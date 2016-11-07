@@ -15,4 +15,8 @@ public class ForwardController extends BaseController{
 	public String gotoProject(){
 		return "projects";
 	}
+	@RequestMapping("newProject.html")
+	public String newProjects(){
+		return "new_project";
+	}
 }

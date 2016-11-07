@@ -48,7 +48,9 @@
                   </li>
                   <li><a><i class="fa fa-edit"></i> 我的项目 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" id="user-project">
-                      <li><a href="form.html">General Form</a>
+                      <li><a href="form.html">我创建的</a>
+                      </li>
+                      <li><a href="form.html">我参与de</a>
                       </li>
 
                     </ul>
@@ -218,143 +220,93 @@
 
         <!-- page content -->
         <div class="right_col" role="main">
-              <div class="x_panel">
-                <div class="x_title">
-                  <h2>最近动态 <small>Sessions</small></h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Settings 1</a>
-                        </li>
-                        <li><a href="#">Settings 2</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <ul class="list-unstyled msg_list">
-                    <li>
-                      <a>
-                        <span class="image">
-                          <img src="<%=request.getContextPath()%>${sessionScope.user.avatarUrl}" alt="img" />
-                        </span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image">
-                          <img src="<%=request.getContextPath()%>${sessionScope.user.avatarUrl}" alt="img" />
-                        </span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image">
-                          <img src="<%=request.getContextPath()%>${sessionScope.user.avatarUrl}" alt="img" />
-                        </span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image">
-                          <img src="<%=request.getContextPath()%>${sessionScope.user.avatarUrl}" alt="img" />
-                        </span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that
-                        </span>
-                      </a>
-                    </li>
-                  </ul>
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>
+                      Form Validation
+                  </h3>
+              </div>
+
+              <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                              <button class="btn btn-default" type="button">Go!</button>
+                          </span>
+                  </div>
                 </div>
               </div>
-              					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title">版本日志</h3>
-						</div>
-						<div class="panel-body">
+            </div>
+            <div class="clearfix"></div>
 
-							<div class="panel-group" id="accordion">
-							
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h4 class="panel-title">
-											<span class="badge pull-right">2016.11.5</span>
-											<a data-toggle="collapse" data-parent="#accordion"
-												href="#collapseTwo"> V2.0 </a>
-										</h4>
-									</div>
-									<div id="collapseTwo" class="panel-collapse collapse  in">
-										<div class="panel-body">
-											<ol>
-												<li>使用后台模板</li>
-												<li>增加操作日志</li>
-												<li>增加数据库表字典</li>
-												<li>项目成员管理</li>
-											</ol>
-										</div>
-									</div>
-								</div>
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h4 class="panel-title">
-											<span class="badge pull-right">2016.10.20</span> <a
-												data-toggle="collapse" data-parent="#accordion"
-												href="#collapseOne"> V1.0 </a>
-										</h4>
-									</div>
-									<div id="collapseOne" class="panel-collapse collapse">
-										<div class="panel-body">
-											<ol>
-												<li>登录、注册功能</li>
-												<li>新建、修改项目</li>
-												<li>新建、修改模块</li>
-												<li>新建、修改接口</li>
-												<li>JSON格式化</li>
-												<li>可编辑表格插件</li>
-												<li>添加项目成员</li>
-											</ol>
-										</div>
-									</div>
-								</div>
-							</div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Form validation <small>sub title</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
 
+                   <form id="defaultForm" method="post" action="target.php" class="form-horizontal">
+                        <fieldset>
+                            <legend>Not Empty validator</legend>
 
-						</div>
-					</div>
-					
-					<iframe src="../druid" width="100%" height="500"></iframe>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">项目名称</label>
+                                <div class="col-lg-5">
+                                    <input type="text" class="form-control" name="proName" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">项目描述</label>
+                                <div class="col-lg-5">
+                                    <textarea name="proDes" class="form-control" rows="3" placeholder='rows="3"'></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">项目版本</label>
+                                <div class="col-lg-5">
+                                    <input type="text" class="form-control" name="proVersion" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">预计接口</label>
+                                <div class="col-lg-5">
+                                    <input type="number" class="form-control" name="targetCount" />
+                                </div>
+                            </div>
+                        </fieldset>
+                         <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-lg-9 col-lg-offset-3">
+                                <button type="submit" class="btn btn-primary">提交</button>
+                                <button type="button" class="btn btn-info" id="resetBtn">重置</button>
+                            </div>
+                        </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <!-- /page content -->
 
@@ -368,24 +320,69 @@
         <!-- /footer content -->
       </div>
     </div>
+<!-- validator -->
 <script>
-	$(function() {
-		var id = ${sessionScope.user.userId};
-		$.ajax({
-					type : "GET",
-					url : "../project/findUserProject.do",
-					data : {
-						"userId" : id
-					},
-					dataType : "json",
-					success : function(result) {
-						$.each(result.data,function(projectIndex, project) {
- 							$("#user-project").append('<li><a href="form.html">'+project["project"].proName+project["project"].proVersion+'</a>'); 
-						});
-					}
-				});
-	});
+$(document).ready(function() {
+    $('#resetBtn').click(function() {
+        $('#defaultForm').data('bootstrapValidator').resetForm(true);
+    });
+    $('#defaultForm').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+        	proName: {
+                message: 'The proName is not valid',
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    },
+                    stringLength: {
+                        min: 2,
+                        max: 30,
+                        message: '项目名必须大于2个字符并且小于30个字符'
+                    }
+                }
+            },
+            proDes: {
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    }
+                }
+            },
+            proVersion: {
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    }
+                }
+            },
+            targetCount: {
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    },
+                    lessThan: {
+                        value: 10000,
+                        inclusive: true,
+                        message: '接口数必须小于10000'
+                    },
+                    greaterThan: {
+                        value: 0,
+                        inclusive: false,
+                        message: '接口数必须大于0'
+                    }
+                }
+            }
+        }
+    });
+});
 </script>
+<!-- /validator -->
 	<!-- FastClick -->
 	<script src="<%=request.getContextPath()%>/static/ace/vendors/fastclick/lib/fastclick.js"></script>
 	<!-- NProgress -->
@@ -393,5 +390,6 @@
 
 	<!-- Custom Theme Scripts -->
 	<script src="<%=request.getContextPath()%>/static/ace/production/js/custom.js"></script>
+	
   </body>
 </html>

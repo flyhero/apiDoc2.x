@@ -44,23 +44,7 @@ public class UserController extends BaseController {
 	private InterfaceService InterfaceService;
 	@Autowired
 	private ProjectService projectService;
-	/**
-	 * 前往主页
-	 * @Title: main
-	 * @author flyhero
-	 * @date 2016年10月15日上午10:41:44
-	 * @param @return    参数
-	 * @return String    返回类型
-	 * @throws
-	 */
-	@RequestMapping("main.html")
-	public String main() {
-		return "error/404";
-	}
-	@RequestMapping()
-	public void t(){
-		System.out.println("this a test!");
-	}
+
 	/**
 	 * 前往登录页
 	 * @Title: gotoLogin
@@ -87,11 +71,7 @@ public class UserController extends BaseController {
 	public String goToRegister() {
 		return "register";
 	}
-	@RequestMapping("test2.do")
-	public ModelAndView test2() {
-		mv.setViewName("flat");
-		return mv;
-	}
+
 	/**
 	 * 用户注册
 	 * 
@@ -140,7 +120,6 @@ public class UserController extends BaseController {
 		}else{
 			json.put("valid", true);
 		}
-		
 		return json;
 	}
 
@@ -229,13 +208,6 @@ public class UserController extends BaseController {
 		return mv;
 	}
 	
-	@RequestMapping("goToInterfaceDetail.do")
-	public ModelAndView goToInterfaceDetail(int interfaceId){
-////		InterfaceWithBLOBs in= InterfaceService.selectByPrimaryKey(interfaceId);
-//		mv.addObject("interface1", in);
-//		mv.setViewName("interfaceDetial");
-		return mv;
-	}
 	@RequestMapping("getInterfaceByModuleId.do")
 	@ResponseBody
 	public List<Interfaces> getInterfaceByModuleId(int moduleId){
