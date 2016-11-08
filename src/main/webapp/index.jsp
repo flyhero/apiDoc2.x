@@ -5,9 +5,9 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Flat UI - Free Bootstrap Framework and Theme</title>
+<title>flyapi登录</title>
 <meta name="description"
-	content="Flat UI Kit Free is a Twitter Bootstrap Framework design and Theme, this responsive framework includes a PSD and HTML version." />
+	content="" />
 <meta name="viewport"
 	content="width=1000, initial-scale=1.0, maximum-scale=1.0">
 <link rel="shortcut icon" href="img/favicon.ico">

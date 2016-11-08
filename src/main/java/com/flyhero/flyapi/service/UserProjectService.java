@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 import com.flyhero.flyapi.dao.UserProjectMapper;
 import com.flyhero.flyapi.entity.Project;
 import com.flyhero.flyapi.entity.UserProject;
+import com.flyhero.flyapi.pojo.TeamMemberPojo;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 @Service
 public class UserProjectService {
@@ -19,8 +23,22 @@ public class UserProjectService {
 	public List<UserProject> findUserProject(Integer userId){
 		return userProjectMapper.findUserProject(userId);
 	}
+	public PageInfo<UserProject> findUserCreate(UserProject up){
+		PageHelper.startPage(up.getPageNumber(), up.getPageSize());
+		List<UserProject> list=userProjectMapper.findUserCreate(up);
+		PageInfo<UserProject> pageInfo=new PageInfo<UserProject>(list);
+		return pageInfo;
+	}
+	public PageInfo<UserProject> findUserJoin(UserProject up){
+		PageHelper.startPage(up.getPageNumber(), up.getPageSize());
+		List<UserProject> list=userProjectMapper.findUserJoin(up);
+		PageInfo<UserProject> pageInfo=new PageInfo<UserProject>(list);
+		return pageInfo;
+	}
 	
-
+	public List<TeamMemberPojo> findTeamMembers(UserProject up){
+		return userProjectMapper.findTeamMembers(up);
+	}
 	public List selectMyProject(Integer userId) {
 		// TODO Auto-generated method stub
 		return null;

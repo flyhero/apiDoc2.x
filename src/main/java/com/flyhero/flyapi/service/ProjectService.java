@@ -7,12 +7,17 @@ import org.springframework.stereotype.Service;
 
 import com.flyhero.flyapi.dao.ProjectMapper;
 import com.flyhero.flyapi.entity.Project;
+import com.flyhero.flyapi.pojo.ProjectDetailpojo;
 
 @Service
 public class ProjectService{
 
 	@Autowired
 	private ProjectMapper projectMapper;
+	
+	public ProjectDetailpojo findProjectDetail(Integer upId){
+		return projectMapper.findProjectDetail(upId);
+	}
 	
 	public int deleteByPrimaryKey(Integer projectId) {
 		// TODO Auto-generated method stub

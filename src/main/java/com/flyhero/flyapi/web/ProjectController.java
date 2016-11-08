@@ -13,10 +13,13 @@ import com.flyhero.flyapi.entity.Project;
 import com.flyhero.flyapi.entity.User;
 import com.flyhero.flyapi.entity.UserProject;
 import com.flyhero.flyapi.pojo.JSONResult;
+import com.flyhero.flyapi.pojo.ProjectDetailpojo;
+import com.flyhero.flyapi.pojo.TeamMemberPojo;
 import com.flyhero.flyapi.service.ProjectService;
 import com.flyhero.flyapi.service.UserProjectService;
 import com.flyhero.flyapi.service.UserService;
 import com.flyhero.flyapi.utils.Constant;
+import com.github.pagehelper.PageInfo;
 
 @Controller
 @RequestMapping("project")
@@ -29,6 +32,26 @@ public class ProjectController extends BaseController{
 	@Autowired
 	private UserService userService;
 	
+	@RequestMapping("findUserCreate.do")
+	@ResponseBody
+	public JSONObject findUserCreate(UserProject up){
+		PageInfo<UserProject> list=userProjectService.findUserCreate(up);
+		if(list != null){
+			json.put("total",list.getTotal());
+			json.put("rows", list.getList());
+			return json;
+		}
+		return null;
+	}
+	@RequestMapping("findUserJoin.do")
+	@ResponseBody
+	public JSONResult findUserJoin(UserProject up){
+		PageInfo<UserProject> list=userProjectService.findUserJoin(up);
+		if(list != null){
+			return new JSONResult(Constant.MSG_OK, Constant.CODE_200, list);
+		}
+		return null;
+	}
 	@RequestMapping("findUserProject.do")
 	@ResponseBody
 	public JSONResult findUserProject(Integer userId){
@@ -38,10 +61,10 @@ public class ProjectController extends BaseController{
 		}
 		return null;
 	}
-	
+
 	@RequestMapping("addProject.do")
 	@ResponseBody
-	public JSONObject addProject(Project project){
+	public JSONResult addProject(Project project){
 		int flag=projectService.insertSelective(project);
 		if(flag>0){
 			UserProject record=new UserProject();
@@ -50,13 +73,11 @@ public class ProjectController extends BaseController{
 				record.setProjectId(project.getProjectId());
 				record.setUserId(u.getUserId());
 				userProjectService.insertSelective(record);
-				json.put("msg", "success");
-				return json;
+				return new JSONResult(Constant.MSG_OK, Constant.CODE_200);
 			}
 
 		}
-		json.put("msg", "error");
-		return json;
+		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
 	}
 	@RequestMapping("updateProject.do")
 	@ResponseBody
@@ -89,4 +110,19 @@ public class ProjectController extends BaseController{
 		}
 		return json;
 	}
+	
+	@RequestMapping("findProjectDetail.do")
+	@ResponseBody
+	public JSONResult findProjectDetail(Integer upId){
+		ProjectDetailpojo projectDetailpojo= projectService.findProjectDetail(upId);
+		return new JSONResult(Constant.MSG_OK, Constant.CODE_200,projectDetailpojo);
+	}
+	
+	@RequestMapping("findTeamMembers.do")
+	@ResponseBody
+	public JSONResult findTeamMembers(UserProject up){
+		List<TeamMemberPojo>  list=userProjectService.findTeamMembers(up);
+		return new JSONResult(Constant.MSG_OK, Constant.CODE_200, list);
+	}
+	
 }

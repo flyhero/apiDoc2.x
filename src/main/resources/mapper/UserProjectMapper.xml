@@ -18,8 +18,11 @@
     <collection property="project" ofType="com.flyhero.flyapi.entity.Project">
 	    <id column="project_id" jdbcType="INTEGER" property="projectId" />
 	    <result column="pro_name" jdbcType="VARCHAR" property="proName" />
+	    <result column="pro_des" jdbcType="VARCHAR" property="proDes" />
 	    <result column="pro_version" jdbcType="VARCHAR" property="proVersion" />
 	    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+	    <result column="target_count" jdbcType="INTEGER" property="targetCount" />
+    	<result column="done_count" jdbcType="INTEGER" property="doneCount" />
     </collection>
   </resultMap> 
   
@@ -28,15 +31,27 @@
   </sql>
     
   <select id="findUserCreate" parameterType="java.lang.Integer" resultMap="UserProjectMap">
-  	select t1.up_id,t1.user_id,t2.project_id,t2.pro_name,t2.pro_version
+  	select t1.up_id,t1.user_id,t2.project_id,t2.pro_name,t2.pro_des,t2.pro_version,t2.create_time,t2.target_count,t2.done_count
   	from fly_user_project t1 left join fly_project t2 on t1.project_id=t2.project_id
-  	where t1.user_id=#{userId} and t1.is_delete=0
-  </select>  
+  	where t1.user_id=#{userId} and t1.is_creator=#{userId} and t1.is_delete=0
+  </select>
+  <select id="findUserJoin" parameterType="java.lang.Integer" resultMap="UserProjectMap">
+  	select t1.up_id,t1.user_id,t2.project_id,t2.pro_name,t2.pro_des,t2.pro_version,t2.create_time,t2.target_count,t2.done_count
+  	from fly_user_project t1 left join fly_project t2 on t1.project_id=t2.project_id
+  	where t1.user_id=#{userId} and t1.is_creator !=#{userId} and t1.is_delete=0
+  </select>    
   <select id="findUserProject" parameterType="java.lang.Integer" resultMap="UserProjectMap">
-  	select t1.up_id,t1.user_id,t2.project_id,t2.pro_name,t2.pro_version
+  	select t1.up_id,t1.user_id,t2.project_id,t2.pro_name,t2.pro_des,t2.pro_version
   	from fly_user_project t1 left join fly_project t2 on t1.project_id=t2.project_id
   	where t1.user_id=#{userId} and t1.is_delete=0
   </select>
+  <select id="findTeamMembers" parameterType="com.flyhero.flyapi.entity.UserProject" resultType="com.flyhero.flyapi.pojo.TeamMemberPojo">
+	SELECT t2.user_id userId,t2.user_name userName,t2.avatar_url avatarUrl,t1.is_edit isEdit,t1.project_id projectId
+	FROM fly_user_project t1 LEFT JOIN fly_user t2 ON t1.user_id=t2.user_id
+	WHERE t2.user_id != #{userId} and t1.project_id=#{projectId}
+  </select>  
+  
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -73,15 +88,13 @@
       <if test="isCreator != null">
         is_creator,
       </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
       <if test="updateTime != null">
         update_time,
       </if>
       <if test="isDelete != null">
         is_delete,
       </if>
+       create_time
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="upId != null">
@@ -99,15 +112,13 @@
       <if test="isCreator != null">
         #{isCreator,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="isDelete != null">
         #{isDelete,jdbcType=INTEGER},
       </if>
+      	NOW()
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.flyhero.flyapi.entity.UserProject">

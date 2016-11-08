@@ -12,7 +12,7 @@
 </head>
 <body>
 	<input id="projectId" value="${project.projectId}" type="hidden" />
-	<%@ include file="header.jsp"%>
+	<%@ include file="base/header.jsp"%>
 	<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2">
@@ -114,7 +114,7 @@
 			</div>
 		</div>
 		</div>
-		<jsp:include page="footer.jsp"></jsp:include>
+		<jsp:include page="base/footer.jsp"></jsp:include>
 		</div>
 		<script lanuage="javascript">
 			$(function() {

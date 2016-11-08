@@ -4,10 +4,17 @@ import java.util.List;
 
 import com.flyhero.flyapi.entity.Project;
 import com.flyhero.flyapi.entity.UserProject;
+import com.flyhero.flyapi.pojo.TeamMemberPojo;
 
 public interface UserProjectMapper {
 	
 	List<UserProject> findUserProject(Integer userId);
+	
+	List<UserProject> findUserCreate(UserProject up);
+	
+	List<UserProject> findUserJoin(UserProject up);
+	
+	List<TeamMemberPojo> findTeamMembers(UserProject up);
 	
     int deleteByPrimaryKey(Integer upId);
 

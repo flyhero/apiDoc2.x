@@ -12,7 +12,7 @@
 <title>接口</title>
 </head>
 <body>
-	<%@ include file="header.jsp"%>
+	<%@ include file="base/header.jsp"%>
 		<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2">
@@ -117,7 +117,7 @@
 			</div>
 			<!-- /.modal-dialog -->
 		</div></br></br>
-		<jsp:include page="footer.jsp"></jsp:include>
+		<jsp:include page="base/footer.jsp"></jsp:include>
 	</div>
 	<script lanuage="javascript">
 		$(function() {

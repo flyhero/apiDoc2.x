@@ -38,6 +38,13 @@ public class JSONResult implements Serializable{
 		this.code = code;
 		this.data = data;
 	}
+	
+	public JSONResult(String msg, Integer code) {
+		super();
+		this.msg = msg;
+		this.code = code;
+	}
+
 	public String getMsg() {
 		return msg;
 	}

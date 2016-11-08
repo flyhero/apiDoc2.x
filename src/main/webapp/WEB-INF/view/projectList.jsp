@@ -14,7 +14,7 @@
 <title>我的项目</title>
 </head>
 <body>
-	<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="base/header.jsp"></jsp:include>
 
 		<input id="userId" value="${sessionScope.user.userId}" type="hidden" />
 			<div class="container-fluid">
@@ -67,7 +67,7 @@
 			</div>
 			<!-- /.modal-dialog -->
 		</div>
-		<jsp:include page="footer.jsp"></jsp:include>
+		<jsp:include page="base/footer.jsp"></jsp:include>
 </div>
 
 

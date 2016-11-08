@@ -11,6 +11,20 @@ public class Entity implements Serializable{
 	
 	private static final long serialVersionUID = -9026378604047063333L;
 
-	public Integer pageNo=1;
+	public Integer pageNumber=1;
 	public Integer pageSize=10;
+	public Integer getPageNumber() {
+		return pageNumber;
+	}
+	public void setPageNumber(Integer pageNumber) {
+		this.pageNumber = pageNumber;
+	}
+	public Integer getPageSize() {
+		return pageSize;
+	}
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
+	}
+	
+	
 }
