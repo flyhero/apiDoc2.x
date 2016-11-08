@@ -170,7 +170,7 @@
                           <div class="clearfix"></div>
                         </div>
                         <div class="panel-body">
-                          <h3 class="green"><i class="fa fa-paint-brush"></i> 项目名</h3>
+                          <h3 class="green"><i class="fa fa-paint-brush"></i>&nbsp;</h3>
 
                           <p id="prodes"></p>
                           <br />
@@ -525,7 +525,7 @@
 				success : function(data) {
 					$("#target-inter").append(data.data.targetCount);
 					$("#done-inter").append(data.data.doneCount);
-					$("#created-day").append(getDayToNow(data.data.createTime));commpany
+					$("#created-day").append(getDayToNow(data.data.createTime));
 					$("#creator").append(data.data.userName);
 					$("#company").append(data.data.company);
 					$(".green").append(data.data.proName);
