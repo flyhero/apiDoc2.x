@@ -56,8 +56,6 @@
                       </li>
                       <li><a href="projects.html">Projects</a>
                       </li>
-                      <li><a href="project_detail.html">Project Detail</a>
-                      </li>
                       <li><a href="contacts.html">Contacts</a>
                       </li>
                       <li><a href="profile.html">Profile</a>
