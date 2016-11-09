@@ -40,7 +40,7 @@ public class ProjectController extends BaseController{
 	@ResponseBody
 	public JSONObject findUserCreate(UserProject up){
 		PageInfo<UserProject> list=userProjectService.findUserCreate(up);
-		OperateLog log=new OperateLog(getCuUser().getUserId(), 0, Constant.TYPE_SELECT, Constant.CLASS_PROJECT, 
+		OperateLog log=new OperateLog(getCuUser().getUserId(),getCuUser().getUserName(), 0, Constant.TYPE_SELECT, Constant.CLASS_PROJECT, 
 				Constant.NAME_PROJECT, "查询："+getCuUser().getUserName()+"创建的项目", JSONObject.toJSONString(up));
 		LogService.addLog(log);
 		if(list != null){
@@ -54,7 +54,7 @@ public class ProjectController extends BaseController{
 	@ResponseBody
 	public JSONResult findUserJoin(UserProject up){
 		PageInfo<UserProject> list=userProjectService.findUserJoin(up);
-		OperateLog log=new OperateLog(getCuUser().getUserId(), 0, Constant.TYPE_SELECT, Constant.CLASS_PROJECT, 
+		OperateLog log=new OperateLog(getCuUser().getUserId(),getCuUser().getUserName(), 0, Constant.TYPE_SELECT, Constant.CLASS_PROJECT, 
 				Constant.NAME_PROJECT, "查询："+getCuUser().getUserName()+"参与的项目", JSONObject.toJSONString(up));
 		LogService.addLog(log);
 		if(list != null){
@@ -79,7 +79,7 @@ public class ProjectController extends BaseController{
 		if(flag>0){
 			UserProject record=new UserProject();
 			User u=(User)session.getAttribute("user");
-			OperateLog log=new OperateLog(u.getUserId(), project.getProjectId(), Constant.TYPE_INSERT, Constant.CLASS_PROJECT, 
+			OperateLog log=new OperateLog(u.getUserId(),getCuUser().getUserName(), project.getProjectId(), Constant.TYPE_INSERT, Constant.CLASS_PROJECT, 
 					Constant.NAME_PROJECT, "创建："+project.getProName()+"项目", JSONObject.toJSONString(project));
 			LogService.addLog(log);
 			if(u != null && u.getUserId() !=null){
@@ -98,7 +98,7 @@ public class ProjectController extends BaseController{
 
 		int flag=projectService.updateByPrimaryKeySelective(project);
 		if(flag>0){
-			OperateLog log=new OperateLog(getCuUser().getUserId(), project.getProjectId(), Constant.TYPE_UPDATE,
+			OperateLog log=new OperateLog(getCuUser().getUserId(),getCuUser().getUserName(), project.getProjectId(), Constant.TYPE_UPDATE,
 					Constant.CLASS_PROJECT, Constant.NAME_PROJECT, "更新："+project.getProName()+"项目", JSONObject.toJSONString(project));
 			LogService.addLog(log);
 			return new JSONResult(Constant.MSG_OK, Constant.CODE_200);
@@ -118,7 +118,7 @@ public class ProjectController extends BaseController{
 		up.setCreateTime(new Timestamp(System.currentTimeMillis()));
 		int flag=userProjectService.insertSelective(up);
 		if(flag>0){
-			OperateLog log=new OperateLog(getCuUser().getUserId(), projectId, Constant.TYPE_INSERT,
+			OperateLog log=new OperateLog(getCuUser().getUserId(),getCuUser().getUserName(), projectId, Constant.TYPE_INSERT,
 					Constant.CLASS_TEAM, Constant.NAME_TEAM, "添加：项目成员-"+userName, JSONObject.toJSONString(up));
 			LogService.addLog(log);
 			return new JSONResult(Constant.MSG_OK, Constant.CODE_200);
@@ -137,7 +137,7 @@ public class ProjectController extends BaseController{
 	@ResponseBody
 	public JSONResult findTeamMembers(UserProject up){
 		List<TeamMemberPojo>  list=userProjectService.findTeamMembers(up);
-		OperateLog log=new OperateLog(getCuUser().getUserId(), up.getProjectId(), Constant.TYPE_SELECT,
+		OperateLog log=new OperateLog(getCuUser().getUserId(),getCuUser().getUserName(), up.getProjectId(), Constant.TYPE_SELECT,
 				Constant.CLASS_TEAM, Constant.NAME_TEAM, "查询：项目成员", JSONObject.toJSONString(up));
 		LogService.addLog(log);
 		return new JSONResult(Constant.MSG_OK, Constant.CODE_200, list);

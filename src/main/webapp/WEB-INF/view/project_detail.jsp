@@ -8,7 +8,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <jsp:include page="static.jsp"></jsp:include>
-<title>新建项目</title>
+<title>项目详情</title>
     <!-- Custom styling plus plugins -->
     <link href="<%=request.getContextPath()%>/static/ace/production/css/custom.css" rel="stylesheet">
 </head>
@@ -208,6 +208,7 @@
             </div>
           </div>
         </div>
+        
         <!-- /page content -->
 
         <!-- footer content -->

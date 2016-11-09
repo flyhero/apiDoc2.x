@@ -45,7 +45,18 @@ public class OperateLog extends Entity{
 		this.remark = remark;
 		this.content = content;
 	}
-
+    public OperateLog(Integer userId,String userName, Integer projectId, String operateType,
+			String modelClass, String modelName, String remark, String content) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.projectId = projectId;
+		this.operateType = operateType;
+		this.modelClass = modelClass;
+		this.modelName = modelName;
+		this.remark = remark;
+		this.content = content;
+	}
 	public Integer getLogId() {
         return logId;
     }

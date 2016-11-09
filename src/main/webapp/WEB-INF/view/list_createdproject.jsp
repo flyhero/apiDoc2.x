@@ -109,6 +109,34 @@
             </div>
           </div>
         </div>
+        
+        	<div class="modal fade" id="myModal2" tabindex="0" role="dialog"
+		aria-labelledby="myModalLabel2" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">×</button>
+					<h4 class="modal-title" id="myModalLabel2">修改项目</h4>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" id="projectid" />
+					<label for="projectName">名称</label> <input type="text"
+						class="form-control" id="projectName"> 
+					<label for="description">描述</label>
+					<textarea id="description" class="form-control" rows="3"></textarea>
+					<label for="targetCount">预计接口</label> <input type="number"
+						class="form-control" id="targetCount">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" id="changeProject" data-dismiss="modal"
+						class="btn btn-primary">提交</button>
+				</div>
+			</div>
+		</div>
+		</div>
+        
         <!-- /page content -->
 
         <!-- footer content -->
@@ -117,7 +145,14 @@
       </div>
     </div>
 
-<script type="text/javascript">            
+<script type="text/javascript">      
+		function edit(projectId,name,des,targetCount) {  
+		    $("#projectid").val(projectId);
+		    $("#projectName").val(name);
+		    $("#description").val(des);
+		    $("#targetCount").val(targetCount);
+		    $('#myModal2').modal('show');  
+		}  
       function initTable() {  
     	  var id = ${sessionScope.user.userId};
         //先销毁表格  
@@ -127,6 +162,9 @@
             columns: [{
                 field: 'project.projectId',
                 title: '项目编号'
+            },{
+                field: 'project.proName',
+                title: '项目名'
             },{
                 field: 'project.proVersion',
                 title: '版本号'
@@ -164,9 +202,11 @@
                 field: 'id',
                 align: 'center',
                 width: 200,
-                formatter:function(value,row,index){  
+                formatter:function(value,row,index){   
+                	var name="'"+row.project.proName+"'";
+                	var des="'"+row.project.proDes+"'";
                      var f='<a href="../forward/project_detail.html?projectId='+row.project.projectId+'&upId='+row.upId+'" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> 查看 </a>'; 
-                     var g='<a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> 编辑 </a>'; 
+                     var g='<a href="#"  class="btn btn-info btn-xs" onclick="edit('+row.project.projectId+','+name+','+des+','+row.project.targetCount+');"><i class="fa fa-pencil"></i> 编辑 </a>'; 
                      var h='<a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> 删除 </a>';
                   return f+g+h;  
               	} 
@@ -201,11 +241,11 @@
             }  
           });  
       }  
-  
+
       $(document).ready(function () {          
           //调用函数，初始化表格  
           initTable();  
-  
+
           //当点击查询按钮的时候执行  
           $("#search").bind("click", initTable);  
       });  
