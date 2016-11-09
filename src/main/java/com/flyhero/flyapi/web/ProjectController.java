@@ -40,6 +40,9 @@ public class ProjectController extends BaseController{
 	@ResponseBody
 	public JSONObject findUserCreate(UserProject up){
 		PageInfo<UserProject> list=userProjectService.findUserCreate(up);
+		OperateLog log=new OperateLog(getCuUser().getUserId(), 0, Constant.TYPE_SELECT, Constant.CLASS_PROJECT, 
+				Constant.NAME_PROJECT, "查询："+getCuUser().getUserName()+"创建的项目", JSONObject.toJSONString(up));
+		LogService.addLog(log);
 		if(list != null){
 			json.put("total",list.getTotal());
 			json.put("rows", list.getList());
@@ -51,6 +54,9 @@ public class ProjectController extends BaseController{
 	@ResponseBody
 	public JSONResult findUserJoin(UserProject up){
 		PageInfo<UserProject> list=userProjectService.findUserJoin(up);
+		OperateLog log=new OperateLog(getCuUser().getUserId(), 0, Constant.TYPE_SELECT, Constant.CLASS_PROJECT, 
+				Constant.NAME_PROJECT, "查询："+getCuUser().getUserName()+"参与的项目", JSONObject.toJSONString(up));
+		LogService.addLog(log);
 		if(list != null){
 			return new JSONResult(Constant.MSG_OK, Constant.CODE_200, list);
 		}
@@ -73,7 +79,8 @@ public class ProjectController extends BaseController{
 		if(flag>0){
 			UserProject record=new UserProject();
 			User u=(User)session.getAttribute("user");
-			OperateLog log=new OperateLog(u.getUserId(), project.getProjectId(), "INSERT", "project", "项目", "创建："+project.getProName()+"项目", project.toString());
+			OperateLog log=new OperateLog(u.getUserId(), project.getProjectId(), Constant.TYPE_INSERT, Constant.CLASS_PROJECT, 
+					Constant.NAME_PROJECT, "创建："+project.getProName()+"项目", JSONObject.toJSONString(project));
 			LogService.addLog(log);
 			if(u != null && u.getUserId() !=null){
 				record.setProjectId(project.getProjectId());
@@ -87,21 +94,20 @@ public class ProjectController extends BaseController{
 	}
 	@RequestMapping("updateProject.do")
 	@ResponseBody
-	public JSONObject updateProject(Project project){
+	public JSONResult updateProject(Project project){
 
 		int flag=projectService.updateByPrimaryKeySelective(project);
 		if(flag>0){
-			OperateLog log=new OperateLog(getCuUser().getUserId(), project.getProjectId(), "UPDATE", "project", "项目", "创建："+project.getProName()+"项目", project.toString());
+			OperateLog log=new OperateLog(getCuUser().getUserId(), project.getProjectId(), Constant.TYPE_UPDATE,
+					Constant.CLASS_PROJECT, Constant.NAME_PROJECT, "更新："+project.getProName()+"项目", JSONObject.toJSONString(project));
 			LogService.addLog(log);
-			json.put("msg", "success");
-		}else{
-			json.put("msg", "error");
+			return new JSONResult(Constant.MSG_OK, Constant.CODE_200);
 		}
-		return json;
+		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
 	}
-	@RequestMapping("addActor.do")
+	@RequestMapping("addMember.do")
 	@ResponseBody
-	public JSONObject addActor(String userName,Integer projectId,int isEdit){
+	public JSONResult addMember(String userName,Integer projectId,int isEdit){
 		User u1=new User();
 		u1.setUserName(userName);
 		User u=userService.findByUserName(u1);
@@ -112,11 +118,12 @@ public class ProjectController extends BaseController{
 		up.setCreateTime(new Timestamp(System.currentTimeMillis()));
 		int flag=userProjectService.insertSelective(up);
 		if(flag>0){
-			json.put("msg", "success");
-		}else{
-			json.put("msg", "error");
+			OperateLog log=new OperateLog(getCuUser().getUserId(), projectId, Constant.TYPE_INSERT,
+					Constant.CLASS_TEAM, Constant.NAME_TEAM, "添加：项目成员-"+userName, JSONObject.toJSONString(up));
+			LogService.addLog(log);
+			return new JSONResult(Constant.MSG_OK, Constant.CODE_200);
 		}
-		return json;
+		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
 	}
 	
 	@RequestMapping("findProjectDetail.do")
@@ -130,6 +137,9 @@ public class ProjectController extends BaseController{
 	@ResponseBody
 	public JSONResult findTeamMembers(UserProject up){
 		List<TeamMemberPojo>  list=userProjectService.findTeamMembers(up);
+		OperateLog log=new OperateLog(getCuUser().getUserId(), up.getProjectId(), Constant.TYPE_SELECT,
+				Constant.CLASS_TEAM, Constant.NAME_TEAM, "查询：项目成员", JSONObject.toJSONString(up));
+		LogService.addLog(log);
 		return new JSONResult(Constant.MSG_OK, Constant.CODE_200, list);
 	}
 	
