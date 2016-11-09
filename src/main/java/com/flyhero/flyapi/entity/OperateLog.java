@@ -34,7 +34,19 @@ public class OperateLog extends Entity{
 
     private Integer isDelete;
 
-    public Integer getLogId() {
+    public OperateLog(Integer userId, Integer projectId, String operateType,
+			String modelClass, String modelName, String remark, String content) {
+		super();
+		this.userId = userId;
+		this.projectId = projectId;
+		this.operateType = operateType;
+		this.modelClass = modelClass;
+		this.modelName = modelName;
+		this.remark = remark;
+		this.content = content;
+	}
+
+	public Integer getLogId() {
         return logId;
     }
 

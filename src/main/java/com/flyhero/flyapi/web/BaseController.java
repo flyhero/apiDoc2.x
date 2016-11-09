@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.flyhero.flyapi.entity.User;
 
 public class BaseController {
 	protected HttpServletResponse response;
@@ -20,7 +21,6 @@ public class BaseController {
   	protected HttpSession session;
   	protected ModelAndView mv;
   	protected JSONObject json = null;
-  	
 	/**
 	 * spring 中request、response是线程安全的，可以直接注入
 	 * @ModelAttribute注解只有在被@Controller和@ControllerAdvice两个注解的类下使用
@@ -38,8 +38,15 @@ public class BaseController {
   	    mv = new ModelAndView();
   	    json = new JSONObject();
   	}
-  	
-  	 
+  	/**
+  	 * 获取当前用户
+  	 * <p>Title: getCuUser</p>
+  	 * <p>Description: </p>
+  	 * @return
+  	 */
+  	 public User getCuUser(){
+  		 return (User)session.getAttribute("user");
+  	 }
   		/**
   		 * @return
   		 */

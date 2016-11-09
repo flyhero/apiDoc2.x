@@ -43,7 +43,7 @@
 				</div>
 				
 					<div class="login-form">
-					 <form id="defaultForm" method="get"  action="user/login.do">
+					 <form id="defaultForm" method="get"  action="../user/login.do">
 						<div class="form-group">
 <!-- 						<div class="input-group">
 						  <span class="input-group-addon">@</span>

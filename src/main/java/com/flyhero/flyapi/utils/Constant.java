@@ -17,4 +17,11 @@ public class Constant {
 	public static final int CODE_500=500;
 	
 	public static final int CODE_404=404;
+	
+	
+	public static final String INSERT="INSERT";
+	public static final String UPDATE="UPDATE";
+	public static final String DELETE="DELETE";
+	public static final String SELECT="SELECT";
+	
 }

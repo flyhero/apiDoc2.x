@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
+import com.flyhero.flyapi.entity.OperateLog;
 import com.flyhero.flyapi.entity.Project;
 import com.flyhero.flyapi.entity.User;
 import com.flyhero.flyapi.entity.UserProject;
 import com.flyhero.flyapi.pojo.JSONResult;
 import com.flyhero.flyapi.pojo.ProjectDetailpojo;
 import com.flyhero.flyapi.pojo.TeamMemberPojo;
+import com.flyhero.flyapi.service.LogService;
 import com.flyhero.flyapi.service.ProjectService;
 import com.flyhero.flyapi.service.UserProjectService;
 import com.flyhero.flyapi.service.UserService;
@@ -31,6 +33,8 @@ public class ProjectController extends BaseController{
 	private UserProjectService userProjectService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private LogService LogService;
 	
 	@RequestMapping("findUserCreate.do")
 	@ResponseBody
@@ -69,6 +73,8 @@ public class ProjectController extends BaseController{
 		if(flag>0){
 			UserProject record=new UserProject();
 			User u=(User)session.getAttribute("user");
+			OperateLog log=new OperateLog(u.getUserId(), project.getProjectId(), "INSERT", "project", "项目", "创建："+project.getProName()+"项目", project.toString());
+			LogService.addLog(log);
 			if(u != null && u.getUserId() !=null){
 				record.setProjectId(project.getProjectId());
 				record.setUserId(u.getUserId());
@@ -85,6 +91,8 @@ public class ProjectController extends BaseController{
 
 		int flag=projectService.updateByPrimaryKeySelective(project);
 		if(flag>0){
+			OperateLog log=new OperateLog(getCuUser().getUserId(), project.getProjectId(), "UPDATE", "project", "项目", "创建："+project.getProName()+"项目", project.toString());
+			LogService.addLog(log);
 			json.put("msg", "success");
 		}else{
 			json.put("msg", "error");

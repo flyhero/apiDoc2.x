@@ -68,9 +68,7 @@
       <if test="content != null">
         content,
       </if>
-      <if test="createTime != null">
         create_time,
-      </if>
       <if test="isDelete != null">
         is_delete,
       </if>
@@ -103,9 +101,7 @@
       <if test="content != null">
         #{content,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
+      	NOW(),
       <if test="isDelete != null">
         #{isDelete,jdbcType=INTEGER},
       </if>
