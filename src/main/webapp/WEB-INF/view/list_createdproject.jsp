@@ -153,6 +153,24 @@
 		    $("#targetCount").val(targetCount);
 		    $('#myModal2').modal('show');  
 		}  
+		function edit(projectId) {  
+			$.ajax({
+				type : 'POST',
+				url : "../project/deleteProject.do",
+				dataType : "json",
+				data : {
+					"projectId" : projectId
+				},
+				success : function(data) {
+					if (data.msg == 'ok') {
+						alert("删除成功！");
+						location.reload();
+					}
+
+				}
+
+			});
+		}  
       function initTable() {  
     	  var id = ${sessionScope.user.userId};
         //先销毁表格  
@@ -207,7 +225,7 @@
                 	var des="'"+row.project.proDes+"'";
                      var f='<a href="../forward/project_detail.html?projectId='+row.project.projectId+'&upId='+row.upId+'" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> 查看 </a>'; 
                      var g='<a href="#"  class="btn btn-info btn-xs" onclick="edit('+row.project.projectId+','+name+','+des+','+row.project.targetCount+');"><i class="fa fa-pencil"></i> 编辑 </a>'; 
-                     var h='<a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> 删除 </a>';
+                     var h='<a href="#" class="btn btn-danger btn-xs" onclick="delete('+row.project.projectId+');"><i class="fa fa-trash-o"></i> 删除 </a>';
                   return f+g+h;  
               	} 
             } ],
@@ -245,7 +263,38 @@
       $(document).ready(function () {          
           //调用函数，初始化表格  
           initTable();  
+			$("#changeProject").click(
+					function() {
+						var projectName = $("#projectName").val();
+						var targetCount = $("#targetCount").val();
+						var description = $("#description").val();
+						var projectId =$("#projectid").val();
+						if (projectName != '' && targetCount != ''
+								&& description != '') {
+							$.ajax({
+								type : 'POST',
+								url : "../project/updateProject.do",
+								dataType : "json",
+								data : {
+									"proName" : projectName,
+									"targetCount" : targetCount,
+									"proDes" : description,
+									"projectId" : projectId
+								},
+								success : function(data) {
+									if (data.msg == 'ok') {
+										alert("修改成功！");
+										location.reload();
+									}
 
+								}
+
+							});
+						} else {
+							alert("信息不能为空！");
+						}
+
+					});
           //当点击查询按钮的时候执行  
           $("#search").bind("click", initTable);  
       });  
