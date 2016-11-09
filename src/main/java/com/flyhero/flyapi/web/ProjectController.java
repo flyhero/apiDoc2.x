@@ -22,7 +22,13 @@ import com.flyhero.flyapi.service.UserProjectService;
 import com.flyhero.flyapi.service.UserService;
 import com.flyhero.flyapi.utils.Constant;
 import com.github.pagehelper.PageInfo;
-
+/**
+ * 项目控制器
+ * @ClassName: ProjectController 
+ * @author flyhero(http://flyhero.top)
+ * @date 2016年11月1日 下午5:38:30 
+ *
+ */
 @Controller
 @RequestMapping("project")
 public class ProjectController extends BaseController{
@@ -36,6 +42,16 @@ public class ProjectController extends BaseController{
 	@Autowired
 	private LogService LogService;
 	
+	/**
+	 * 我创建的项目
+	 * @Title: findUserCreate  
+	 * @author flyhero(http://flyhero.top)
+	 * @date 2016年11月3日 下午5:41:24 
+	 * @param @param up
+	 * @param @return    设定文件 
+	 * @return JSONObject    返回类型 
+	 * @throws
+	 */
 	@RequestMapping("findUserCreate.do")
 	@ResponseBody
 	public JSONObject findUserCreate(UserProject up){
@@ -50,6 +66,16 @@ public class ProjectController extends BaseController{
 		}
 		return null;
 	}
+	/**
+	 * 我参与的项目
+	 * @Title: findUserJoin  
+	 * @author flyhero(http://flyhero.top)
+	 * @date 2016年11月3日 下午6:42:30 
+	 * @param @param up
+	 * @param @return    设定文件 
+	 * @return JSONResult    返回类型 
+	 * @throws
+	 */
 	@RequestMapping("findUserJoin.do")
 	@ResponseBody
 	public JSONResult findUserJoin(UserProject up){
@@ -62,6 +88,16 @@ public class ProjectController extends BaseController{
 		}
 		return null;
 	}
+	/**
+	 * 
+	 * @Title: findUserProject  
+	 * @author flyhero(http://flyhero.top)
+	 * @date 2016年11月1日 下午5:43:21 
+	 * @param @param userId
+	 * @param @return    设定文件 
+	 * @return JSONResult    返回类型 
+	 * @throws
+	 */
 	@RequestMapping("findUserProject.do")
 	@ResponseBody
 	public JSONResult findUserProject(Integer userId){
@@ -72,6 +108,16 @@ public class ProjectController extends BaseController{
 		return null;
 	}
 
+	/**
+	 * 新建项目
+	 * @Title: addProject  
+	 * @author flyhero(http://flyhero.top)
+	 * @date 2016年11月5日 上午10:44:00 
+	 * @param @param project
+	 * @param @return    设定文件 
+	 * @return JSONResult    返回类型 
+	 * @throws
+	 */
 	@RequestMapping("addProject.do")
 	@ResponseBody
 	public JSONResult addProject(Project project){
@@ -92,6 +138,16 @@ public class ProjectController extends BaseController{
 		}
 		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
 	}
+	/**
+	 * 更新项目
+	 * @Title: updateProject  
+	 * @author flyhero(http://flyhero.top)
+	 * @date 2016年11月7日 下午3:45:30 
+	 * @param @param project
+	 * @param @return    设定文件 
+	 * @return JSONResult    返回类型 
+	 * @throws
+	 */
 	@RequestMapping("updateProject.do")
 	@ResponseBody
 	public JSONResult updateProject(Project project){
@@ -105,7 +161,32 @@ public class ProjectController extends BaseController{
 		}
 		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
 	}
-	
+	/**
+	 * 项目详情
+	 * @Title: findProjectDetail  
+	 * @author flyhero(http://flyhero.top)
+	 * @date 2016年11月8日 下午5:47:41 
+	 * @param @param upId
+	 * @param @return    设定文件 
+	 * @return JSONResult    返回类型 
+	 * @throws
+	 */
+	@RequestMapping("findProjectDetail.do")
+	@ResponseBody
+	public JSONResult findProjectDetail(Integer upId){
+		ProjectDetailpojo projectDetailpojo= projectService.findProjectDetail(upId);
+		return new JSONResult(Constant.MSG_OK, Constant.CODE_200,projectDetailpojo);
+	}
+	/**
+	 * 删除项目
+	 * @Title: deleteProject  
+	 * @author flyhero(http://flyhero.top)
+	 * @date 2016年11月9日 下午5:46:21 
+	 * @param @param project
+	 * @param @return    设定文件 
+	 * @return JSONResult    返回类型 
+	 * @throws
+	 */
 	@RequestMapping("deleteProject.do")
 	@ResponseBody
 	public JSONResult deleteProject(Project project){
@@ -123,6 +204,18 @@ public class ProjectController extends BaseController{
 		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
 	}
 	
+	/**
+	 * 添加项目成员
+	 * @Title: addMember  
+	 * @author flyhero(http://flyhero.top)
+	 * @date 2016年11月8日 下午4:20:07 
+	 * @param @param userName
+	 * @param @param projectId
+	 * @param @param isEdit
+	 * @param @return    设定文件 
+	 * @return JSONResult    返回类型 
+	 * @throws
+	 */
 	@RequestMapping("addMember.do")
 	@ResponseBody
 	public JSONResult addMember(String userName,Integer projectId,int isEdit){
@@ -143,14 +236,17 @@ public class ProjectController extends BaseController{
 		}
 		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
 	}
-	
-	@RequestMapping("findProjectDetail.do")
-	@ResponseBody
-	public JSONResult findProjectDetail(Integer upId){
-		ProjectDetailpojo projectDetailpojo= projectService.findProjectDetail(upId);
-		return new JSONResult(Constant.MSG_OK, Constant.CODE_200,projectDetailpojo);
-	}
-	
+
+	/**
+	 * 查询项目成员
+	 * @Title: findTeamMembers  
+	 * @author flyhero(http://flyhero.top)
+	 * @date 2016年11月8日 下午5:49:05 
+	 * @param @param up
+	 * @param @return    设定文件 
+	 * @return JSONResult    返回类型 
+	 * @throws
+	 */
 	@RequestMapping("findTeamMembers.do")
 	@ResponseBody
 	public JSONResult findTeamMembers(UserProject up){

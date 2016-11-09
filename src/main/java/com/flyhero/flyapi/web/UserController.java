@@ -28,6 +28,13 @@ import com.flyhero.flyapi.entity.UserProject;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * 用户控制器
+ * @ClassName: UserController 
+ * @author flyhero(http://flyhero.top)
+ * @date 2016年10月28日 下午5:50:47 
+ *
+ */
 @Controller
 @RequestMapping("user")
 public class UserController extends BaseController {
