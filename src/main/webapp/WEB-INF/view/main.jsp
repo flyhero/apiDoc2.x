@@ -30,7 +30,7 @@
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>flyhero</h2>
+                <h2>${sessionScope.user.userName}</h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -150,7 +150,7 @@
 												<li>使用后台模板</li>
 												<li>增加操作日志</li>
 												<li>增加数据库表字典</li>
-												<li>项目成员管理</li>
+												<li>项目成员管理(增加、删除、权限修改)</li>
 											</ol>
 										</div>
 									</div>

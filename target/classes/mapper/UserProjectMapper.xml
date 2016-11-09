@@ -159,4 +159,11 @@
       is_delete = #{isDelete,jdbcType=INTEGER}
     where up_id = #{upId,jdbcType=INTEGER}
   </update>
+  
+  <update id="deleteUserProject" parameterType="com.flyhero.flyapi.entity.UserProject">
+  	update fly_user_project
+  	set is_delete=1
+  	where project_id=#{projectId}
+  </update>
+  
 </mapper>

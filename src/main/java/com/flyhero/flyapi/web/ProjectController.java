@@ -125,7 +125,7 @@ public class ProjectController extends BaseController{
 		if(flag>0){
 			UserProject record=new UserProject();
 			User u=(User)session.getAttribute("user");
-			OperateLog log=new OperateLog(u.getUserId(),getCuUser().getUserName(), project.getProjectId(), Constant.TYPE_INSERT, Constant.CLASS_PROJECT, 
+			OperateLog log=new OperateLog(u.getUserId(),getCuUser().getUserName(), 0, Constant.TYPE_INSERT, Constant.CLASS_PROJECT, 
 					Constant.NAME_PROJECT, "创建："+project.getProName()+"项目", JSONObject.toJSONString(project));
 			LogService.addLog(log);
 			if(u != null && u.getUserId() !=null){

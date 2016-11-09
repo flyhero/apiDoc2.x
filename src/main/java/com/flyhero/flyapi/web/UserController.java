@@ -120,12 +120,17 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value = "login.do")
 	public ModelAndView login(User user) throws Exception {
+		System.out.println("当前用户："+getCuUser());
+		if(getCuUser()!=null){
+			mv.setViewName("main");
+			return mv;
+		}
+		
 		user.setPassword(Md5Util.textToMD5L16(user.getPassword()));
 		User user1 = userService.findByLogin(user);
 		if (user1 != null) {
 			userService.updateLoginCount(user1);
 			session.setAttribute("user", user1);
-			mv.addObject("u", user1);
 			mv.setViewName("main");
 			return mv;
 		}
