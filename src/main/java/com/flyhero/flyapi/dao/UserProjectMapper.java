@@ -16,6 +16,8 @@ public interface UserProjectMapper {
 	
 	List<TeamMemberPojo> findTeamMembers(UserProject up);
 	
+	int deleteUserProject(UserProject up);
+	
     int deleteByPrimaryKey(Integer upId);
 
     int insert(UserProject record);

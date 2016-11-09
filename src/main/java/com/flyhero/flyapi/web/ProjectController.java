@@ -105,6 +105,24 @@ public class ProjectController extends BaseController{
 		}
 		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
 	}
+	
+	@RequestMapping("deleteProject.do")
+	@ResponseBody
+	public JSONResult deleteProject(Project project){
+		project.setIsDelete(1);
+		UserProject uProject=new UserProject();
+		uProject.setProjectId(project.getProjectId());
+		int flag=projectService.updateByPrimaryKeySelective(project);
+		int flag1=userProjectService.deleteUserProject(uProject);
+		if(flag>0 && flag1>0){
+			OperateLog log=new OperateLog(getCuUser().getUserId(),getCuUser().getUserName(), project.getProjectId(), Constant.TYPE_DELETE,
+					Constant.CLASS_PROJECT, Constant.NAME_PROJECT, "删除："+project.getProName()+"项目", JSONObject.toJSONString(project));
+			LogService.addLog(log);
+			return new JSONResult(Constant.MSG_OK, Constant.CODE_200);
+		}
+		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
+	}
+	
 	@RequestMapping("addMember.do")
 	@ResponseBody
 	public JSONResult addMember(String userName,Integer projectId,int isEdit){

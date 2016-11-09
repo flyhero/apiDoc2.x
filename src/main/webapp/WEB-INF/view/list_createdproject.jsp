@@ -153,13 +153,14 @@
 		    $("#targetCount").val(targetCount);
 		    $('#myModal2').modal('show');  
 		}  
-		function edit(projectId) {  
+		function edit(projectId,name) {  
 			$.ajax({
 				type : 'POST',
 				url : "../project/deleteProject.do",
 				dataType : "json",
 				data : {
-					"projectId" : projectId
+					"projectId" : projectId,
+					"proName" : name
 				},
 				success : function(data) {
 					if (data.msg == 'ok') {
@@ -225,7 +226,7 @@
                 	var des="'"+row.project.proDes+"'";
                      var f='<a href="../forward/project_detail.html?projectId='+row.project.projectId+'&upId='+row.upId+'" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> 查看 </a>'; 
                      var g='<a href="#"  class="btn btn-info btn-xs" onclick="edit('+row.project.projectId+','+name+','+des+','+row.project.targetCount+');"><i class="fa fa-pencil"></i> 编辑 </a>'; 
-                     var h='<a href="#" class="btn btn-danger btn-xs" onclick="delete('+row.project.projectId+');"><i class="fa fa-trash-o"></i> 删除 </a>';
+                     var h='<a href="#" class="btn btn-danger btn-xs" onclick="delete('+row.project.projectId+','+name+');"><i class="fa fa-trash-o"></i> 删除 </a>';
                   return f+g+h;  
               	} 
             } ],

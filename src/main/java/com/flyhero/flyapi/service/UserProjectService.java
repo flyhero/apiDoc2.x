@@ -35,7 +35,9 @@ public class UserProjectService {
 		PageInfo<UserProject> pageInfo=new PageInfo<UserProject>(list);
 		return pageInfo;
 	}
-	
+	public int deleteUserProject(UserProject up){
+		return userProjectMapper.deleteUserProject(up);
+	}
 	public List<TeamMemberPojo> findTeamMembers(UserProject up){
 		return userProjectMapper.findTeamMembers(up);
 	}
