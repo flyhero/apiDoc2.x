@@ -8,6 +8,32 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("forward")
 public class ForwardController extends BaseController{
 
+	/**
+	 * 前往注册页
+	 * @Title: goToRegister
+	 * @author flyhero
+	 * @date 2016年10月11日上午10:42:02
+	 * @param @return    参数
+	 * @return String    返回类型
+	 * @throws
+	 */
+	@RequestMapping("register.html")
+	public String goToRegister() {
+		return "register";
+	}
+	/**
+	 * 前往登录页
+	 * @Title: gotoLogin
+	 * @author flyhero
+	 * @date 2016年10月20日下午2:58:21
+	 * @param @return    参数
+	 * @return String    返回类型
+	 * @throws
+	 */
+	@RequestMapping("login.html")
+	public String gotoLogin() {
+		return "login";
+	}
 	@RequestMapping("main.html")
 	public String gotoMain(){
 		return "main";

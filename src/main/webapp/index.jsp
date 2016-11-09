@@ -61,7 +61,7 @@
 						</div>
 						
 						<button class="btn btn-primary btn-lg btn-block" type="submit">登&nbsp;&nbsp;录</button>
-						<a class="login-link" href="user/gotoRegister.html">还没注册？前去注册</a>
+						<a class="login-link" href="forward/register.html">还没注册？前去注册</a>
 						</form>
 					</div>
 					
@@ -79,7 +79,7 @@
 				<!-- /col-xs-7 -->
 				<div class="col-xs-8"></br>
 					<ul class="list-inline text-center">
-		                <li>flyapi接口管理系统V1.0 &nbsp;Copyright &copy;2016. 作者：王清飞 博客：<a target="_blank" href="http://flyhero.top">flyhero.top</a></li>
+		                <li>flyapi接口管理系统V2.0 &nbsp;Copyright &copy;2016. 作者：王清飞 博客：<a target="_blank" href="http://flyhero.top">flyhero.top</a></li>
 		            </ul>
 				</div>
 				<div class="col-xs-2"></div>

@@ -7,7 +7,7 @@ public interface OperateLogMapper {
 
     int insert(OperateLog record);
 
-    int insertSelective(OperateLog record);
+    int addLog(OperateLog record);
 
     OperateLog selectByPrimaryKey(Integer logId);
 

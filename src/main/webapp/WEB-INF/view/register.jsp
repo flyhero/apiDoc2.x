@@ -16,7 +16,7 @@
 					<a href="#" class="navbar-brand">
 						<small>
 							<i class="icon-leaf"></i>
-							flyapi接口管理系统 V1.0
+							flyapi接口管理系统 V2.0
 						</small>
 					</a><!-- /.brand -->
 				</div><!-- /.navbar-header -->
@@ -24,7 +24,7 @@
 
 				<div class="navbar-header pull-right" role="navigation">
 					<ul class="nav navbar-nav navbar-right"> 
-			            <li><a href="<%=request.getContextPath()%>/user/gotoLogin.do"><span class="glyphicon glyphicon-log-in"></span> 有账号？去登录 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li> 
+			            <li><a href="<%=request.getContextPath()%>/forward/login.html"><span class="glyphicon glyphicon-log-in"></span> 有账号？去登录 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li> 
 			        </ul> 
 				</div>
 			</div>

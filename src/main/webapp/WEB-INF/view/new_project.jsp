@@ -79,7 +79,7 @@
                             <div class="form-group">
                                 <label class="col-lg-3 control-label">项目描述</label>
                                 <div class="col-lg-5">
-                                    <textarea name="proDes" class="form-control" rows="3" placeholder='rows="3"'></textarea>
+                                    <textarea name="proDes" class="form-control" rows="3" placeholder='描述'></textarea>
                                 </div>
                             </div>
                             <div class="form-group">

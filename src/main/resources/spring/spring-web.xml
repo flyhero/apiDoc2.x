@@ -75,7 +75,7 @@
 		                    <value>/static/</value> 
 		                    <value>/user/gotoRegister.do</value>
 		                    <value>/user/validUserName.do</value>
-		                    <value>/user/register.do</value>
+		                    <value>forward/register.html</value>
 		                </list>
 		            </property>
 		        </bean>

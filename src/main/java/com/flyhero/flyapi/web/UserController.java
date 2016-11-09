@@ -45,32 +45,8 @@ public class UserController extends BaseController {
 	@Autowired
 	private ProjectService projectService;
 
-	/**
-	 * 前往登录页
-	 * @Title: gotoLogin
-	 * @author flyhero
-	 * @date 2016年10月20日下午2:58:21
-	 * @param @return    参数
-	 * @return String    返回类型
-	 * @throws
-	 */
-	@RequestMapping("gotoLogin.html")
-	public String gotoLogin() {
-		return "login";
-	}
-	/**
-	 * 前往注册页
-	 * @Title: goToRegister
-	 * @author flyhero
-	 * @date 2016年10月11日上午10:42:02
-	 * @param @return    参数
-	 * @return String    返回类型
-	 * @throws
-	 */
-	@RequestMapping("gotoRegister.html")
-	public String goToRegister() {
-		return "register";
-	}
+
+
 
 	/**
 	 * 用户注册

@@ -38,7 +38,7 @@ public class LoginInterceptor implements HandlerInterceptor {
      */
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
                              Object handler) throws Exception {
-    	System.out.println("==================");
+    	System.out.println("=================="+request.getRequestURI());
         String requestUri = request.getRequestURI();
         for (String url : excludedUrls) {
             if (requestUri.contains(url)) {

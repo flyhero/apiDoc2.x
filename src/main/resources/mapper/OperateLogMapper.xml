@@ -38,7 +38,7 @@
       #{modelName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.flyhero.flyapi.entity.OperateLog">
+  <insert id="addLog" parameterType="com.flyhero.flyapi.entity.OperateLog">
     insert into fly_operate_log
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="logId != null">
