@@ -95,9 +95,8 @@
 
 					<table class="table table-striped" id="cusTable"  
 					       data-pagination="true"  
-					       data-show-refresh="true"  
 					       data-show-toggle="true"  
-					       data-showColumns="true">  
+					       >  
 					</table>  
 
 
@@ -234,7 +233,7 @@
             url: "../project/findUserCreate.do", //获取数据的Servlet地址  
             striped: true,  //表格显示条纹  
             pagination: true, //启动分页  
-            pageSize: 1,  //每页显示的记录数  
+            pageSize: 10,  //每页显示的记录数  
             pageNumber:1, //当前第几页  
             pageList: [5, 10, 15, 20, 25],  //记录数可选列表  
             search: true,  //是否启用查询  

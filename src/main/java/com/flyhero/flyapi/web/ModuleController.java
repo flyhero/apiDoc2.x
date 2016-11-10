@@ -77,6 +77,8 @@ public class ModuleController extends BaseController{
 	 * @return JSONResult    返回类型 
 	 * @throws
 	 */
+	@RequestMapping("updateModule.do")
+	@ResponseBody
 	public JSONResult updateModule(Module module){
 		int flag=moduleService.updateByPrimaryKeySelective(module);
 		if(flag != 0){
@@ -95,6 +97,8 @@ public class ModuleController extends BaseController{
 	 * @return JSONResult    返回类型 
 	 * @throws
 	 */
+	@RequestMapping("findModule.do")
+	@ResponseBody
 	public JSONResult findModule(Module module){
 		List<Module> list=moduleService.findModule(module.getProjectId());
 		if(list != null){
