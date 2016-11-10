@@ -18,7 +18,10 @@
             <param-value>true</param-value>
         </init-param>
     </filter> 
-    
+    <filter-mapping>  
+       <filter-name>charsetEncoding</filter-name>  
+       <url-pattern>/*</url-pattern>  
+   </filter-mapping> 
 	<servlet>
 		<servlet-name>SpringMVC</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

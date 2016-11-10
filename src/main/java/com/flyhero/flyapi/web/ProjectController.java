@@ -1,5 +1,6 @@
 package com.flyhero.flyapi.web;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -109,6 +110,7 @@ public class ProjectController extends BaseController{
 	}
 
 	/**
+	 * @throws UnsupportedEncodingException 
 	 * 新建项目
 	 * @Title: addProject  
 	 * @author flyhero(http://flyhero.top)

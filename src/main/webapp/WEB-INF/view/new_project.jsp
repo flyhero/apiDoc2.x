@@ -68,7 +68,7 @@
                   </div>
                   <div class="x_content">
 
-                   <form id="defaultForm" method="post" action="../project/addProject.do" class="form-horizontal">
+                   <form id="defaultForm" method="post" action="../project/addProject.do" class="form-horizontal" accept-charset="UTF-8">
                         <fieldset>
                             <div class="form-group">
                                 <label class="col-lg-3 control-label">项目名称</label>
@@ -103,6 +103,7 @@
                             </div>
                         </div>
                     </form>
+
                   </div>
                 </div>
               </div>
@@ -179,10 +180,6 @@ $(document).ready(function() {
 });
 </script>
 <!-- /validator -->
-	<!-- FastClick -->
-	<script src="<%=request.getContextPath()%>/static/ace/vendors/fastclick/lib/fastclick.js"></script>
-	<!-- NProgress -->
-	<script src="<%=request.getContextPath()%>/static/ace/vendors/nprogress/nprogress.js"></script>
 
 	<!-- Custom Theme Scripts -->
 	<script src="<%=request.getContextPath()%>/static/ace/production/js/custom.js"></script>
