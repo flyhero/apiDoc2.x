@@ -191,7 +191,7 @@
                           <br />
 
                           <div class=" mtop20">
-                           <a href="#" class="btn btn-sm btn-primary">添加成员</a>
+                           <a href="#" class="btn btn-sm btn-primary"  data-toggle="modal" data-target="#addTeam">添加成员</a>
                             <a href="#" class="btn btn-sm btn-danger">删除成员</a>
                           </div>
                           <br /><hr>
@@ -274,6 +274,35 @@
 			</div>
 		</div>
 		</div>
+		
+			<div class="modal fade" id="addTeam" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">×</button>
+					<h4 class="modal-title" id="myModalLabel">添加成员</h4>
+				</div>
+				<div class="modal-body">
+					<label for="userName">成员用户名</label> 
+					<input type="text"
+						class="form-control" id="TeamName" placeholder="请输入名称">
+					<label for="isEdit">权限</label> 
+					<select id="isEdit" class="form-control">
+						<option value="0">只读</option>
+						<option value="1">可写</option>
+					</select>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="checkUserName" class="btn btn-warning">检查用户</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" id="addActor" data-dismiss="modal"
+						class="btn btn-primary">提交</button>
+				</div>
+			</div>
+		</div>
+	</div> 
         <!-- /page content -->
 
         <!-- footer content -->
@@ -624,7 +653,30 @@
 
 			});
 			
-			
+			$("#checkUserName").click(function() {
+				var userName = $("#TeamName").val();
+				if (userName != '') {
+					$.ajax({
+						type : 'POST',
+						url : "../user/validUserName.do",
+						dataType : "json",
+						data : {
+							"userName" : userName
+						},
+						success : function(data) {
+							if (data.valid == false) {
+								alert("用户存在^_^");
+							} else {
+								alert("用户不存在！-_-");
+							}
+						}
+
+					});
+				} else {
+					alert("用户名不能为空！");
+				}
+
+			});
 			$("#updatePermission").click(function() {
 				var userName = $("#userName").val();
 				var projectId = $("#projectID").val();
@@ -678,7 +730,7 @@
 	                    }  
 	                }); 
 				} else {
-					alert("用户名不能为空！");
+					alert("信息不能为空！");
 				}
 			});
     	  
