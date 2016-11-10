@@ -18,7 +18,7 @@
     select 
     <include refid="Base_Column_List" />
     from fly_module
-    where project_id = #{projectId} and is_delete=0
+    where project_id = #{projectId} and is_detele=0
   </select>
   
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

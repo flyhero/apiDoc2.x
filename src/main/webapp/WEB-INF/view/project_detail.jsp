@@ -202,7 +202,7 @@
                           <br />
 
                           <div class=" mtop20">
-                           <a href="#" class="btn btn-sm btn-primary">添加模块</a>
+                           <a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addModule">添加模块</a>
                             <a href="#" class="btn btn-sm btn-danger">删除模块</a>
                           </div>
                         </div>
@@ -249,6 +249,31 @@
 			</div>
 		</div>
 	</div> 
+	
+	
+		<div class="modal fade" id="addModule" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel3" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">×</button>
+					<h4 class="modal-title" id="myModalLabel3">新建模块</h4>
+				</div>
+				<div class="modal-body">
+					<label for="moduleName">名称</label> 
+					<input type="text" class="form-control" id="moduleName"> 
+					<label for="moduleDes">描述</label>
+					<textarea id="moduleDes" class="form-control" rows="3"></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" id="domodule" data-dismiss="modal"
+						class="btn btn-primary">提交</button>
+				</div>
+			</div>
+		</div>
+		</div>
         <!-- /page content -->
 
         <!-- footer content -->
@@ -587,13 +612,12 @@
 				url : "../module/findModule.do",
 				dataType : "json",
 				data : {
-					"projectId":projectId,
-					"userId":userId
+					"projectId":projectId
 				},
 				success : function(data) {
-					$.each(data.data,function(index,user){
-						var name="'"+user.userName+"'";
-						$("#team-member").append('<li><a href="#" onclick="edit('+user.upId+','+user.isEdit+','+name+','+user.projectId+')"><i class="fa fa-user"></i>&nbsp;'+user.userName+'</a></li>');
+					$.each(data.data,function(index,module){
+						var name="'"+module.moduleName+"'";
+						$("#team-member").append('<li><a href="#" onclick="edit('+name+')"><i class="fa fa-cube"></i>&nbsp;'+name+'</a></li>');
 					});
 					
 				}
@@ -618,7 +642,7 @@
 							"upId" : upId
 						},
 						success : function(data) {
-							if (data.msg == 'success') {
+							if (data.msg == 'ok') {
 								alert("更新成功！^_^");
 							} else {
 								alert("更新失败！-_-");
@@ -629,7 +653,33 @@
 				} else {
 					alert("用户名不能为空！");
 				}
-
+			});
+			
+			
+			$("#domodule").click(function() {
+				var moduleName = $("#moduleName").val();
+				var moduleDes = $("#moduleDes").val();
+				if (moduleName != '' && moduleDes != ''
+					&& projectId != '') {
+	                $.ajax({  
+	                    type : "POST",  //提交方式  
+	                    url : "../module/addModule.do",//路径  
+	                    data : {  
+							moduleName : moduleName,
+							moduleDes : moduleDes,
+							projectId : projectId
+	                    },//数据，这里使用的是Json格式进行传输  
+	                    success : function(data) {//返回数据根据结果进行相应的处理  
+							if (data.msg == 'ok') {
+								alert("添加成功^_^");
+							} else {
+								alert("添加失败！-_-");
+							}
+	                    }  
+	                }); 
+				} else {
+					alert("用户名不能为空！");
+				}
 			});
     	  
       });  
