@@ -68,37 +68,37 @@
                   </div>
                   <div class="x_content">
 
-                   <form id="defaultForm" method="post" action="../project/addProject.do" class="form-horizontal" accept-charset="UTF-8">
+                   <form id="defaultForm"  class="form-horizontal">
                         <fieldset>
                             <div class="form-group">
                                 <label class="col-lg-3 control-label">项目名称</label>
                                 <div class="col-lg-5">
-                                    <input type="text" class="form-control" name="proName" />
+                                    <input type="text" class="form-control" name="proName" id="proName" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-3 control-label">项目描述</label>
                                 <div class="col-lg-5">
-                                    <textarea name="proDes" class="form-control" rows="3" placeholder='描述'></textarea>
+                                    <textarea name="proDes" id="proDes" class="form-control" rows="3" placeholder='描述'></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-3 control-label">项目版本</label>
                                 <div class="col-lg-5">
-                                    <input type="text" class="form-control" name="proVersion" />
+                                    <input type="text" class="form-control" name="proVersion" id="proVersion"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-3 control-label">预计接口</label>
                                 <div class="col-lg-5">
-                                    <input type="number" class="form-control" name="targetCount" />
+                                    <input type="number" class="form-control" name="targetCount" id="targetCount"/>
                                 </div>
                             </div>
                         </fieldset>
                          <div class="ln_solid"></div>
                         <div class="form-group">
                             <div class="col-lg-9 col-lg-offset-3">
-                                <button type="submit" class="btn btn-primary">提交</button>
+                                <button type="button" class="btn btn-primary" onclick = "add();">提交</button>
                                 <button type="button" class="btn btn-info" id="resetBtn">重置</button>
                             </div>
                         </div>
@@ -119,7 +119,35 @@
     </div>
 <!-- validator -->
 <script>
+function add(){
+    var proVersion= $("#proVersion").val();
+    var proName=$("#proName").val();
+    var proDes=$("#proDes").val();
+    var targetCount=$("#targetCount").val();
+	$.ajax({
+		type : 'POST',
+		url : "../project/addProject.do",
+		dataType : "json",
+		data : {
+			"proVersion" : proVersion,
+			"proName" : proName,
+			"proDes" : proDes,
+			"targetCount" : targetCount
+		},
+		success : function(data) {
+			if (data.msg == 'ok') {
+				alert("创建成功！");
+				window.location.href='main.html';
+			}else{
+				alert("创建失败！");
+			}
+
+		}
+
+	});
+}
 $(document).ready(function() {
+
     $('#resetBtn').click(function() {
         $('#defaultForm').data('bootstrapValidator').resetForm(true);
     });

@@ -1,8 +1,13 @@
 package com.flyhero.flyapi.dao;
 
+import java.util.List;
+
 import com.flyhero.flyapi.entity.Module;
 
 public interface ModuleMapper {
+	
+	List<Module> findModule(Integer projectId);
+	
     int deleteByPrimaryKey(Integer moduleId);
 
     int insert(Module record);

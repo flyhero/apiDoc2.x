@@ -110,7 +110,6 @@ public class ProjectController extends BaseController{
 	}
 
 	/**
-	 * @throws UnsupportedEncodingException 
 	 * 新建项目
 	 * @Title: addProject  
 	 * @author flyhero(http://flyhero.top)
@@ -124,15 +123,19 @@ public class ProjectController extends BaseController{
 	@ResponseBody
 	public JSONResult addProject(Project project){
 		int flag=projectService.insertSelective(project);
+		System.out.println("id:"+project.getProjectId());
 		if(flag>0){
 			UserProject record=new UserProject();
-			User u=(User)session.getAttribute("user");
+			User u=(User)getCuUser();
 			OperateLog log=new OperateLog(u.getUserId(),getCuUser().getUserName(), 0, Constant.TYPE_INSERT, Constant.CLASS_PROJECT, 
 					Constant.NAME_PROJECT, "创建："+project.getProName()+"项目", JSONObject.toJSONString(project));
 			LogService.addLog(log);
-			if(u != null && u.getUserId() !=null){
+			if(u != null){
 				record.setProjectId(project.getProjectId());
 				record.setUserId(u.getUserId());
+				record.setIsCreator(u.getUserId());
+				record.setIsEdit(1);
+				record.setIsDelete(0);
 				userProjectService.insertSelective(record);
 				return new JSONResult(Constant.MSG_OK, Constant.CODE_200);
 			}

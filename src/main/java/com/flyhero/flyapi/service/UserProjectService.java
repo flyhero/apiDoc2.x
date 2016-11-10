@@ -58,7 +58,7 @@ public class UserProjectService {
 
 	public int insertSelective(UserProject record) {
 		// TODO Auto-generated method stub
-		return 0;
+		return userProjectMapper.insertSelective(record);
 	}
 
 	public UserProject selectByPrimaryKey(Integer r1Id) {

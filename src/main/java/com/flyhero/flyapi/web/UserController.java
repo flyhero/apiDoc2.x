@@ -175,11 +175,6 @@ public class UserController extends BaseController {
 		mv.setViewName("moduleList");
 		return mv;
 	}
-	@RequestMapping("getModuleByprojectId.do")
-	@ResponseBody
-	public List<Module> getModuleByprojectId(int projectId){
-		return moduleService.selectByProjectId(projectId);
-	}
 	@RequestMapping("goToInterface.do")
 	public ModelAndView goToInterface(int moduleId,int isEdit,String projectName){
 		String name = null;

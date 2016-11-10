@@ -58,7 +58,7 @@
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.flyhero.flyapi.entity.Project">
+  <insert id="insertSelective" parameterType="com.flyhero.flyapi.entity.Project" useGeneratedKeys="true" keyColumn="project_id" keyProperty="projectId">
     insert into fly_project
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="projectId != null">

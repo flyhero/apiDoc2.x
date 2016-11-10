@@ -14,19 +14,31 @@ public class ModuleService{
 	@Autowired
 	private ModuleMapper moduleMapper;
 
-	public List<Module> selectByProjectId(Integer projectId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Module> findModule(Integer projectId) {
+		return moduleMapper.findModule(projectId);
 	}
 
-	public Module selectByPrimaryKey(Integer moduleId) {
-		// TODO Auto-generated method stub
-		return null;
+	public int deleteByPrimaryKey(Integer moduleId) {
+		return moduleMapper.deleteByPrimaryKey(moduleId);
+	}
+
+	public int insert(Module record) {
+		return moduleMapper.insert(record);
 	}
 
 	public int insertSelective(Module record) {
-		// TODO Auto-generated method stub
-		return 0;
+		return moduleMapper.insertSelective(record);
 	}
 
+	public Module selectByPrimaryKey(Integer moduleId) {
+		return moduleMapper.selectByPrimaryKey(moduleId);
+	}
+
+	public int updateByPrimaryKeySelective(Module record) {
+		return moduleMapper.updateByPrimaryKeySelective(record);
+	}
+
+	public int updateByPrimaryKey(Module record) {
+		return moduleMapper.updateByPrimaryKey(record);
+	}
 }
