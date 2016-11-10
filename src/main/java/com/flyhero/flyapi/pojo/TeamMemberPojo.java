@@ -11,11 +11,19 @@ public class TeamMemberPojo implements Serializable{
 	
 	private static final long serialVersionUID = -5855621551459626482L;
 
+	private Integer upId;
 	private Integer userId;
 	private String userName;
 	private String avatarUrl;
 	private Integer isEdit;
 	private Integer projectId;
+	
+	public Integer getUpId() {
+		return upId;
+	}
+	public void setUpId(Integer upId) {
+		this.upId = upId;
+	}
 	public Integer getUserId() {
 		return userId;
 	}

@@ -192,8 +192,18 @@
 
                           <div class=" mtop20">
                            <a href="#" class="btn btn-sm btn-primary">添加成员</a>
-                            <a href="#" class="btn btn-sm btn-warning">修改成员</a>
                             <a href="#" class="btn btn-sm btn-danger">删除成员</a>
+                          </div>
+                          <br /><hr>
+                          <h5>项目模块</h5>
+                          <ul class="list-unstyled project_files" id="team-member">
+                            <li><i class="fa fa-cube"></i> 模块1</li>
+                          </ul>
+                          <br />
+
+                          <div class=" mtop20">
+                           <a href="#" class="btn btn-sm btn-primary">添加模块</a>
+                            <a href="#" class="btn btn-sm btn-danger">删除模块</a>
                           </div>
                         </div>
 
@@ -209,6 +219,36 @@
           </div>
         </div>
         
+        
+        	<div class="modal fade" id="editTeam" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">×</button>
+					<h4 class="modal-title" id="myModalLabel">修改权限</h4>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" id="upID"/>
+					<input type="hidden" id="projectID"/>
+					<label for="userName">成员</label> 
+					<input type="text"
+						class="form-control" id="userName" readonly="readonly">
+					<label for="isEdit">权限</label> 
+					<select id="isEdit" class="form-control">
+						<option value="0">只读</option>
+						<option value="1">可写</option>
+					</select>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" id="updatePermission" data-dismiss="modal"
+						class="btn btn-primary">提交</button>
+				</div>
+			</div>
+		</div>
+	</div> 
         <!-- /page content -->
 
         <!-- footer content -->
@@ -496,7 +536,13 @@
           data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
         }]
       });
-      
+		function edit(upId,isEdit,name,projectId) {  
+		    $("#userName").val(name);
+		    $("#isEdit  option[value='"+isEdit+"'] ").attr("selected",true)
+		    $("#upID").val(upId);
+		    $("#projectID").val(projectId);
+		    $('#editTeam').modal('show');  
+		}  
       $(document).ready(function () {     
     	    var projectId=${projectId};
     	    var upId=${upId};
@@ -529,9 +575,43 @@
 				},
 				success : function(data) {
 					$.each(data.data,function(index,user){
-						$("#team-member").append('<li><i class="fa fa-user"></i>&nbsp;'+user.userName+'</li>');
+						var name="'"+user.userName+"'";
+						$("#team-member").append('<li><a href="#" onclick="edit('+user.upId+','+user.isEdit+','+name+','+user.projectId+')"><i class="fa fa-user"></i>&nbsp;'+user.userName+'</a></li>');
 					});
 					
+				}
+
+			});
+			
+			
+			
+			$("#updatePermission").click(function() {
+				var userName = $("#userName").val();
+				var projectId = $("#projectID").val();
+				var isEdit = $("#isEdit").val();
+			    var upId=$("#upID").val();
+				if (userName != '' && projectId != '' && upId != '') {
+					$.ajax({
+						type : 'POST',
+						url : "../project/updateMemberPermission.do",
+						dataType : "json",
+						data : {
+							"name" : userName,
+							"projectId" : projectId,
+							"isEdit" : isEdit,
+							"upId" : upId
+						},
+						success : function(data) {
+							if (data.msg == 'success') {
+								alert("更新成功！^_^");
+							} else {
+								alert("更新失败！-_-");
+							}
+						}
+
+					});
+				} else {
+					alert("用户名不能为空！");
 				}
 
 			});

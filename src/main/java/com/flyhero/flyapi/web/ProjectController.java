@@ -256,5 +256,31 @@ public class ProjectController extends BaseController{
 		LogService.addLog(log);
 		return new JSONResult(Constant.MSG_OK, Constant.CODE_200, list);
 	}
+	/**
+	 * 更新成员权限
+	 * @Title: updateMemberPermission  
+	 * @author flyhero(http://flyhero.top)
+	 * @date 2016年11月10日 上午11:00:52 
+	 * @param @param up
+	 * @param @param name
+	 * @param @return    
+	 * @return JSONResult    返回类型 
+	 * @throws
+	 */
+	@RequestMapping("updateMemberPermission.do")
+	@ResponseBody
+	public JSONResult updateMemberPermission(UserProject up,String name){
+		Integer id=up.getProjectId();
+		up.setProjectId(null);
+		int flag=userProjectService.updateByPrimaryKeySelective(up);
+		if(flag>0){
+			OperateLog log=new OperateLog(getCuUser().getUserId(),getCuUser().getUserName(), id, Constant.TYPE_UPDATE,
+					Constant.CLASS_TEAM, Constant.NAME_TEAM, "更新："+name+"的权限", JSONObject.toJSONString(up));
+			LogService.addLog(log);
+			return new JSONResult(Constant.MSG_OK, Constant.CODE_200);
+		}
+		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
+		
+	}
 	
 }

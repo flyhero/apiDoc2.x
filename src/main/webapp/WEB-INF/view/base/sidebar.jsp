@@ -28,9 +28,9 @@
 
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-table"></i> 数据库字典 <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-database"></i> 字典 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="tables.html">Tables</a>
+                      <li><a href="tables.html">数据库</a>
                       </li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a>
                       </li>

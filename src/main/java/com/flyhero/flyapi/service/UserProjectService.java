@@ -72,8 +72,7 @@ public class UserProjectService {
 	}
 
 	public int updateByPrimaryKeySelective(UserProject record) {
-		// TODO Auto-generated method stub
-		return 0;
+		return userProjectMapper.updateByPrimaryKeySelective(record);
 	}
 
 	public int updateByPrimaryKey(UserProject record) {
