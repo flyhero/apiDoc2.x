@@ -7,6 +7,7 @@
 - 核心框架：Spring Framework 4.1
 - 视图框架：Spring MVC 4.1
 - 持久层框架：MyBatis 3.2
+- 分页插件：Mybatis-PageHelper
 - 数据库：MySql 5.6
 - 数据库连接池：Alibaba Druid 1.0
 - 日志管理：SLF4J 1.7、Log4j
