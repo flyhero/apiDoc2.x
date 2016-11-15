@@ -62,4 +62,12 @@ public class ForwardController extends BaseController{
 		mv.setViewName("project_detail");
 		return mv;
 	}
+	@RequestMapping("demo.html")
+	public String gotoDemo1(){
+		return "demo";
+	}
+	@RequestMapping("new_interfaces.html")
+	public String gotoDemo(){
+		return "new_interfaces";
+	}
 }

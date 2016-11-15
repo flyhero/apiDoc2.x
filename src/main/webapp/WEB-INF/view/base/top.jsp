@@ -15,6 +15,11 @@
          				<a href="../forward/newProject.html" id="menu_toggle"><i class="fa fa-plus"></i> </a>
          				<label>新建项目</label>
               </div>
+                            <div class="nav toggle">
+                                   
+         				<a href="../forward/new_interfaces.html" id="menu_toggle"><i class="fa fa-plus"></i> </a>
+         				<label>新建接口</label>
+              </div>
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">

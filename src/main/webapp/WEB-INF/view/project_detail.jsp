@@ -775,11 +775,11 @@
 					              },
 					              restore: {
 					                show: true,
-					                title: 'Restore'
+					                title: '重加载'
 					              },
 					              saveAsImage: {
 					                show: true,
-					                title: 'Save'
+					                title: '保存'
 					              }
 					            }
 					          },

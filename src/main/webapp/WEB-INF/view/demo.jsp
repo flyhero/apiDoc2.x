@@ -5,7 +5,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<jsp:include page="static.jsp"></jsp:include>
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/static/table/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/static/table/bootstrap-table/src/bootstrap-table.css">
+ <link href="<%=request.getContextPath()%>/static/ace/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="http://rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet">
+	
+<script src="<%=request.getContextPath()%>/static/table/jquery.min.js"></script>
+<script
+	src="<%=request.getContextPath()%>/static/table/bootstrap/js/bootstrap.min.js"></script>
+<script
+	src="<%=request.getContextPath()%>/static/table/bootstrap-table/src/bootstrap-table.js"></script>
+	<script src="http://rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/js/bootstrap-editable.js"></script>
+	<script
+	src="<%=request.getContextPath()%>/static/table/bootstrap-table/src/extensions/editable/bootstrap-table-editable.js"></script>
 <title>接口</title>
 </head>
 <div class="container">
