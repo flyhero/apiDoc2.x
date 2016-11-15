@@ -35,6 +35,10 @@ public class UserProjectService {
 		PageInfo<UserProject> pageInfo=new PageInfo<UserProject>(list);
 		return pageInfo;
 	}
+	public List<UserProject> findUserEdit(Integer userId){
+		List<UserProject> list=userProjectMapper.findUserEdit(userId);
+		return list;
+	}
 	public int deleteUserProject(UserProject up){
 		return userProjectMapper.deleteUserProject(up);
 	}

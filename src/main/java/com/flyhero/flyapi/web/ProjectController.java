@@ -110,6 +110,25 @@ public class ProjectController extends BaseController{
 	}
 
 	/**
+	 * 获取用户拥有权限的项目
+	 * @Title: findUserEdit  
+	 * @author flyhero(http://flyhero.top)
+	 * @date 2016年11月15日 下午5:16:19 
+	 * @param @param userId
+	 * @param @return    
+	 * @return JSONResult    返回类型 
+	 * @throws
+	 */
+	@RequestMapping("findUserEdit.do")
+	@ResponseBody
+	public JSONResult findUserEdit(Integer userId){
+		List<UserProject> list=userProjectService.findUserEdit(userId);
+		if(list != null && !list.isEmpty()){
+			return new JSONResult(Constant.MSG_OK, Constant.CODE_200, list);
+		}
+		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200, list);
+	}
+	/**
 	 * 新建项目
 	 * @Title: addProject  
 	 * @author flyhero(http://flyhero.top)
