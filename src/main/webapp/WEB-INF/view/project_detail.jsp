@@ -196,7 +196,7 @@
                           </div>
                           <br /><hr>
                           <h5>项目模块</h5>
-                          <ul class="list-unstyled project_files" id="team-member">
+                          <ul class="list-unstyled project_files" id="project-module">
                             <li><i class="fa fa-cube"></i> 模块1</li>
                           </ul>
                           <br />
@@ -646,7 +646,7 @@
 				success : function(data) {
 					$.each(data.data,function(index,module){
 						var name="'"+module.moduleName+"'";
-						$("#team-member").append('<li><a href="#" onclick="edit('+name+')"><i class="fa fa-cube"></i>&nbsp;'+name+'</a></li>');
+						$("#project-module").append('<li><a href="#" onclick="edit('+name+')"><i class="fa fa-cube"></i>&nbsp;'+name+'</a></li>');
 					});
 					
 				}
