@@ -102,8 +102,17 @@
 										<div class="form-group">
 											<label class="col-lg-3 control-label">项目名称</label>
 											<div class="col-lg-5">
-												<input type="text" class="form-control" name="proName"
-													id="proName" />
+												<select id="pro-name" class="form-control">
+													<option value="0">可用</option>
+												</select>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-lg-3 control-label">模块</label>
+											<div class="col-lg-5">
+												<select id="module-name" class="form-control">
+													<option value="0">可用</option>
+												</select>
 											</div>
 										</div>
 										<div class="form-group">
@@ -324,14 +333,41 @@
 				},
 				success : function(data) {
 					if (data.msg == 'ok') {
-						alert("创建成功！");
+						$.each(data.data,function(index,pro){
+							$("#pro-name").append('<option value="'+pro.projectId+'">'+pro.proName+'</option>');
+						});
+						
 					} else {
-						alert("创建失败！");
+						alert("获取项目失败！");
 					}
 
 				}
 
 			});
+			$("#pro-name").change( function() {
+				var proId=$("#pro-name").val();
+				$
+				.ajax({
+					type : 'POST',
+					url : "../module/findModule.do",
+					dataType : "json",
+					data : {
+						"projectId":proId
+					},
+					success : function(data) {
+						if (data.msg == 'ok') {
+							$.each(data.data,function(index,mo){
+								$("#module-name").append('<option value="'+mo.moduleId+'">'+mo.moduleName+'</option>');
+							});
+							
+						} else {
+							alert("获取模块失败！");
+						}
+
+					}
+
+				});
+				});
 			
 		});
 	</script>
