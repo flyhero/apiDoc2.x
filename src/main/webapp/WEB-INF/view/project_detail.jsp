@@ -531,65 +531,7 @@
 
       var echartBarLine = echarts.init(document.getElementById('mainb'), theme);
 
-      echartBarLine.setOption({
-        title: {
-          x: 'center',
-          y: 'top',
-          padding: [0, 0, 20, 0],
-          text: '项目接口完成情况',
-          textStyle: {
-            fontSize: 15,
-            fontWeight: 'normal'
-          }
-        },
-        tooltip: {
-          trigger: 'axis'
-        },
-        toolbox: {
-          show: true,
-          feature: {
-            dataView: {
-              show: true,
-              readOnly: false,
-              title: "Text View",
-              lang: [
-                "Text View",
-                "Close",
-                "Refresh",
-              ],
-            },
-            restore: {
-              show: true,
-              title: 'Restore'
-            },
-            saveAsImage: {
-              show: true,
-              title: 'Save'
-            }
-          }
-        },
-        calculable: true,
-        legend: {
-          data: ['绿色'],
-          y: 'bottom'
-        },
-        xAxis: [{
-          type: 'category',
-          data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-        }],
-        yAxis: [{
-          type: 'value',
-          name: '接口数',
-          axisLabel: {
-            formatter: '{value} 个'
-          }
-        }],
-        series: [{
-          name: '绿色',
-          type: 'bar',
-          data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
-        }]
-      });
+
 		function edit(upId,isEdit,name,projectId) {  
 		    $("#userName").val(name);
 		    $("#isEdit  option[value='"+isEdit+"'] ").attr("selected",true)
@@ -733,6 +675,81 @@
 					alert("信息不能为空！");
 				}
 			});
+            $.ajax({  
+                type : "POST",  //提交方式  
+                url : "../log/findLog.do",//路径  
+                data : {  
+					"projectId" : projectId
+                },//数据，这里使用的是Json格式进行传输  
+                success : function(data) {//返回数据根据结果进行相应的处理  
+					if (data.msg == 'ok') {
+						
+					      echartBarLine.setOption({
+					          title: {
+					            x: 'center',
+					            y: 'top',
+					            padding: [0, 0, 20, 0],
+					            text: '项目接口完成情况',
+					            textStyle: {
+					              fontSize: 15,
+					              fontWeight: 'normal'
+					            }
+					          },
+					          tooltip: {
+					            trigger: 'axis'
+					          },
+					          toolbox: {
+					            show: true,
+					            feature: {
+					              dataView: {
+					                show: true,
+					                readOnly: false,
+					                title: "Text View",
+					                lang: [
+					                  "Text View",
+					                  "Close",
+					                  "Refresh",
+					                ],
+					              },
+					              restore: {
+					                show: true,
+					                title: 'Restore'
+					              },
+					              saveAsImage: {
+					                show: true,
+					                title: 'Save'
+					              }
+					            }
+					          },
+					          calculable: true,
+					          legend: {
+					            data: ['接口'],
+					            y: 'bottom'
+					          },
+					          xAxis: [{
+					            type: 'category',
+					            data: data.data.xtime
+					          }],
+					          yAxis: [{
+					            type: 'value',
+					            name: '接口数',
+					            axisLabel: {
+					              formatter: '{value} 个'
+					            }
+					          }],
+					          series: [{
+					            name: '接口',
+					            type: 'bar',
+					            data: data.data.count
+					          }]
+					        });
+						
+						
+					} else {
+						alert("获取数据失败！-_-");
+					}
+                }  
+            }); 
     	  
       });  
       
