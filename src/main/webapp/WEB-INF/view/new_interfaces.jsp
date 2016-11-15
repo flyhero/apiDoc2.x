@@ -103,7 +103,7 @@
 											<label class="col-lg-3 control-label">项目名称</label>
 											<div class="col-lg-5">
 												<select id="pro-name" class="form-control">
-													<option value="0">可用</option>
+													<option value="0">请选择</option>
 												</select>
 											</div>
 										</div>
@@ -111,7 +111,7 @@
 											<label class="col-lg-3 control-label">模块</label>
 											<div class="col-lg-5">
 												<select id="module-name" class="form-control">
-													<option value="0">可用</option>
+													<option value="0">请选择</option>
 												</select>
 											</div>
 										</div>
@@ -160,7 +160,7 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-lg-3 control-label">2.3请求头说明</label>
+											<label class="col-lg-3 control-label">2.3请求参数</label>
 											<div class="col-lg-5">
 												<div id="toolbar">
 													<button id="button" type="button" class="btn btn-default">添加</button>
@@ -182,7 +182,7 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-lg-3 control-label">2.4请求参数示例</label>
+											<label class="col-lg-3 control-label">2.4请求示例</label>
 											<div class="col-lg-5">
 												<textarea id="requestexam" class="form-control" rows="6"
 													placeholder='{
@@ -334,7 +334,7 @@
 				success : function(data) {
 					if (data.msg == 'ok') {
 						$.each(data.data,function(index,pro){
-							$("#pro-name").append('<option value="'+pro.projectId+'">'+pro.proName+'</option>');
+							$("#pro-name").append('<option value="'+pro.project.projectId+'">'+pro.project.proName+'</option>');
 						});
 						
 					} else {
