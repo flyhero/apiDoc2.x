@@ -250,31 +250,6 @@
 		</div>
 	</div> 
 	
-	
-		<div class="modal fade" id="addModule" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel3" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">×</button>
-					<h4 class="modal-title" id="myModalLabel3">新建模块</h4>
-				</div>
-				<div class="modal-body">
-					<label for="moduleName">名称</label> 
-					<input type="text" class="form-control" id="moduleName"> 
-					<label for="moduleDes">描述</label>
-					<textarea id="moduleDes" class="form-control" rows="3"></textarea>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" id="domodule" data-dismiss="modal"
-						class="btn btn-primary">提交</button>
-				</div>
-			</div>
-		</div>
-		</div>
-		
 			<div class="modal fade" id="addTeam" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -303,6 +278,57 @@
 			</div>
 		</div>
 	</div> 
+	
+		
+		<div class="modal fade" id="addModule" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel3" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">×</button>
+					<h4 class="modal-title" id="myModalLabel3">新建模块</h4>
+				</div>
+				<div class="modal-body">
+					<label for="moduleName">名称</label> 
+					<input type="text" class="form-control" id="moduleName"> 
+					<label for="moduleDes">描述</label>
+					<textarea id="moduleDes" class="form-control" rows="3"></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" id="domodule" data-dismiss="modal"
+						class="btn btn-primary">提交</button>
+				</div>
+			</div>
+		</div>
+		</div>
+		
+			
+		<div class="modal fade" id="editModule" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel3" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">×</button>
+					<h4 class="modal-title" id="myModalLabel3">新建模块</h4>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" id="editId"/>
+					<label for="editName">名称</label> 
+					<input type="text" class="form-control" id="moduleName"> 
+					<label for="editDes">描述</label>
+					<textarea id="moduleDes" class="form-control" rows="3"></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" id="updateModule" data-dismiss="modal"
+						class="btn btn-primary">提交</button>
+				</div>
+			</div>
+		</div>
+		</div>
         <!-- /page content -->
 
         <!-- footer content -->
@@ -539,6 +565,12 @@
 		    $("#projectID").val(projectId);
 		    $('#editTeam').modal('show');  
 		}  
+		function editModule(id,name,des) {  
+		    $("#editId").val(id);
+		    $("#editName").val(name);
+		    $("#editDes").val(des);
+		    $('#editModule').modal('show');  
+		}  
       $(document).ready(function () {     
     	    var projectId=${projectId};
     	    var upId=${upId};
@@ -588,7 +620,8 @@
 				success : function(data) {
 					$.each(data.data,function(index,module){
 						var name="'"+module.moduleName+"'";
-						$("#project-module").append('<li><a href="#" onclick="edit('+name+')"><i class="fa fa-cube"></i>&nbsp;'+name+'</a></li>');
+						var des="'"+module.moduleDes+"'";
+						$("#project-module").append('<li><a href="#" onclick="editModule('+module.moduleId+','+name+','+des+')"><i class="fa fa-cube"></i>&nbsp;'+module.moduleName+'</a></li>');
 					});
 					
 				}
@@ -649,6 +682,33 @@
 				}
 			});
 			
+			$("#updateModule").click(function() {
+				var editId = $("#editId").val();
+				var editName = $("#editName").val();
+				var editDes = $("#editDes").val();
+				if (editId != '' && editName != '' && editDes != '') {
+					$.ajax({
+						type : 'POST',
+						url : "../module/updateModule.do",
+						dataType : "json",
+						data : {
+							"moduleId" : editId,
+							"moduleName" : editName,
+							"moduleDes" : editDes
+						},
+						success : function(data) {
+							if (data.msg == 'ok') {
+								alert("更新成功！^_^");
+							} else {
+								alert("更新失败！-_-");
+							}
+						}
+
+					});
+				} else {
+					alert("信息不能为空！");
+				}
+			});
 			
 			$("#domodule").click(function() {
 				var moduleName = $("#moduleName").val();
