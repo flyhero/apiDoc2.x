@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.flyhero.flyapi.pojo.JSONResult;
 import com.flyhero.flyapi.service.LogService;
@@ -25,6 +26,7 @@ public class LogController extends BaseController{
 	private LogService logService;
 	
 	@RequestMapping("findLog.do")
+	@ResponseBody
 	public JSONResult findLogByProjectId(Integer projectId){
 		Map<String, Object> map=logService.findLog(projectId);
 		return new JSONResult(Constant.MSG_OK, Constant.CODE_200, map);

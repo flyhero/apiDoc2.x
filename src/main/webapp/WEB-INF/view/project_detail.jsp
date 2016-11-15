@@ -675,16 +675,18 @@
 					alert("信息不能为空！");
 				}
 			});
-            $.ajax({  
-                type : "POST",  //提交方式  
-                url : "../log/findLog.do",//路径  
-                data : {  
+			
+			$.ajax({
+				type : 'POST',
+				url : "../log/findLog.do",
+				dataType : "json",
+				data : {
 					"projectId" : projectId
-                },//数据，这里使用的是Json格式进行传输  
-                success : function(data) {//返回数据根据结果进行相应的处理  
+				},
+				success : function(data) {
 					if (data.msg == 'ok') {
 						
-					      echartBarLine.setOption({
+						 echartBarLine.setOption({
 					          title: {
 					            x: 'center',
 					            y: 'top',
@@ -735,7 +737,8 @@
 					            name: '接口数',
 					            axisLabel: {
 					              formatter: '{value} 个'
-					            }
+					            },
+					            splitNumber: 1
 					          }],
 					          series: [{
 					            name: '接口',
@@ -744,12 +747,13 @@
 					          }]
 					        });
 						
-						
-					} else {
-						alert("获取数据失败！-_-");
+					}else{
+						alert("创建失败！");
 					}
-                }  
-            }); 
+
+				}
+
+			});
     	  
       });  
       
