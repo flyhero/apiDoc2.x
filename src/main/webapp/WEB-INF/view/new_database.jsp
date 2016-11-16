@@ -100,6 +100,49 @@
                                     <input type="text" class="form-control" name="dbDriver" id="dbDriver" />
                                 </div>
                             </div>
+                           <!--  <div class="form-group">
+                                <label class="col-lg-3 control-label">更新策略</label>
+                                <div class="col-lg-5 btn-group" data-toggle="buttons">
+					                <label class="btn btn-default">
+					                    <input type="radio" name="gender" value="male" /> 每天
+					                </label>
+					                <label class="btn btn-default">
+					                    <input type="radio" name="gender" value="female" /> 每月
+					                </label>
+					                <label class="btn btn-default">
+					                    <input type="radio" name="gender" value="other" /> 每年
+					                </label>
+					                <label class="btn btn-default">
+					                    <input type="radio" name="gender" value="other" /> 不更新
+					                </label>
+					            </div>
+                            </div> -->
+                            
+                                <div class="form-group">
+							        <label class="col-lg-3 control-label">更新策略</label>
+							        <div class="col-lg-9">
+							            <div class="btn-group" data-toggle="buttons">
+							                <label class="btn btn-default">
+							                    <input type="radio" name="gender" value="male" /> 每天
+							                </label>
+							                <label class="btn btn-default">
+							                    <input type="radio" name="gender" value="female" /> 每月
+							                </label>
+							                <label class="btn btn-default">
+							                    <input type="radio" name="gender" value="other" /> 每年
+							                </label>
+							                <label class="btn btn-default">
+							                    <input type="radio" name="gender" value="1" /> 不更新
+							                </label>
+							                <label class="btn btn-default">
+							                    <input type="radio" name="gender" value="2" disabled="disabled"/> ___
+							                </label>
+							            </div>
+							        </div>
+							    </div>
+                            
+                            
+                            
                         </fieldset>
                          <div class="ln_solid"></div>
                         <div class="form-group">
@@ -200,6 +243,13 @@ $(document).ready(function() {
                 }
             },
             dbDriver: {
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    }
+                }
+            },
+            gender: {
                 validators: {
                     notEmpty: {
                         message: '不能为空'
