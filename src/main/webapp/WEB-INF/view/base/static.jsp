@@ -19,3 +19,5 @@
 	src="//rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/js/bootstrap-editable.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/static/bootstrapvalidator/js/bootstrapValidator.js"></script>
 
+<script
+	src="<%=request.getContextPath()%>/static/layer/layer.js"></script>
