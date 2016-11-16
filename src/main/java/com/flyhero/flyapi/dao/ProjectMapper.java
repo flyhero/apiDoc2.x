@@ -18,4 +18,6 @@ public interface ProjectMapper {
     int updateByPrimaryKeySelective(Project record);
 
     int updateByPrimaryKey(Project record);
+    
+    int updateDoneCount(Integer projectId);
 }

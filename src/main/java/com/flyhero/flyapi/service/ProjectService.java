@@ -15,6 +15,10 @@ public class ProjectService{
 	@Autowired
 	private ProjectMapper projectMapper;
 	
+	public int updateDoneCount(Integer projectId){
+		return projectMapper.updateDoneCount(projectId);
+	}
+	
 	public ProjectDetailpojo findProjectDetail(Integer upId){
 		return projectMapper.findProjectDetail(upId);
 	}

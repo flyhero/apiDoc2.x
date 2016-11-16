@@ -157,4 +157,9 @@
       is_delete = #{isDelete,jdbcType=INTEGER}
     where project_id = #{projectId,jdbcType=INTEGER}
   </update>
+  <update id="updateDoneCount" parameterType="java.lang.Integer">
+  	update fly_project
+  	set done_count=done_count+1
+  	where project_id = #{projectId}
+  </update>
 </mapper>

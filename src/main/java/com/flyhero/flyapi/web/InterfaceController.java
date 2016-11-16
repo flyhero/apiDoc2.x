@@ -15,6 +15,7 @@ import com.flyhero.flyapi.pojo.HttpResponse;
 import com.flyhero.flyapi.pojo.JSONResult;
 import com.flyhero.flyapi.service.InterfaceService;
 import com.flyhero.flyapi.service.LogService;
+import com.flyhero.flyapi.service.ProjectService;
 import com.flyhero.flyapi.utils.Constant;
 import com.flyhero.flyapi.utils.HttpClientUtil;
 
@@ -26,6 +27,8 @@ public class InterfaceController extends BaseController{
 	private InterfaceService interfaceService;
 	@Autowired
 	private LogService LogService;
+	@Autowired
+	private ProjectService projectService;
 	
 	@RequestMapping("addInterface.do")
 	@ResponseBody
@@ -36,6 +39,7 @@ public class InterfaceController extends BaseController{
 			OperateLog log=new OperateLog(getCuUser().getUserId(),getCuUser().getUserName(), projectId, Constant.TYPE_INSERT, Constant.CLASS_INTERFACE, 
 					Constant.NAME_INTERFACE, "新建："+interfaces.getInterName()+"接口", JSONObject.toJSONString(interfaces));
 			LogService.addLog(log);
+			projectService.updateDoneCount(projectId);
 			return new JSONResult(Constant.MSG_OK, Constant.CODE_200);
 		}
 		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);

@@ -718,6 +718,7 @@
 	                $.ajax({  
 	                    type : "POST",  //提交方式  
 	                    url : "../module/addModule.do",//路径  
+	                    dataType:"json",
 	                    data : {  
 							moduleName : moduleName,
 							moduleDes : moduleDes,
