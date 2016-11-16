@@ -18,8 +18,7 @@ public class InterfaceService{
 		return null;
 	}
 	public int insertSelective(Interfaces record) {
-		// TODO Auto-generated method stub
-		return 0;
+		return interfacesMapper.insertSelective(record);
 	}
 	public List selectByModuleId(Integer moduleId) {
 		// TODO Auto-generated method stub

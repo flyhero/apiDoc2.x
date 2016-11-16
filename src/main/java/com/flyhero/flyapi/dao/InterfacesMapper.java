@@ -6,15 +6,15 @@ import com.flyhero.flyapi.entity.InterfacesWithBLOBs;
 public interface InterfacesMapper {
     int deleteByPrimaryKey(Integer interfaceId);
 
-    int insert(InterfacesWithBLOBs record);
+    int insert(Interfaces record);
 
-    int insertSelective(InterfacesWithBLOBs record);
+    int insertSelective(Interfaces record);
 
     InterfacesWithBLOBs selectByPrimaryKey(Integer interfaceId);
 
-    int updateByPrimaryKeySelective(InterfacesWithBLOBs record);
+    int updateByPrimaryKeySelective(Interfaces record);
 
-    int updateByPrimaryKeyWithBLOBs(InterfacesWithBLOBs record);
+    int updateByPrimaryKeyWithBLOBs(Interfaces record);
 
     int updateByPrimaryKey(Interfaces record);
 }

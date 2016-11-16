@@ -52,11 +52,10 @@ public final class static_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<link rel=\"stylesheet\" href=\"");
       out.print(request.getContextPath());
       out.write("/static/bootstrapvalidator/css/bootstrapValidator.css\"/>\r\n");
-      out.write("<link rel=\"stylesheet\" href=\"");
+      out.write(" <link href=\"");
       out.print(request.getContextPath());
-      out.write("/static/ace/css/font-awesome.min.css\" />\r\n");
-      out.write("<link rel=\"stylesheet\"\r\n");
-      out.write("\thref=\"//rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/css/bootstrap-editable.css\">\r\n");
+      out.write("/static/ace/vendors/font-awesome/css/font-awesome.min.css\" rel=\"stylesheet\">\r\n");
+      out.write("<link href=\"http://cdn.bootcss.com/x-editable/1.5.1/bootstrap-editable/css/bootstrap-editable.css\" rel=\"stylesheet\">\r\n");
       out.write("\t\r\n");
       out.write("<script src=\"");
       out.print(request.getContextPath());
@@ -76,8 +75,7 @@ public final class static_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\tsrc=\"");
       out.print(request.getContextPath());
       out.write("/static/table/bootstrap-table/src/extensions/editable/bootstrap-table-editable.js\"></script>\r\n");
-      out.write("<script\r\n");
-      out.write("\tsrc=\"//rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/js/bootstrap-editable.js\"></script>\r\n");
+      out.write("<script src=\"http://cdn.bootcss.com/x-editable/1.5.1/bootstrap-editable/js/bootstrap-editable.js\"></script>\r\n");
       out.write("<script type=\"text/javascript\" src=\"");
       out.print(request.getContextPath());
       out.write("/static/bootstrapvalidator/js/bootstrapValidator.js\"></script>\r\n");

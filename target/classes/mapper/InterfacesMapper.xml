@@ -13,8 +13,6 @@
     <result column="module_id" jdbcType="INTEGER" property="moduleId" />
     <result column="creator" jdbcType="INTEGER" property="creator" />
     <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.flyhero.flyapi.entity.InterfacesWithBLOBs">
     <result column="param" jdbcType="LONGVARCHAR" property="param" />
     <result column="request_exam" jdbcType="LONGVARCHAR" property="requestExam" />
     <result column="response_param" jdbcType="LONGVARCHAR" property="responseParam" />
@@ -23,16 +21,11 @@
   </resultMap>
   <sql id="Base_Column_List">
     interface_id, inter_name, inter_des, status, inter_url, method, create_time, update_time, 
-    module_id, creator, is_delete
+    module_id, creator, is_delete, param, request_exam, response_param, true_exam, false_exam
   </sql>
-  <sql id="Blob_Column_List">
-    param, request_exam, response_param, true_exam, false_exam
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from fly_interfaces
     where interface_id = #{interfaceId,jdbcType=INTEGER}
   </select>
@@ -40,7 +33,7 @@
     delete from fly_interfaces
     where interface_id = #{interfaceId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.flyhero.flyapi.entity.InterfacesWithBLOBs">
+  <insert id="insert" parameterType="com.flyhero.flyapi.entity.Interfaces">
     insert into fly_interfaces (interface_id, inter_name, inter_des, 
       status, inter_url, method, 
       create_time, update_time, module_id, 
@@ -54,7 +47,7 @@
       #{requestExam,jdbcType=LONGVARCHAR}, #{responseParam,jdbcType=LONGVARCHAR}, #{trueExam,jdbcType=LONGVARCHAR}, 
       #{falseExam,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.flyhero.flyapi.entity.InterfacesWithBLOBs">
+  <insert id="insertSelective" parameterType="com.flyhero.flyapi.entity.Interfaces">
     insert into fly_interfaces
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="interfaceId != null">
@@ -75,9 +68,7 @@
       <if test="method != null">
         method,
       </if>
-      <if test="createTime != null">
         create_time,
-      </if>
       <if test="updateTime != null">
         update_time,
       </if>
@@ -125,9 +116,7 @@
       <if test="method != null">
         #{method,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
+      	NOW(),
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
@@ -157,7 +146,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.flyhero.flyapi.entity.InterfacesWithBLOBs">
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyhero.flyapi.entity.Interfaces">
     update fly_interfaces
     <set>
       <if test="interName != null">
@@ -208,7 +197,7 @@
     </set>
     where interface_id = #{interfaceId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.flyhero.flyapi.entity.InterfacesWithBLOBs">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.flyhero.flyapi.entity.Interfaces">
     update fly_interfaces
     set inter_name = #{interName,jdbcType=VARCHAR},
       inter_des = #{interDes,jdbcType=VARCHAR},

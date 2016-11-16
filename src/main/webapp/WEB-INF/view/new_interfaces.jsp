@@ -206,7 +206,18 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-lg-3 control-label">2.6失败返回示例</label>
+											<label class="col-lg-3 control-label">2.6成功返回示例</label>
+											<div class="col-lg-5">
+														<textarea id="trueexam" class="form-control" rows="5"
+			placeholder='{
+	"msg":"success",
+	"status":200,
+	"data":"",
+}'></textarea>
+											</div>
+										</div>										
+										<div class="form-group">
+											<label class="col-lg-3 control-label">2.7失败返回示例</label>
 											<div class="col-lg-5">
 												<textarea id="falseexam" class="form-control" rows="5"
 													placeholder='{
@@ -225,7 +236,6 @@
 											</div>
 										</div>
 								</div>
-
 
 								</form>
 							</div>
@@ -275,6 +285,7 @@
 			$("#createInterface")
 					.click(
 							function() {
+								var moduleId=$("#module-name").val();
 								var interName = $("#interName").val();
 								var interDes = $("#interDes").val();
 								var status = $("#status").val();
@@ -287,27 +298,28 @@
 								var responseparam = $("#responseparam").val();
 								var trueexam = $("#trueexam").val();
 								var falseexam = $("#falseexam").val();
-								if (projectName != '' && description != ''
-										&& description != '') {
+								if (interName != '' && interUrl != ''
+										&& param != '') {
 									$
 											.ajax({
 												type : 'POST',
 												url : "../interface/addInterface.do",
 												dataType : "json",
 												data : {
-													interName : interName,
-													interDes : interDes,
-													status : status,
-													interUrl : interUrl,
-													method : method,
-													param : param,
-													requestexam : requestexam,
-													responseparam : responseparam,
-													trueexam : trueexam,
-													falseexam : falseexam
+													"moduleId":moduleId,
+													"interName" : interName,
+													"interDes" : interDes,
+													"status" : status,
+													"interUrl" : interUrl,
+													"method" : method,
+													"param" : param,
+													"requestExam" : requestexam,
+													"responseParam" : responseparam,
+													"trueExam" : trueexam,
+													"falseExam" : falseexam
 												},
 												success : function(data) {
-													if (data.msg == 'success') {
+													if (data.msg == 'ok') {
 														alert("创建成功！");
 													} else {
 														alert("创建失败！");
