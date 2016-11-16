@@ -1,6 +1,5 @@
 package com.flyhero.flyapi.web;
 
-import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -152,7 +151,7 @@ public class ProjectController extends BaseController{
 			if(u != null){
 				record.setProjectId(project.getProjectId());
 				record.setUserId(u.getUserId());
-				record.setIsCreator(u.getUserId());
+				record.setIsCreator(1);
 				record.setIsEdit(1);
 				record.setIsDelete(0);
 				userProjectService.insertSelective(record);

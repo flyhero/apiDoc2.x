@@ -163,7 +163,7 @@
 				},
 				success : function(data) {
 					if (data.msg == 'ok') {
-						alert("删除成功！");
+						layer.alert("删除成功！");
 						location.reload();
 					}
 
@@ -283,7 +283,6 @@
 								},
 								success : function(data) {
 									if (data.msg == 'ok') {
-										alert("修改成功！");
 										location.reload();
 									}
 
@@ -291,7 +290,7 @@
 
 							});
 						} else {
-							alert("信息不能为空！");
+							layer.alert("信息不能为空！");
 						}
 
 					});
@@ -299,9 +298,6 @@
           $("#search").bind("click", initTable);  
       });  
 </script>  
-	<!-- FastClick -->
-	<script src="<%=request.getContextPath()%>/static/ace/vendors/fastclick/lib/fastclick.js"></script>
-
 	<!-- Custom Theme Scripts -->
 	<script src="<%=request.getContextPath()%>/static/ace/production/js/custom.js"></script>
 	

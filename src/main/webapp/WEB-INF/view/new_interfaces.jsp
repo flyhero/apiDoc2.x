@@ -277,7 +277,7 @@
 				});
 			});
 			$button1.click(function() {
-				alert('getSelections: '
+				layer.alert('getSelections: '
 						+ JSON.stringify($table
 								.bootstrapTable('getAllSelections')));
 			});
@@ -320,16 +320,16 @@
 												},
 												success : function(data) {
 													if (data.msg == 'ok') {
-														alert("创建成功！");
+														layer.alert("创建成功！");
 													} else {
-														alert("创建失败！");
+														layer.alert("创建失败！");
 													}
 
 												}
 
 											});
 								} else {
-									alert("信息不能为空！");
+									layer.alert("信息不能为空！");
 								}
 
 							});
@@ -350,7 +350,7 @@
 						});
 						
 					} else {
-						alert("获取项目失败！");
+						layer.alert("获取项目失败！");
 					}
 
 				}
@@ -373,7 +373,7 @@
 							});
 							
 						} else {
-							alert("获取模块失败！");
+							layer.alert("获取模块失败！");
 						}
 
 					}

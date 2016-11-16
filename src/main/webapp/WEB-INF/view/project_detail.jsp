@@ -633,22 +633,22 @@
 				if (userName != '') {
 					$.ajax({
 						type : 'POST',
-						url : "../user/validUserName.do",
+						url : "../user/checkUserName.do",
 						dataType : "json",
 						data : {
 							"userName" : userName
 						},
 						success : function(data) {
 							if (data.valid == false) {
-								alert("用户存在^_^");
+								layer.alert("用户存在^_^");
 							} else {
-								alert("用户不存在！-_-");
+								layer.alert("用户不存在！-_-");
 							}
 						}
 
 					});
 				} else {
-					alert("用户名不能为空！");
+					layer.alert("用户名不能为空！");
 				}
 
 			});
@@ -670,15 +670,15 @@
 						},
 						success : function(data) {
 							if (data.msg == 'ok') {
-								alert("更新成功！^_^");
+								layer.alert("更新成功！^_^");
 							} else {
-								alert("更新失败！-_-");
+								layer.alert("更新失败！-_-");
 							}
 						}
 
 					});
 				} else {
-					alert("用户名不能为空！");
+					layer.alert("信息不能为空！");
 				}
 			});
 			
@@ -698,15 +698,15 @@
 						},
 						success : function(data) {
 							if (data.msg == 'ok') {
-								alert("更新成功！^_^");
+								layer.alert("更新成功！^_^");
 							} else {
-								alert("更新失败！-_-");
+								layer.alert("更新失败！-_-");
 							}
 						}
 
 					});
 				} else {
-					alert("信息不能为空！");
+					layer.alert("信息不能为空！");
 				}
 			});
 			
@@ -726,14 +726,18 @@
 	                    },//数据，这里使用的是Json格式进行传输  
 	                    success : function(data) {//返回数据根据结果进行相应的处理  
 							if (data.msg == 'ok') {
-								alert("添加成功^_^");
+								layer.alert("添加成功^_^");
 							} else {
-								alert("添加失败！-_-");
+								layer.alert("添加失败！-_-");
 							}
 	                    }  
 	                }); 
 				} else {
-					alert("信息不能为空！");
+					layer.alert("信息不能为空");
+				/* 	layer.alert('信息不能为空', {
+						  icon: 0,
+						  skin: 'layer-ext-moon' 
+						}); */
 				}
 			});
 			
