@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -18,6 +19,7 @@ import org.springframework.web.socket.WebSocketSession;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.flyhero.flyapi.pojo.Message;
+import com.flyhero.flyapi.pojo.TeamMemberPojo;
 
 /**
  * Socket处理器
@@ -135,7 +137,26 @@ public class SystemWebSocketHandler implements WebSocketHandler {
 
 		}
 	}
+	/**
+	 * 发送消息给团队成员
+	 * @Title: sendMessageToTeam  
+	 * @author flyhero(http://flyhero.top)
+	 * @date 2016年11月16日 下午2:12:34 
+	 * @param @param list
+	 * @param @param message
+	 * @param @throws IOException    
+	 * @return void    返回类型 
+	 * @throws
+	 */
+	public void sendMessageToTeam(List<TeamMemberPojo> list,final TextMessage message) throws IOException {
+		for(TeamMemberPojo t:list){
+			WebSocketSession session = userSocketSessionMap.get(Long.valueOf(t.getUserId()));
+			if (session != null && session.isOpen()) {
+				session.sendMessage(message);
+			}
+		}
 
+	}
 	/**
 	 * 给某个用户发送消息
 	 * 

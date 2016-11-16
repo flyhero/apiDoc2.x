@@ -1,17 +1,30 @@
 package com.flyhero.flyapi.web;
 
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
+
+import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.socket.TextMessage;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.flyhero.flyapi.entity.Module;
+import com.flyhero.flyapi.entity.OperateLog;
+import com.flyhero.flyapi.entity.UserProject;
 import com.flyhero.flyapi.pojo.JSONResult;
+import com.flyhero.flyapi.pojo.Message;
+import com.flyhero.flyapi.pojo.TeamMemberPojo;
+import com.flyhero.flyapi.service.LogService;
 import com.flyhero.flyapi.service.ModuleService;
+import com.flyhero.flyapi.service.UserProjectService;
 import com.flyhero.flyapi.utils.Constant;
+import com.flyhero.flyapi.websocket.SystemWebSocketHandler;
 
 /**
  * 项目模块控制器
@@ -26,7 +39,12 @@ public class ModuleController extends BaseController{
 
 	@Autowired
 	private ModuleService moduleService;
-	
+	@Autowired
+	private LogService LogService;
+	@Autowired
+	private UserProjectService userProjectService;
+	@Resource
+	private SystemWebSocketHandler handler;
 	/**
 	 * 添加模块
 	 * @Title: addModule  
@@ -42,6 +60,24 @@ public class ModuleController extends BaseController{
 	public JSONResult addModule(Module module){
 		int flag=moduleService.insertSelective(module);
 		if(flag != 0){
+			try {
+				OperateLog log=new OperateLog(getCuUser().getUserId(),getCuUser().getUserName(), module.getProjectId(), Constant.TYPE_INSERT, Constant.CLASS_MODULE, 
+						Constant.NAME_MODULE, "新建："+module.getModuleName()+"模块", JSONObject.toJSONString(module));
+				LogService.addLog(log);
+				UserProject up=new UserProject();
+				up.setUserId(getCuUser().getUserId());
+				up.setProjectId(module.getProjectId());
+				List<TeamMemberPojo>  list=userProjectService.findTeamMembers(up);
+				Message msg = new Message();
+				msg.setDate(new Date());
+				msg.setFrom(-1L);
+				msg.setFromName("系统广播");
+				msg.setTo(0L);
+				msg.setText(getCuUser().getUserName()+"新建："+module.getModuleName()+"模块");
+				handler.sendMessageToTeam(list, new TextMessage(JSON.toJSONString(msg)));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			return new JSONResult(Constant.MSG_OK, Constant.CODE_200);
 		}
 		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);

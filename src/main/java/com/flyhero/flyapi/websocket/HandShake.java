@@ -11,12 +11,12 @@ import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 
-
 /**
  * Socket建立连接（握手）和断开
- * 
- * @author Goofy
- * @Date 2015年6月11日 下午2:23:09
+ * @ClassName: HandShake 
+ * @author flyhero(http://flyhero.top)
+ * @date 2016年11月16日 下午1:40:31 
+ *
  */
 public class HandShake implements HandshakeInterceptor {
 
