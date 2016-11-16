@@ -70,4 +70,8 @@ public class ForwardController extends BaseController{
 	public String gotoDemo(){
 		return "new_interfaces";
 	}
+	@RequestMapping("data_base.html")
+	public String gotoDataBase(){
+		return "data_base";
+	}
 }

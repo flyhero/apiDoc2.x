@@ -90,10 +90,7 @@
                   </div>
                   <div class="x_content">
 
-                    <p>Simple table with project listing with progress and editing options</p>
-
-
-					<table class="table table-striped" id="cusTable"  
+					<table class="table table-no-bordered" id="cusTable"  
 					       data-pagination="true"  
 					       data-show-toggle="true"  
 					       >  

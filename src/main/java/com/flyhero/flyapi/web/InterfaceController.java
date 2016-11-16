@@ -60,12 +60,7 @@ public class InterfaceController extends BaseController{
 				up.setUserId(getCuUser().getUserId());
 				up.setProjectId(projectId);
 				List<TeamMemberPojo>  list=userProjectService.findTeamMembers(up);
-				Message msg = new Message();
-				msg.setDate(new Date());
-				msg.setFrom(-1L);
-				msg.setFromName("系统广播");
-				msg.setTo(0L);
-				msg.setText(getCuUser().getUserName()+"新建："+interfaces.getInterName()+"接口");
+				Message msg = new Message(-1L, "系统广播", 0L, getCuUser().getUserName()+"新建："+interfaces.getInterName()+"接口", new Date());
 				handler.sendMessageToTeam(list, new TextMessage(JSON.toJSONString(msg)));
 			} catch (IOException e) {
 				e.printStackTrace();

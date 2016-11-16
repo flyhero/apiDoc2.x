@@ -30,7 +30,7 @@
                   </li>
                   <li><a><i class="fa fa-database"></i> 字典 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="tables.html">数据库</a>
+                      <li><a href="../forward/data_base.html">数据库</a>
                       </li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a>
                       </li>

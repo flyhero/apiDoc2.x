@@ -19,6 +19,20 @@ public class Message {
 	//发送日期
 	public Date date;
 
+	
+	public Message() {
+		super();
+	}
+
+	public Message(Long from, String fromName, Long to, String text, Date date) {
+		super();
+		this.from = from;
+		this.fromName = fromName;
+		this.to = to;
+		this.text = text;
+		this.date = date;
+	}
+
 	public Long getFrom() {
 		return from;
 	}
