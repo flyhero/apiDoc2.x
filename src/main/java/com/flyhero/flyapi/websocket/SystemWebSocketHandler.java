@@ -20,7 +20,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.flyhero.flyapi.pojo.Message;
 import com.flyhero.flyapi.pojo.TeamMemberPojo;
-
+import com.flyhero.flyapi.entity.User;
 /**
  * Socket处理器
  * @ClassName: SystemWebSocketHandler 
@@ -42,6 +42,7 @@ public class SystemWebSocketHandler implements WebSocketHandler {
 	public void afterConnectionEstablished(WebSocketSession session)
 			throws Exception {
 		Long uid = (Long) session.getAttributes().get("uid");
+		System.out.println("uid:"+uid);//((User)session.getAttributes().get("user")).getUserId()
 		if (userSocketSessionMap.get(uid) == null) {
 			userSocketSessionMap.put(uid, session);
 		}

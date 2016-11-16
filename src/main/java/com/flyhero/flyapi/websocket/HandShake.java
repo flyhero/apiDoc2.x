@@ -11,6 +11,8 @@ import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 
+import com.flyhero.flyapi.entity.User;
+
 /**
  * Socket建立连接（握手）和断开
  * @ClassName: HandShake 
@@ -21,12 +23,12 @@ import org.springframework.web.socket.server.HandshakeInterceptor;
 public class HandShake implements HandshakeInterceptor {
 
 	public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
-		System.out.println("Websocket:用户[ID:" + ((ServletServerHttpRequest) request).getServletRequest().getSession(false).getAttribute("uid") + "]已经建立连接");
+		System.out.println("Websocket:用户[ID:" + ((User)((ServletServerHttpRequest) request).getServletRequest().getSession(false).getAttribute("user")).getUserId() + "]已经建立连接");
 		if (request instanceof ServletServerHttpRequest) {
 			ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
 			HttpSession session = servletRequest.getServletRequest().getSession(false);
 			// 标记用户
-			Long uid = (Long) session.getAttribute("uid");
+			Long uid =Long.valueOf(((User)session.getAttribute("user")).getUserId());
 			if(uid!=null){
 				attributes.put("uid", uid);
 			}else{

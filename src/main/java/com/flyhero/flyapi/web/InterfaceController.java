@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.socket.TextMessage;
 
@@ -90,4 +91,17 @@ public class InterfaceController extends BaseController{
 		json.put("msg", Constant.MSG_OK);
 		return json;
 	}
+	// 发布系统广播（群发）
+	@ResponseBody
+	@RequestMapping("send")
+	public void send() throws IOException {
+		Message msg = new Message();
+		msg.setDate(new Date());
+		msg.setFrom(-1L);
+		msg.setFromName("系统广播");
+		msg.setTo(0L);
+		msg.setText("这是我的第一个消息");
+		handler.sendMessageToUser(2L, new TextMessage(JSON.toJSONString(msg)));
+	}
+	
 }

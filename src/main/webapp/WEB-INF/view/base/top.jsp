@@ -3,7 +3,7 @@
 <%
 	String path = request.getContextPath();
 	String socketPath = request.getServerName() + ":"
-			+ request.getServerPort() + path + "/";
+			+ request.getServerPort() + path;
 %>
 <!-- top navigation -->
 <div class="top_nav">
@@ -48,19 +48,7 @@
 				</a>
 					<ul id="menu1" class="dropdown-menu list-unstyled msg_list"
 						role="menu">
-						<li><a> <span class="image"> <img src=""/></span> 
-								<span> 
-									<span>用户名</span> 
-									<span class="time">3分钟前</span>
-								</span> 
-								<span class="message"> 消息体 </span>
-						</a></li>
-						<li>
-							<div class="text-center">
-								<a> <strong>查看详细</strong> <i class="fa fa-angle-right"></i>
-								</a>
-							</div>
-						</li>
+						
 					</ul></li>
 
 			</ul>
@@ -86,9 +74,9 @@
 	};
 	websocket.onmessage = function(event) {
 		var data = JSON.parse(event.data);
+		var time=getMyDate(data.date);
 		console.log("WebSocket:收到一条消息", data);
-		var textCss = data.from == -1 ? "sfmsg_text" : "fmsg_text";
-		$("#menu1").append('<li><a> <span class="image"> <img src=""/></span><span><span>用户名</span><span class="time">3分钟前</span></span><span class="message"> 消息体 </span></a></li>');
+		$("#menu1").append('<li><a> <span class="image"> <img src="<%=request.getContextPath()%>${sessionScope.user.avatarUrl}"/></span><span><span>'+data.fromName+'</span><span class="time">'+time+'</span></span><span class="message">'+data.text+'</span></a></li>');
 	};
 	websocket.onerror = function(event) {
 		console.log("WebSocket:发生错误 ");
