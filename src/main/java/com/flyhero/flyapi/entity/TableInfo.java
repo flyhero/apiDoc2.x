@@ -1,5 +1,7 @@
 package com.flyhero.flyapi.entity;
 
+import java.util.Date;
+
 import com.flyhero.flyapi.entity.base.Entity;
 
 public class TableInfo extends Entity{
@@ -8,9 +10,11 @@ public class TableInfo extends Entity{
 	 * @since 1.0.0
 	 */
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -6664794737515772210L;
 
 	private Integer id;
+
+    private Integer dbId;
 
     private String tableSchema;
 
@@ -28,12 +32,26 @@ public class TableInfo extends Entity{
 
     private String columnComment;
 
+    private Date createTime;
+
+    private Date updateTime;
+
+    private Integer isDelete;
+
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getDbId() {
+        return dbId;
+    }
+
+    public void setDbId(Integer dbId) {
+        this.dbId = dbId;
     }
 
     public String getTableSchema() {
@@ -100,13 +118,27 @@ public class TableInfo extends Entity{
         this.columnComment = columnComment == null ? null : columnComment.trim();
     }
 
-	@Override
-	public String toString() {
-		return "TableInfo [id=" + id + ", tableSchema=" + tableSchema
-				+ ", tableName=" + tableName + ", columnName=" + columnName
-				+ ", isNullable=" + isNullable + ", columnType=" + columnType
-				+ ", columnKey=" + columnKey + ", columnDefault="
-				+ columnDefault + ", columnComment=" + columnComment + "]";
-	}
-    
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Integer getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
+    }
 }
