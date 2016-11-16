@@ -21,12 +21,13 @@ import com.flyhero.flyapi.pojo.Message;
 
 /**
  * Socket处理器
- * 
- * @author Goofy
- * @Date 2015年6月11日 下午1:19:50
+ * @ClassName: SystemWebSocketHandler 
+ * @author flyhero(http://flyhero.top)
+ * @date 2016年11月16日 下午1:32:22 
+ *
  */
 @Component
-public class MyWebSocketHandler implements WebSocketHandler {
+public class SystemWebSocketHandler implements WebSocketHandler {
 	public static final Map<Long, WebSocketSession> userSocketSessionMap;
 
 	static {

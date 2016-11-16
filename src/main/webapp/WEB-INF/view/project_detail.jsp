@@ -260,11 +260,11 @@
 					<h4 class="modal-title" id="myModalLabel">添加成员</h4>
 				</div>
 				<div class="modal-body">
-					<label for="userName">成员用户名</label> 
+					<label for="addName">成员用户名</label> 
 					<input type="text"
-						class="form-control" id="TeamName" placeholder="请输入名称">
-					<label for="isEdit">权限</label> 
-					<select id="isEdit" class="form-control">
+						class="form-control" id="addName" placeholder="请输入名称">
+					<label for="addisEdit">权限</label> 
+					<select id="addisEdit" class="form-control">
 						<option value="0">只读</option>
 						<option value="1">可写</option>
 					</select>
@@ -272,7 +272,7 @@
 				<div class="modal-footer">
 					<button type="button" id="checkUserName" class="btn btn-warning">检查用户</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" id="addActor" data-dismiss="modal"
+					<button type="button" id="addTeamUser" data-dismiss="modal"
 						class="btn btn-primary">提交</button>
 				</div>
 			</div>
@@ -681,7 +681,32 @@
 					layer.alert("信息不能为空！");
 				}
 			});
-			
+			$("#addTeamUser").click(function() {
+				var addName = $("#addName").val();
+				var addisEdit = $("#addisEdit").val();
+				if (userName != '' && addisEdit != '') {
+					$.ajax({
+						type : 'POST',
+						url : "../project/addMember.do",
+						dataType : "json",
+						data : {
+							"userName" : addName,
+							"projectId" : projectId,
+							"isEdit" : addisEdit
+						},
+						success : function(data) {
+							if (data.msg == 'ok') {
+								layer.alert("添加成功！^_^");
+							} else {
+								layer.alert("添加失败！-_-");
+							}
+						}
+
+					});
+				} else {
+					layer.alert("信息不能为空！");
+				}
+			});
 			$("#updateModule").click(function() {
 				var editId = $("#editId").val();
 				var editName = $("#editName").val();

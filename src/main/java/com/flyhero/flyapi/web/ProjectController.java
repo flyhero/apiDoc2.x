@@ -249,7 +249,7 @@ public class ProjectController extends BaseController{
 		up.setUserId(u.getUserId());
 		up.setProjectId(projectId);
 		up.setIsEdit(isEdit);
-		up.setCreateTime(new Timestamp(System.currentTimeMillis()));
+		up.setIsCreator(0);
 		int flag=userProjectService.insertSelective(up);
 		if(flag>0){
 			OperateLog log=new OperateLog(getCuUser().getUserId(),getCuUser().getUserName(), projectId, Constant.TYPE_INSERT,
