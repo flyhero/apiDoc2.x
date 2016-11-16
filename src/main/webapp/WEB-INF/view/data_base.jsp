@@ -82,7 +82,7 @@
 								<div class="x_title">
 									<h2>项目详情</h2>
 									<ul class="nav navbar-left panel_toolbox">
-										<li><a class="collapse-link"><i
+										<li><a href="../forward/new_database.html" class="collapse-link"><i
 												class="fa fa-plus"></i>新建数据</a></li>
 									</ul>
 											

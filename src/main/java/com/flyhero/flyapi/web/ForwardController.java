@@ -74,4 +74,9 @@ public class ForwardController extends BaseController{
 	public String gotoDataBase(){
 		return "data_base";
 	}
+	
+	@RequestMapping("new_database.html")
+	public String gotoNewDataBase(){
+		return "new_database";
+	}
 }
