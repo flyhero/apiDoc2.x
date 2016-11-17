@@ -69,7 +69,7 @@
                   <div class="x_content">
 
                    <form id="defaultForm"  class="form-horizontal">
-                        <fieldset>
+                        <fieldset id="fieldset">
                             <div class="form-group">
                                 <label class="col-lg-3 control-label">数据库名称</label>
                                 <div class="col-lg-5">
@@ -97,50 +97,67 @@
                             <div class="form-group">
                                 <label class="col-lg-3 control-label">驱动包名</label>
                                 <div class="col-lg-5">
-                                    <input type="text" class="form-control" name="dbDriver" id="dbDriver" />
+                                    <select name="dbDriver" id="dbDriver" class="form-control">
+													<option value="oracle.jdbc.driver.OracleDriver">oracle.jdbc.driver.OracleDriver</option>
+													<option value="com.mysql.jdbc.Driver">com.mysql.jdbc.Driver</option>
+													<option value="com.sybase.jdbc2.jdbc.SybDriver">com.sybase.jdbc2.jdbc.SybDriver</option>
+													<option value="com.ibm.db2.jcc.DB2Driver">com.ibm.db2.jcc.DB2Driver</option>
+													<option value="net.sourceforge.jtds.jdbc.Driver">net.sourceforge.jtds.jdbc.Driver</option>
+													<option value="com.microsoft.sqlserver.jdbc.SQLServerDriver">com.microsoft.sqlserver.jdbc.SQLServerDriver</option>
+													<option value="com.microsoft.jdbc.sqlserver.SQLServerDriver">com.microsoft.jdbc.sqlserver.SQLServerDriver</option>
+									</select>
                                 </div>
                             </div>
-                           <!--  <div class="form-group">
-                                <label class="col-lg-3 control-label">更新策略</label>
-                                <div class="col-lg-5 btn-group" data-toggle="buttons">
-					                <label class="btn btn-default">
-					                    <input type="radio" name="gender" value="male" /> 每天
-					                </label>
-					                <label class="btn btn-default">
-					                    <input type="radio" name="gender" value="female" /> 每月
-					                </label>
-					                <label class="btn btn-default">
-					                    <input type="radio" name="gender" value="other" /> 每年
-					                </label>
-					                <label class="btn btn-default">
-					                    <input type="radio" name="gender" value="other" /> 不更新
-					                </label>
-					            </div>
-                            </div> -->
                             
                                 <div class="form-group">
 							        <label class="col-lg-3 control-label">更新策略</label>
 							        <div class="col-lg-9">
 							            <div class="btn-group" data-toggle="buttons">
 							                <label class="btn btn-default">
-							                    <input type="radio" name="gender" value="male" /> 每天
+							                    <input type="radio" name="cycle" value="everyDay" /> 每天
 							                </label>
 							                <label class="btn btn-default">
-							                    <input type="radio" name="gender" value="female" /> 每月
+							                    <input type="radio" name="cycle" value="everyWeek" /> 每周
 							                </label>
 							                <label class="btn btn-default">
-							                    <input type="radio" name="gender" value="other" /> 每年
+							                    <input type="radio" name="cycle" value="everyMouth" /> 每月
 							                </label>
 							                <label class="btn btn-default">
-							                    <input type="radio" name="gender" value="1" /> 不更新
+							                    <input type="radio" name="cycle" value="never" /> 不更新
 							                </label>
 							                <label class="btn btn-default">
-							                    <input type="radio" name="gender" value="2" disabled="disabled"/> ___
+							                    <input type="radio" name="cycle" value="no" disabled="disabled"/> ___
 							                </label>
 							            </div>
 							        </div>
 							    </div>
-                            
+							    
+							 <div class="form-group" id="whichWeek">
+                                <label class="col-lg-3 control-label">周几</label>
+                                <div class="col-lg-5">
+                                	<select id="week" class="form-control">
+													<option value="one">周一</option>
+													<option value="two">周二</option>
+													<option value="three">周三</option>
+													<option value="four">周四</option>
+													<option value="five">周五</option>
+													<option value="six">周六</option>
+													<option value="seven">周日</option>
+									</select>
+                                </div>
+                            </div>   
+							 <div class="form-group" id="whichDay">
+                                <label class="col-lg-3 control-label">哪天</label>
+                                <div class="col-lg-5">
+                                	<input type="number" value="1" min="1" max="28" class="form-control" name="day" id="day" />
+                                </div>
+                            </div>
+                            <div class="form-group" id="whichTime">
+                                <label class="col-lg-3 control-label">几点</label>
+                                <div class="col-lg-5">
+                                	<input type="time" class="form-control" name="whichtime" id="whichtime" />
+                                </div>
+                            </div>
                             
                             
                         </fieldset>
@@ -249,7 +266,7 @@ $(document).ready(function() {
                     }
                 }
             },
-            gender: {
+            cycle: {
                 validators: {
                     notEmpty: {
                         message: '不能为空'
@@ -258,6 +275,33 @@ $(document).ready(function() {
             }
             
         }
+    });
+    
+    $('input[name=cycle]').change(function(){
+    	 switch($(this).val()){
+    	  case "everyDay":
+    	   $("#whichWeek").hide();
+    	   $("#whichDay").hide();
+    	   $("#whichTime").show();
+    	   break;
+    	  case "everyWeek":
+    		  $("#whichWeek").show();
+    		  $("#whichDay").hide();
+    		  $("#whichTime").show();
+    	   break;
+    	  case "everyMouth":
+    		  $("#whichWeek").hide();
+    		  $("#whichDay").show();
+    		  $("#whichTime").show();
+       	   break;
+    	  case "never":
+       	   $("#whichWeek").hide();
+    	   $("#whichDay").hide();
+    	   $("#whichTime").hide();
+       	   break;
+    	  default:
+    	   break;
+    	 }
     });
 });
 </script>
