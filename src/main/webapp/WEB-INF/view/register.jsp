@@ -91,7 +91,7 @@
 
                         <div class="form-group">
                             <div class="col-lg-9 col-lg-offset-3">
-                                <button type="submit" class="btn btn-primary" name="signup" value="Sign up">注册</button>
+                                <button type="submit" class="btn btn-primary" id="validateBtn"  name="signup" value="Sign up">注册</button>
                                 <button type="button" class="btn btn-info" id="resetBtn">重置</button>
                             </div>
                         </div>

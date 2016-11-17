@@ -34,6 +34,10 @@ public class ForwardController extends BaseController{
 	public String gotoLogin() {
 		return "login";
 	}
+	@RequestMapping("register.html")
+	public String gotoRegister() {
+		return "register";
+	}
 	@RequestMapping("main.html")
 	public String gotoMain(){
 		return "main";

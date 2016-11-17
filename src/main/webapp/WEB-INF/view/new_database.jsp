@@ -164,7 +164,7 @@
                          <div class="ln_solid"></div>
                         <div class="form-group">
                             <div class="col-lg-9 col-lg-offset-3">
-                                <button type="button" class="btn btn-primary" onclick = "add();">提交</button>
+                                <button type="button" class="btn btn-primary" id="validateBtn" onclick = "add();">提交</button>
                                 <button type="button" class="btn btn-info" id="resetBtn">重置</button>
                             </div>
                         </div>
@@ -276,7 +276,14 @@ $(document).ready(function() {
             
         }
     });
-    
+    // Validate the form manually
+    $('#validateBtn').click(function() {
+        $('#defaultForm').bootstrapValidator('validate');
+    });
+
+    $('#resetBtn').click(function() {
+        $('#defaultForm').data('bootstrapValidator').resetForm(true);
+    });
     $('input[name=cycle]').change(function(){
     	 switch($(this).val()){
     	  case "everyDay":
