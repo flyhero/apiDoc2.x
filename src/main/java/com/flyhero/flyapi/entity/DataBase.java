@@ -2,17 +2,8 @@ package com.flyhero.flyapi.entity;
 
 import java.util.Date;
 
-import com.flyhero.flyapi.entity.base.Entity;
-
-public class DataBase extends Entity{
-    /**
-	 * serialVersionUID:TODO（用一句话描述这个变量表示什么）
-	 * @since 1.0.0
-	 */
-	
-	private static final long serialVersionUID = -7225649940914497020L;
-
-	private Integer dbId;
+public class DataBase {
+    private Integer dbId;
 
     private String dbUrl;
 
@@ -23,6 +14,14 @@ public class DataBase extends Entity{
     private String dbPassword;
 
     private String dbDriver;
+
+    private Integer updateWay;
+
+    private Integer updateDay;
+
+    private String updateWeek;
+
+    private String updateHour;
 
     private Date createTime;
 
@@ -76,6 +75,38 @@ public class DataBase extends Entity{
 
     public void setDbDriver(String dbDriver) {
         this.dbDriver = dbDriver == null ? null : dbDriver.trim();
+    }
+
+    public Integer getUpdateWay() {
+        return updateWay;
+    }
+
+    public void setUpdateWay(Integer updateWay) {
+        this.updateWay = updateWay;
+    }
+
+    public Integer getUpdateDay() {
+        return updateDay;
+    }
+
+    public void setUpdateDay(Integer updateDay) {
+        this.updateDay = updateDay;
+    }
+
+    public String getUpdateWeek() {
+        return updateWeek;
+    }
+
+    public void setUpdateWeek(String updateWeek) {
+        this.updateWeek = updateWeek == null ? null : updateWeek.trim();
+    }
+
+    public String getUpdateHour() {
+        return updateHour;
+    }
+
+    public void setUpdateHour(String updateHour) {
+        this.updateHour = updateHour == null ? null : updateHour.trim();
     }
 
     public Date getCreateTime() {
