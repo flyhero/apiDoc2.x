@@ -68,7 +68,7 @@
                   </div>
                   <div class="x_content">
 
-                   <form id="defaultForm"  class="form-horizontal">
+                   <form id="defaultForm"  class="form-horizontal" method="get" action="../db/database.do">
                         <fieldset id="fieldset">
                             <div class="form-group">
                                 <label class="col-lg-3 control-label">数据库名称</label>
@@ -114,19 +114,19 @@
 							        <div class="col-lg-9">
 							            <div class="btn-group" data-toggle="buttons">
 							                <label class="btn btn-default">
-							                    <input type="radio" name="cycle" value="everyDay" /> 每天
+							                    <input type="radio" name="cycle" value="1" /> 每天
 							                </label>
 							                <label class="btn btn-default">
-							                    <input type="radio" name="cycle" value="everyWeek" /> 每周
+							                    <input type="radio" name="cycle" value="2" /> 每周
 							                </label>
 							                <label class="btn btn-default">
-							                    <input type="radio" name="cycle" value="everyMouth" /> 每月
+							                    <input type="radio" name="cycle" value="3" /> 每月
 							                </label>
 							                <label class="btn btn-default">
-							                    <input type="radio" name="cycle" value="never" /> 不更新
+							                    <input type="radio" name="cycle" value="4" /> 不更新
 							                </label>
 							                <label class="btn btn-default">
-							                    <input type="radio" name="cycle" value="no" disabled="disabled"/> ___
+							                    <input type="radio" name="cycle" value="5" disabled="disabled"/> ___
 							                </label>
 							            </div>
 							        </div>
@@ -135,27 +135,27 @@
 							 <div class="form-group" id="whichWeek">
                                 <label class="col-lg-3 control-label">周几</label>
                                 <div class="col-lg-5">
-                                	<select id="week" class="form-control">
-													<option value="one">周一</option>
-													<option value="two">周二</option>
-													<option value="three">周三</option>
-													<option value="four">周四</option>
-													<option value="five">周五</option>
-													<option value="six">周六</option>
-													<option value="seven">周日</option>
+                                	<select id="week" name="updateWeek" class="form-control">
+													<option value="MON">周一</option>
+													<option value="TUES">周二</option>
+													<option value="WED">周三</option>
+													<option value="THUR">周四</option>
+													<option value="FRI">周五</option>
+													<option value="SAT">周六</option>
+													<option value="SUN">周日</option>
 									</select>
                                 </div>
                             </div>   
 							 <div class="form-group" id="whichDay">
                                 <label class="col-lg-3 control-label">哪天</label>
                                 <div class="col-lg-5">
-                                	<input type="number" value="1" min="1" max="28" class="form-control" name="day" id="day" />
+                                	<input type="number" value="1" min="1" max="28" class="form-control" name="updateDay" id="whichday" />
                                 </div>
                             </div>
                             <div class="form-group" id="whichTime">
                                 <label class="col-lg-3 control-label">几点</label>
                                 <div class="col-lg-5">
-                                	<input type="time" class="form-control" name="whichtime" id="whichtime" />
+                                	<input type="time" class="form-control" name="updateHour" id="whichtime" />
                                 </div>
                             </div>
                             
@@ -164,7 +164,7 @@
                          <div class="ln_solid"></div>
                         <div class="form-group">
                             <div class="col-lg-9 col-lg-offset-3">
-                                <button type="button" class="btn btn-primary" id="validateBtn" onclick = "add();">提交</button>
+                                <button type="submit" class="btn btn-primary" >提交</button>
                                 <button type="button" class="btn btn-info" id="resetBtn">重置</button>
                             </div>
                         </div>
@@ -213,12 +213,14 @@ function add(){
 	});
 }
 $(document).ready(function() {
-
+    $('#validateBtn').click(function() {
+        $('#defaultForm').bootstrapValidator('validate');
+    });
     $('#resetBtn').click(function() {
         $('#defaultForm').data('bootstrapValidator').resetForm(true);
     });
     $('#defaultForm').bootstrapValidator({
-        message: 'This value is not valid',
+        message: '无效值',
         feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
             invalid: 'glyphicon glyphicon-remove',
@@ -272,36 +274,44 @@ $(document).ready(function() {
                         message: '不能为空'
                     }
                 }
+            },
+            whichtime:{
+            	validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    }
+                }
+            },
+            whichday:{
+            	validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    }
+                }
             }
             
         }
     });
-    // Validate the form manually
-    $('#validateBtn').click(function() {
-        $('#defaultForm').bootstrapValidator('validate');
-    });
 
-    $('#resetBtn').click(function() {
-        $('#defaultForm').data('bootstrapValidator').resetForm(true);
-    });
+
     $('input[name=cycle]').change(function(){
     	 switch($(this).val()){
-    	  case "everyDay":
+    	  case "1":
     	   $("#whichWeek").hide();
     	   $("#whichDay").hide();
     	   $("#whichTime").show();
     	   break;
-    	  case "everyWeek":
+    	  case "2":
     		  $("#whichWeek").show();
     		  $("#whichDay").hide();
     		  $("#whichTime").show();
     	   break;
-    	  case "everyMouth":
+    	  case "3":
     		  $("#whichWeek").hide();
     		  $("#whichDay").show();
     		  $("#whichTime").show();
        	   break;
-    	  case "never":
+    	  case "4":
        	   $("#whichWeek").hide();
     	   $("#whichDay").hide();
     	   $("#whichTime").hide();
