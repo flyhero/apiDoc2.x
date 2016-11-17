@@ -84,4 +84,5 @@
 	 	</mvc:interceptor>
 	 </mvc:interceptors>
   
+  <bean class="com.flyhero.flyapi.listener.StartupListener"/>
 </beans>

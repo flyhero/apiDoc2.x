@@ -9,7 +9,7 @@ public class MyJob extends QuartzJobBean{
 	@Override
 	protected void executeInternal(JobExecutionContext arg0)
 			throws JobExecutionException {
-		// TODO Auto-generated method stub
+		System.out.println("=================定时任务执行===================");
 		
 	}
 

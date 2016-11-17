@@ -8,6 +8,10 @@ import java.util.List;
 import com.alibaba.fastjson.JSONObject;
 
 import org.apache.log4j.Logger;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.SchedulerFactory;
+import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -125,7 +129,7 @@ public class UserController extends BaseController {
 			mv.setViewName("main");
 			return mv;
 		}
-		
+
 		user.setPassword(Md5Util.textToMD5L16(user.getPassword()));
 		User user1 = userService.findByLogin(user);
 		if (user1 != null) {
