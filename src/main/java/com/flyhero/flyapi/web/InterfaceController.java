@@ -20,6 +20,7 @@ import com.flyhero.flyapi.entity.Interfaces;
 import com.flyhero.flyapi.entity.OperateLog;
 import com.flyhero.flyapi.entity.UserProject;
 import com.flyhero.flyapi.pojo.HttpResponse;
+import com.flyhero.flyapi.pojo.InterPojo;
 import com.flyhero.flyapi.pojo.JSONResult;
 import com.flyhero.flyapi.pojo.Message;
 import com.flyhero.flyapi.pojo.TeamMemberPojo;
@@ -71,7 +72,22 @@ public class InterfaceController extends BaseController{
 		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
 		
 	}
-	
+	/**
+	 * 根据条件获取接口
+	 * @Title: findInterface  
+	 * @author flyhero(http://flyhero.top)
+	 * @date 2016年11月18日 下午4:46:20 
+	 * @param @param interPojo
+	 * @param @return    
+	 * @return JSONResult    返回类型 
+	 * @throws
+	 */
+	@ResponseBody
+	@RequestMapping("findInterface.do")
+	public JSONResult findInterface(InterPojo interPojo){
+		List<InterPojo> list=interfaceService.findInterByWhere(interPojo);
+		return new JSONResult(Constant.MSG_OK, Constant.CODE_200,list);
+	}
 	@RequestMapping("testHttp.do")
 	@ResponseBody
 	public JSONObject testHttp(String method,String url,String param,int jsonWay){

@@ -23,6 +23,32 @@
     interface_id, inter_name, inter_des, status, inter_url, method, create_time, update_time, 
     module_id, creator, is_delete, param, request_exam, response_param, true_exam, false_exam
   </sql>
+  <select id="findInterByWhere" parameterType="com.flyhero.flyapi.pojo.InterPojo" resultType="com.flyhero.flyapi.pojo.InterPojo">
+		SELECT
+			t2.module_name,
+			t3.*, t4.user_name,
+			t4.avatar_url,
+			t4.email
+		FROM
+			fly_project t1
+		LEFT JOIN fly_module t2 ON t1.project_id = t2.project_id
+		LEFT JOIN fly_interfaces t3 ON t2.module_id = t3.module_id
+		LEFT JOIN fly_user t4 ON t3.creator = t4.user_id
+		WHERE
+			t1.is_delete = 0 
+			<if test="moduleId != null">
+				AND t2.module_id = #{moduleId}
+			</if>
+			<if test="userName = null">
+				AND t4.user_name LIKE '%${userName}%'
+			</if>
+			<if test="interName != null">
+				AND t3.inter_name LIKE '%${interName}%'
+			</if>
+			AND t1.project_id = #{projectId}
+		<!-- CONCAT(CONCAT('%','接口2'),'%') -->
+  </select>
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
