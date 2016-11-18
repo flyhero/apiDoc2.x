@@ -26,6 +26,7 @@ import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
 import com.flyhero.flyapi.entity.OperateLog;
 import com.flyhero.flyapi.scheduler.MyJob;
+import com.flyhero.flyapi.scheduler.QuartzManager;
 import com.flyhero.flyapi.scheduler.ScheduleJob;
 import com.flyhero.flyapi.service.LogService;
 import com.flyhero.flyapi.utils.Constant;
@@ -44,8 +45,8 @@ public class StartupListener implements
 	@Autowired
 	private LogService logService;
 
-/*	@Autowired
-	private Scheduler scheduler;*/
+	@Autowired
+	private Scheduler scheduler;
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent arg0) {
@@ -58,9 +59,24 @@ public class StartupListener implements
 			// 需要执行的逻辑代码，当spring容器初始化完成后就会执行该方法。
 			System.out
 					.println("=================监听spring的启动=====================");
+			
+			ScheduleJob job = new ScheduleJob();
+			job.setJobId("10001");
+			job.setJobName("JobName");
+			job.setJobGroup("dataWork");
+			job.setJobStatus("1");
+			job.setCronExpression("0/5 * * * * ?");
+			job.setDesc("数据导入任务");
+			job.setBeanClass("com.flyhero.flyapi.scheduler.MyJob");
 			try {
-				 SchedulerFactory sf = new StdSchedulerFactory();  
-				 Scheduler scheduler = sf.getScheduler();  
+				QuartzManager.addJob(job);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SchedulerException e) {
+				e.printStackTrace();
+			}
+			
+/*			try {
 				// 这里获取任务信息数据
 				List<ScheduleJob> jobList = new ArrayList<ScheduleJob>();
 
@@ -126,7 +142,7 @@ public class StartupListener implements
 			} catch (SchedulerException e) {
 				e.printStackTrace();
 			}
-
+*/
 		}
 
 	}

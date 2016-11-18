@@ -36,4 +36,11 @@ public class Constant {
 	public static final String NAME_TEAM="成员";
 	public static final String NAME_DATABASE="数据库";
 	
+	/**
+	 * 定时任务运行状态
+	 */
+    public static final String STATUS_RUNNING = "1";  
+    public static final String STATUS_NOT_RUNNING = "0";  
+	
+	
 }

@@ -6,10 +6,10 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context.xsd">
 	
-<!--      <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" lazy-init="false">  
+      <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" lazy-init="false">  
         <property name="triggers">  
             <list>  
             </list>  
         </property>  
-    </bean>     -->
+    </bean>     
 </beans>

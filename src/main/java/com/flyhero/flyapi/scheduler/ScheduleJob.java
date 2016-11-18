@@ -19,6 +19,11 @@ public class ScheduleJob
  
     /** 任务描述 **/
     private String desc;
+    
+    /** 
+     * 任务执行时调用哪个类的方法 包名+类名 
+     */  
+    private String beanClass;  
 
     public String getJobId()
     {
@@ -79,6 +84,14 @@ public class ScheduleJob
     {
         this.desc = desc;
     }
+
+	public String getBeanClass() {
+		return beanClass;
+	}
+
+	public void setBeanClass(String beanClass) {
+		this.beanClass = beanClass;
+	}
     
     
 }
