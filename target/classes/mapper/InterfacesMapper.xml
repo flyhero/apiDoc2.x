@@ -25,9 +25,25 @@
   </sql>
   <select id="findInterByWhere" parameterType="com.flyhero.flyapi.pojo.InterPojo" resultType="com.flyhero.flyapi.pojo.InterPojo">
 		SELECT
-			t2.module_name,
-			t3.*, t4.user_name,
-			t4.avatar_url,
+			t1.project_id projectId,
+			t2.module_name moduleName,
+			t3.interface_id interfaceId, 
+			t3.inter_name interName, 
+			t3.inter_des interDes, 
+			t3.status, 
+			t3.inter_url interUrl, 
+			t3.method, 
+			t3.create_time createTime, 
+			t3.update_time updateTime, 
+    		t3.module_id  moduleId, 
+    		t3.creator, 
+    		t3.param, 
+    		t3.request_exam requestExam, 
+    		t3.response_param responseParam, 
+    		t3.true_exam trueExam, 
+    		t3.false_exam falseExam,
+			t4.user_name userName,
+			t4.avatar_url avatarUrl,
 			t4.email
 		FROM
 			fly_project t1

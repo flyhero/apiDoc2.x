@@ -42,8 +42,8 @@ import com.flyhero.flyapi.utils.Constant;
 public class StartupListener implements
 		ApplicationListener<ContextRefreshedEvent> {
 
-	@Autowired
-	private LogService logService;
+/*	@Autowired
+	private LogService logService;*/
 
 	@Autowired
 	private Scheduler scheduler;
@@ -100,7 +100,7 @@ public class StartupListener implements
 			job.setDesc("数据导入任务");
 			job.setBeanClass("com.flyhero.flyapi.scheduler.MyJob");
 			try {
-				QuartzManager.addJob(job);
+				QuartzManager.addJob(scheduler,job);
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (SchedulerException e) {

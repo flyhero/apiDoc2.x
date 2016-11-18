@@ -12,6 +12,8 @@ public class InterPojo implements Serializable {
 	
 	private static final long serialVersionUID = -3489745390656077750L;
 
+	private Integer projectId;
+	
 	private String moduleName;
 
     private Integer interfaceId;
@@ -51,6 +53,15 @@ public class InterPojo implements Serializable {
     private String avatarUrl;
     
     private String email;
+
+    
+	public Integer getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(Integer projectId) {
+		this.projectId = projectId;
+	}
 
 	public String getModuleName() {
 		return moduleName;

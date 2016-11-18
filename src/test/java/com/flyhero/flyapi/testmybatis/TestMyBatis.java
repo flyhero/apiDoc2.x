@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;  
 
+import com.flyhero.flyapi.pojo.InterPojo;
+import com.flyhero.flyapi.service.InterfaceService;
 import com.flyhero.flyapi.service.UserProjectService;
 import com.flyhero.flyapi.service.UserService;
 import com.github.pagehelper.PageInfo;
@@ -30,7 +32,8 @@ public class TestMyBatis {
    private UserService userService;
    @Autowired
    private UserProjectService userProjectService;
-   
+   @Autowired
+   private InterfaceService interfaceService;
    @Test
    public void testPage(){
 	   PageInfo<User> pageInfo= userService.queryByPage(1, 10);
@@ -43,6 +46,15 @@ public class TestMyBatis {
 	   for(UserProject up:list){
 		   System.out.println(up.toString());
 	   }
+   }
+   @Test
+   public void testInter(){
+	   InterPojo interPojo=new InterPojo();
+	   interPojo.setProjectId(11);
+	   interPojo.setModuleId(1);
+	   interPojo.setInterName("接口");
+	   interPojo.setUserName("ad");
+	   System.out.println(JSON.toJSONString(interfaceService.findInterByWhere(interPojo)));
    }
    
 /*	@Autowired

@@ -23,7 +23,7 @@ import com.flyhero.flyapi.utils.Constant;
 
 public class QuartzManager {
 
-	private static SchedulerFactory sFactory = new StdSchedulerFactory();  
+/*	private static SchedulerFactory sFactory = new StdSchedulerFactory();  */
 	/**
 	 * 添加任务到任务队列 
 	 * @Title: addJob  
@@ -35,12 +35,12 @@ public class QuartzManager {
 	 * @return void    返回类型 
 	 * @throws
 	 */
-    public static void addJob(ScheduleJob job) throws SchedulerException, ClassNotFoundException {  
+    public static void addJob(Scheduler scheduler,ScheduleJob job) throws SchedulerException, ClassNotFoundException {  
         if (job == null || !Constant.STATUS_RUNNING.equals(job.getJobStatus())) {  
             return;  
         }  
   
-        Scheduler scheduler = sFactory.getScheduler();  
+        /*Scheduler scheduler = sFactory.getScheduler();  */
         TriggerKey triggerKey = TriggerKey.triggerKey(job.getJobName(), job.getJobGroup());  
   
         CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);  
@@ -83,9 +83,8 @@ public class QuartzManager {
      * @return 
      * @throws SchedulerException 
      */  
-    @Deprecated  
-    public List<ScheduleJob> getAllJob() throws SchedulerException {  
-        Scheduler scheduler = new StdSchedulerFactory().getScheduler();  
+    public List<ScheduleJob> getAllJob(Scheduler scheduler) throws SchedulerException {  
+        /*Scheduler scheduler = new StdSchedulerFactory().getScheduler();  */
         GroupMatcher<JobKey> matcher = GroupMatcher.anyJobGroup();  
         Set<JobKey> jobKeys = scheduler.getJobKeys(matcher);  
         List<ScheduleJob> jobList = new ArrayList<ScheduleJob>();  
@@ -119,8 +118,8 @@ public class QuartzManager {
      * @return List<ScheduleJob>    返回类型 
      * @throws
      */
-    public List<ScheduleJob> getRunningJob() throws SchedulerException {  
-        Scheduler scheduler = sFactory.getScheduler();  
+    public List<ScheduleJob> getRunningJob(Scheduler scheduler) throws SchedulerException {  
+        /*Scheduler scheduler = sFactory.getScheduler();  */
         List<JobExecutionContext> executingJobs = scheduler.getCurrentlyExecutingJobs();  
         List<ScheduleJob> jobList = new ArrayList<ScheduleJob>(executingJobs.size());  
         for (JobExecutionContext executingJob : executingJobs) {  
@@ -153,8 +152,8 @@ public class QuartzManager {
      * @return void    返回类型 
      * @throws
      */
-    public void pauseJob(ScheduleJob job) throws SchedulerException {  
-        Scheduler scheduler = sFactory.getScheduler();  
+    public void pauseJob(Scheduler scheduler,ScheduleJob job) throws SchedulerException {  
+        /*Scheduler scheduler = sFactory.getScheduler();  */
         JobKey jobKey = JobKey.jobKey(job.getJobName(), job.getJobGroup());  
         scheduler.pauseJob(jobKey);  
     }  
@@ -166,8 +165,8 @@ public class QuartzManager {
      * @param ScheduleJob1 
      * @throws SchedulerException 
      */  
-    public void resumeJob(ScheduleJob job) throws SchedulerException {  
-        Scheduler scheduler = sFactory.getScheduler();  
+    public void resumeJob(Scheduler scheduler,ScheduleJob job) throws SchedulerException {  
+        /*Scheduler scheduler = sFactory.getScheduler();  */
         JobKey jobKey = JobKey.jobKey(job.getJobName(), job.getJobGroup());  
         scheduler.resumeJob(jobKey);  
     }  
@@ -178,8 +177,8 @@ public class QuartzManager {
      * @param ScheduleJob1 
      * @throws SchedulerException 
      */  
-    public void deleteJob(ScheduleJob job) throws SchedulerException {  
-        Scheduler scheduler = sFactory.getScheduler();  
+    public void deleteJob(Scheduler scheduler,ScheduleJob job) throws SchedulerException {  
+        /*Scheduler scheduler = sFactory.getScheduler();  */
         JobKey jobKey = JobKey.jobKey(job.getJobName(), job.getJobGroup());  
         scheduler.deleteJob(jobKey);  
     }  
@@ -190,8 +189,8 @@ public class QuartzManager {
      * @param ScheduleJob1 
      * @throws SchedulerException 
      */  
-    public void runAJobNow(ScheduleJob job) throws SchedulerException {  
-        Scheduler scheduler = sFactory.getScheduler();  
+    public void runAJobNow(Scheduler scheduler,ScheduleJob job) throws SchedulerException {  
+       /* Scheduler scheduler = sFactory.getScheduler();  */
         JobKey jobKey = JobKey.jobKey(job.getJobName(), job.getJobGroup());  
         scheduler.triggerJob(jobKey);  
     }  
@@ -202,8 +201,8 @@ public class QuartzManager {
      * @param ScheduleJob1 
      * @throws SchedulerException 
      */  
-    public ScheduleJob updateJobCron(ScheduleJob job) throws SchedulerException {  
-        Scheduler scheduler = sFactory.getScheduler();  
+    public ScheduleJob updateJobCron(Scheduler scheduler,ScheduleJob job) throws SchedulerException {  
+        /*Scheduler scheduler = sFactory.getScheduler();  */
   
         TriggerKey triggerKey = TriggerKey.triggerKey(job.getJobName(), job.getJobGroup());  
   
