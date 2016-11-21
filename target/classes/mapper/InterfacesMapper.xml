@@ -18,10 +18,11 @@
     <result column="response_param" jdbcType="LONGVARCHAR" property="responseParam" />
     <result column="true_exam" jdbcType="LONGVARCHAR" property="trueExam" />
     <result column="false_exam" jdbcType="LONGVARCHAR" property="falseExam" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Base_Column_List">
     interface_id, inter_name, inter_des, status, inter_url, method, create_time, update_time, 
-    module_id, creator, is_delete, param, request_exam, response_param, true_exam, false_exam
+    module_id, creator, is_delete, param, request_exam, response_param, true_exam, false_exam,content
   </sql>
   <select id="findInterByWhere" parameterType="com.flyhero.flyapi.pojo.InterPojo" resultType="com.flyhero.flyapi.pojo.InterPojo">
 		SELECT
@@ -138,6 +139,9 @@
       <if test="falseExam != null">
         false_exam,
       </if>
+      <if test="content != null">
+        content,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="interfaceId != null">
@@ -185,6 +189,9 @@
       </if>
       <if test="falseExam != null">
         #{falseExam,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="content != null">
+        #{content}
       </if>
     </trim>
   </insert>
@@ -235,6 +242,9 @@
       </if>
       <if test="falseExam != null">
         false_exam = #{falseExam,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content}
       </if>
     </set>
     where interface_id = #{interfaceId,jdbcType=INTEGER}

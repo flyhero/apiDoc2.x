@@ -80,4 +80,8 @@ public class ForwardController extends BaseController{
 	public String gotoNewDataBase(){
 		return "new_database";
 	}
+	@RequestMapping("detial.html")
+	public String gotoDetial(){
+		return "detial_interface";
+	}
 }

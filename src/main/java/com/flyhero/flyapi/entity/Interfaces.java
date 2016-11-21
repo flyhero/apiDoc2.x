@@ -34,6 +34,8 @@ public class Interfaces {
     private String trueExam;
 
     private String falseExam;
+    
+    private String content;
     public Integer getInterfaceId() {
         return interfaceId;
     }
@@ -160,6 +162,14 @@ public class Interfaces {
     public void setFalseExam(String falseExam) {
         this.falseExam = falseExam == null ? null : falseExam.trim();
     }
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
 
 	@Override
 	public String toString() {
