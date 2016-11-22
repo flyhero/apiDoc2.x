@@ -236,7 +236,6 @@
 											<div class="col-lg-9 col-lg-offset-3">
                									 <button type="button" class="btn btn-primary"
 													id="createInterface">提交</button>
-												<button type="button" class="btn btn-primary" id="get-html-btn">Get HTML</button>
 												<button type="button" class="btn btn-info" id="resetBtn">重置</button>
 											</div>
 										</div>
@@ -248,18 +247,6 @@
 					</div>
 				</div>
 			</div>
-			
-			
-			
-			   
-        <div id="layout">
-                    
-            <div id="test-editormd">
-                <textarea id="content" style="display:none;">
-				</textarea>
-            </div>
-        </div>
-			
 			
 			<!-- /page content -->
 
@@ -281,7 +268,6 @@
 
 	<script>
 	
-		var testEditor;
 	
 		var $table = $('#table'), $button = $('#button'), $button1 = $('#button1');
 		var userId=${sessionScope.user.userId};
@@ -317,53 +303,6 @@
 		}
 		$(function() {
 			
-	    	testEditor = editormd("test-editormd", {
-	            width   : "90%",
-	            height  : 640,
-	            saveHTMLToTextarea : true, 
-	            htmlDecode : true,
-	            syncScrolling : "single",
-	            path    : "<%=request.getContextPath()%>/static/editor/lib/"
-	        });
-	        $("#get-html-btn").bind('click', function() {
-	            cont=testEditor.getHTML();
-	            
-	           if (interName != '' && interUrl != ''
-				&& param != '') {
-				$.ajax({
-						type : 'POST',
-						url : "../interface/addInterface.do",
-						dataType : "json",
-						data : {
-							"projectId" : pro,
-							"moduleId":moduleId,
-							"interName" : interName,
-							"interDes" : interDes,
-							"status" : status,
-							"interUrl" : interUrl,
-							"method" : method,
-							"param" : param,
-							"requestExam" : requestexam,
-							"responseParam" : responseparam,
-							"trueExam" : trueexam,
-							"falseExam" : falseexam,
-							"content" : cont
-						},
-						success : function(data) {
-							if (data.msg == 'ok') {
-								layer.alert("创建成功！");
-							} else {
-								layer.alert("创建失败！");
-							}
-
-						}
-
-					});
-		} else {
-			layer.alert("信息不能为空！");
-		} 
-	            
-	        });      
 			
 			$button.click(function() {
 				$table.bootstrapTable('insertRow', {
@@ -398,7 +337,42 @@
 						           });
 								 st=st+tab;
 								 st=st+'\n###请求示例\n'+requestexam+'\n###返回参数说明\n'+responseparam+'\n###成功示例\n'+trueexam+'\n###失败示例'+falseexam;
-								 testEditor.insertValue(st); 
+								 cont=st;
+								 
+						           if (interName != '' && interUrl != ''
+										&& param != '') {
+										$.ajax({
+												type : 'POST',
+												url : "../interface/addInterface.do",
+												dataType : "json",
+												data : {
+													"projectId" : pro,
+													"moduleId":moduleId,
+													"interName" : interName,
+													"interDes" : interDes,
+													"status" : status,
+													"interUrl" : interUrl,
+													"method" : method,
+													"param" : param,
+													"requestExam" : requestexam,
+													"responseParam" : responseparam,
+													"trueExam" : trueexam,
+													"falseExam" : falseexam,
+													"content" : cont
+												},
+												success : function(data) {
+													if (data.msg == 'ok') {
+														layer.alert("创建成功！");
+													} else {
+														layer.alert("创建失败！");
+													}
+
+												}
+
+											});
+								} else {
+									layer.alert("信息不能为空！");
+								} 
 			});
 			
 			
