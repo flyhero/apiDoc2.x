@@ -27,7 +27,6 @@
 	src="http://rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/js/bootstrap-editable.js"></script>
 <script
 	src="<%=request.getContextPath()%>/static/table/bootstrap-table/src/extensions/editable/bootstrap-table-editable.js"></script>
-	        <link rel="stylesheet" href="<%=request.getContextPath()%>/static/editor/css/style.css" />
         <link rel="stylesheet" href="<%=request.getContextPath()%>/static/editor/css/editormd.css" />
         <script
 	src="<%=request.getContextPath()%>/static/layer/layer.js"></script>

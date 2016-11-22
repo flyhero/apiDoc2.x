@@ -10,7 +10,7 @@
 <jsp:include page="static.jsp"></jsp:include>
 <title>我创建的项目</title>
     <!-- Custom styling plus plugins -->
-    <link href="<%=request.getContextPath()%>/static/ace/production/css/custom1.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/static/ace/production/css/custom.css" rel="stylesheet">
 </head>
  <body class="nav-md">
     <div class="container body">

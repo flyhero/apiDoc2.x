@@ -311,15 +311,15 @@ body .container.body .right_col {
 .top_nav .nav>li>a:focus, .top_nav .nav>li>a:hover, .top_nav .nav .open>a, .top_nav .nav .open>a:focus, .top_nav .nav .open>a:hover {
   background: #D9DEE4;
 }
-body {
-  color: #73879C;
+ body {
+  color: #000000;
   background: #2A3F54;
-  /*#ECF0F1; #FCFCFC*/
-  font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+/*   #ECF0F1; #FCFCFC */
+  font-family: Lato,"Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
   font-size: 13px;
   font-weight: 400;
   line-height: 1.471;
-}
+} 
 .main_container .top_nav {
   display: block;
   margin-left: 230px;

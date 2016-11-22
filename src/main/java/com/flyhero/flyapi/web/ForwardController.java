@@ -84,4 +84,8 @@ public class ForwardController extends BaseController{
 	public String gotoDetial(){
 		return "detial_interface";
 	}
+	@RequestMapping("list_interfaces.html")
+	public String gotoListInterfaces(){
+		return "list_interfaces";
+	}
 }
