@@ -54,6 +54,7 @@ public class InterfaceController extends BaseController{
 		int flag=interfaceService.insertSelective(interfaces);
 		if(flag != 0){
 			try {
+				interfaces.setContent("");
 				OperateLog log=new OperateLog(getCuUser().getUserId(),getCuUser().getUserName(), projectId, Constant.TYPE_INSERT, Constant.CLASS_INTERFACE, 
 						Constant.NAME_INTERFACE, "新建："+interfaces.getInterName()+"接口", JSONObject.toJSONString(interfaces));
 				LogService.addLog(log);

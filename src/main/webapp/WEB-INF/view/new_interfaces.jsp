@@ -27,6 +27,10 @@
 	src="http://rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/js/bootstrap-editable.js"></script>
 <script
 	src="<%=request.getContextPath()%>/static/table/bootstrap-table/src/extensions/editable/bootstrap-table-editable.js"></script>
+	        <link rel="stylesheet" href="<%=request.getContextPath()%>/static/editor/css/style.css" />
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/static/editor/css/editormd.css" />
+        <script
+	src="<%=request.getContextPath()%>/static/layer/layer.js"></script>
 <title>主页</title>
 <!-- Custom styling plus plugins -->
 <link
@@ -230,8 +234,9 @@
 										<div class="ln_solid"></div>
 										<div class="form-group">
 											<div class="col-lg-9 col-lg-offset-3">
-												<button type="button" class="btn btn-primary"
+               									 <button type="button" class="btn btn-primary"
 													id="createInterface">提交</button>
+												<button type="button" class="btn btn-primary" id="get-html-btn">Get HTML</button>
 												<button type="button" class="btn btn-info" id="resetBtn">重置</button>
 											</div>
 										</div>
@@ -243,6 +248,19 @@
 					</div>
 				</div>
 			</div>
+			
+			
+			
+			   
+        <div id="layout">
+                    
+            <div id="test-editormd">
+                <textarea id="content" style="display:none;">
+				</textarea>
+            </div>
+        </div>
+			
+			
 			<!-- /page content -->
 
 			<!-- footer content -->
@@ -259,12 +277,94 @@
 	<!-- Custom Theme Scripts -->
 	<script
 		src="<%=request.getContextPath()%>/static/ace/production/js/custom.js"></script>
-
+ <script src="<%=request.getContextPath()%>/static/editor/js/editormd.min.js"></script>
 
 	<script>
+	
+		var testEditor;
+	
 		var $table = $('#table'), $button = $('#button'), $button1 = $('#button1');
 		var userId=${sessionScope.user.userId};
+		var cont;
+		
+		var pro;
+		var moduleId;
+		var interName;
+		var interDes;
+		var status;
+		var interUrl;
+		var method;
+		var param;
+		var requestexam;
+		var responseparam;
+		var trueexam;
+		var falseexam;
+		
+		function getValues(){
+			pro=$("#pro-name").val();
+			moduleId=$("#module-name").val();
+			interName = $("#interName").val();
+			interDes = $("#interDes").val();
+			status = $("#status").val();
+			interUrl = $("#interUrl").val();
+			method = $("#method").val();
+			param = JSON.stringify($table
+					.bootstrapTable('getAllSelections'));
+			requestexam = $("#requestexam").val();
+			responseparam = $("#responseparam").val();
+			trueexam = $("#trueexam").val();
+			falseexam = $("#falseexam").val();
+		}
 		$(function() {
+			
+	    	testEditor = editormd("test-editormd", {
+	            width   : "90%",
+	            height  : 640,
+	            saveHTMLToTextarea : true, 
+	            htmlDecode : true,
+	            syncScrolling : "single",
+	            path    : "<%=request.getContextPath()%>/static/editor/lib/"
+	        });
+	        $("#get-html-btn").bind('click', function() {
+	            cont=testEditor.getHTML();
+	            
+	           if (interName != '' && interUrl != ''
+				&& param != '') {
+				$.ajax({
+						type : 'POST',
+						url : "../interface/addInterface.do",
+						dataType : "json",
+						data : {
+							"projectId" : pro,
+							"moduleId":moduleId,
+							"interName" : interName,
+							"interDes" : interDes,
+							"status" : status,
+							"interUrl" : interUrl,
+							"method" : method,
+							"param" : param,
+							"requestExam" : requestexam,
+							"responseParam" : responseparam,
+							"trueExam" : trueexam,
+							"falseExam" : falseexam,
+							"content" : cont
+						},
+						success : function(data) {
+							if (data.msg == 'ok') {
+								layer.alert("创建成功！");
+							} else {
+								layer.alert("创建失败！");
+							}
+
+						}
+
+					});
+		} else {
+			layer.alert("信息不能为空！");
+		} 
+	            
+	        });      
+			
 			$button.click(function() {
 				$table.bootstrapTable('insertRow', {
 					index : 1,
@@ -282,61 +382,27 @@
 								.bootstrapTable('getAllSelections')));
 			});
 
-			$("#createInterface")
-					.click(
-							function() {
-								var moduleId=$("#module-name").val();
-								var interName = $("#interName").val();
-								var interDes = $("#interDes").val();
-								var status = $("#status").val();
-								var interUrl = $("#interUrl").val();
-								var method = $("#method").val();
-								var param = JSON.stringify($table
-										.bootstrapTable('getAllSelections'));
-								responseparam
-								var requestexam = $("#requestexam").val();
-								var responseparam = $("#responseparam").val();
-								var trueexam = $("#trueexam").val();
-								var falseexam = $("#falseexam").val();
-								if (interName != '' && interUrl != ''
-										&& param != '') {
-									$
-											.ajax({
-												type : 'POST',
-												url : "../interface/addInterface.do",
-												dataType : "json",
-												data : {
-													"moduleId":moduleId,
-													"interName" : interName,
-													"interDes" : interDes,
-													"status" : status,
-													"interUrl" : interUrl,
-													"method" : method,
-													"param" : param,
-													"requestExam" : requestexam,
-													"responseParam" : responseparam,
-													"trueExam" : trueexam,
-													"falseExam" : falseexam
-												},
-												success : function(data) {
-													if (data.msg == 'ok') {
-														layer.alert("创建成功！");
-													} else {
-														layer.alert("创建失败！");
-													}
-
-												}
-
-											});
-								} else {
-									layer.alert("信息不能为空！");
+			$("#createInterface").click(function() {
+								getValues();
+								var st='#'+interName+'\n [TOCM]\n\n [TOC]\n'+'##功能说明\n'+'###接口名称\n'+interName+'\n###接口描述\n'+interDes+'\n###接口状态\n';
+								if(status==0){
+									st=st+'可用';
+								}else{
+									st=st+'不可用';
 								}
-
-							});
+								st=st+'\n##调用说明\n###调用地址\n'+interUrl+'\n###请求方式 \n'+method+'\n###请求参数\n | 名称   | 是否必须   |  类型  |说明 | \n | ---------- | --------- | --------- | --------- |\n';
+								var pa=$.parseJSON(param);
+					            var tab='';
+								 $.each(pa, function (n, p) {
+									 	tab=tab+'  |'+p.name+'|'+p.isTure+'|'+p.interType+'|'+p.des+'|\n';
+						           });
+								 st=st+tab;
+								 st=st+'\n###请求示例\n'+requestexam+'\n###返回参数说明\n'+responseparam+'\n###成功示例\n'+trueexam+'\n###失败示例'+falseexam;
+								 testEditor.insertValue(st); 
+			});
 			
 			
-			$
-			.ajax({
+			$.ajax({
 				type : 'POST',
 				url : "../project/findUserEdit.do",
 				dataType : "json",
