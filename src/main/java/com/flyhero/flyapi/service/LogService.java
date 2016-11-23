@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import com.flyhero.flyapi.dao.OperateLogMapper;
 import com.flyhero.flyapi.entity.OperateLog;
 import com.flyhero.flyapi.pojo.LogPojo;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 @Service
 public class LogService {
@@ -56,7 +58,10 @@ public class LogService {
 	public List<OperateLog> findLogDetialByProId(Integer projectId){
 		return operateLogMapper.findLogDetialByProId(projectId);
 	}
-	public List<OperateLog> findAllLogByUserId(Integer userId){
-		return operateLogMapper.findAllLogByUserId(userId);
+	public PageInfo<OperateLog> findAllLogByUserId(Integer userId,Integer pageNumber,Integer pageSize){
+		PageHelper.startPage(pageNumber, pageSize);
+		List<OperateLog> list=operateLogMapper.findAllLogByUserId(userId);
+		PageInfo<OperateLog> pInfo=new PageInfo<OperateLog>(list);
+		return pInfo;
 	}
 }

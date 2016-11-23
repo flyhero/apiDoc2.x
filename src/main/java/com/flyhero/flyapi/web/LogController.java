@@ -1,5 +1,6 @@
 package com.flyhero.flyapi.web;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import com.flyhero.flyapi.entity.OperateLog;
 import com.flyhero.flyapi.pojo.JSONResult;
 import com.flyhero.flyapi.service.LogService;
 import com.flyhero.flyapi.utils.Constant;
+import com.github.pagehelper.PageInfo;
 
 /**
  * 操作日志控制器
@@ -65,11 +67,15 @@ public class LogController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping("findAllLog.do")
-	public JSONResult findAllLogByUserId(Integer userId){
-		List<OperateLog> list=logService.findAllLogByUserId(userId);
-		if(list != null &&list.isEmpty()){
-			return new JSONResult(Constant.MSG_OK, Constant.CODE_404, list);	
+	public JSONResult findAllLogByUserId(Integer userId,Integer pageNumber,Integer pageSize){
+		PageInfo<OperateLog> list=logService.findAllLogByUserId(userId,pageNumber,pageSize);
+		Map<String, Object> map=new HashMap<String, Object>();
+		if(list != null ){
+			map.put("rows", list.getList());
+			map.put("total", list.getTotal());
+			System.out.println(list.getPages());
+			return new JSONResult(Constant.MSG_OK, Constant.CODE_200, list);	
 		}
-		return new JSONResult(Constant.MSG_OK, Constant.CODE_200, list);
+		return new JSONResult(Constant.MSG_OK, Constant.CODE_404, list);
 	}
 }

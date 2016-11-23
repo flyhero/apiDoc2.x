@@ -47,21 +47,12 @@
                 </div>
                 <div class="x_content">
                   <ul class="list-unstyled msg_list">
-                    <li>
-                      <a>
-                        <span class="image">
-                          <img src="<%=request.getContextPath()%>${sessionScope.user.avatarUrl}" alt="img" />
-                        </span>
-                        <span>
-                          <span>qfwang</span>
-                          <span class="time">3分钟前</span>
-                        </span>
-                        <span class="message">
-                          对遛遛旅游项目中的推荐景点接口进行了更改。
-                        </span>
-                      </a>
-                    </li>
                   </ul>
+                  					<center>
+										<ul class="pagination">
+											<li class="disabled"><a href="#">&laquo;</a></li>
+										</ul>
+									</center>
                 </div>
               </div>
               					<div class="panel panel-default">
@@ -127,7 +118,86 @@
         <!-- /footer content -->
       </div>
     </div>
-	<!-- Custom Theme Scripts -->
+    
+    <script type="text/javascript">
+    	var userId=${sessionScope.user.userId};
+    	function logPage(pageNumber,pageSize){
+    		$.ajax({
+    			type : 'POST',
+    			url : "../log/findAllLog.do",
+    			dataType : "json",
+    			data : {
+    				"userId":userId,
+    				"pageNumber":pageNumber,
+    				"pageSize":pageSize
+    			},
+    			success : function(data) {
+    				$.each(data.data.navigatepageNums,function(index,pn){
+    					if(data.data.pageNum==pn){
+    						$(".pagination").append('<li class="active"><a href="#">'+pn+'</a></li>');
+    					}else{
+    						$(".pagination").append('<li><a href="#">'+pn+'</a></li>');
+    					}
+    					
+    				});
+    				$(".pagination").append('<li class="disabled"><a href="disabled">&raquo;</a></li>');
+    				
+    				$.each(data.data.list,function(index,log){
+    					$(".msg_list").append('<li>'
+                                +'<div class="message_wrapper">'
+                                 +' <h4 class="heading">'+log.userName+'</h4>'
+                                 +' <blockquote class="message">'+log.remark+'</blockquote>'
+                                 +' <br />'
+                                  +'<p class="url">'
+                                  +'  <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>'
+                                  +'  <a><i class="fa fa-calendar"></i> '+getMyDate(log.createTime)+' </a>'
+                                  +'</p>'
+                                +'</div>'
+                             +' </li>');
+    				});
+    				
+    			}
+
+    		}); 
+    	}
+		$.ajax({
+			type : 'POST',
+			url : "../log/findAllLog.do",
+			dataType : "json",
+			data : {
+				"userId":userId,
+				"pageNumber":1,
+				"pageSize":3
+			},
+			success : function(data) {
+				$.each(data.data.navigatepageNums,function(index,pn){
+					if(data.data.pageNum==pn){
+						$(".pagination").append('<li class="active"><a href="#">'+pn+'</a></li>');
+					}else{
+						$(".pagination").append('<li><a href="#">'+pn+'</a></li>');
+					}
+					
+				});
+				$(".pagination").append('<li class="disabled"><a href="disabled">&raquo;</a></li>');
+				
+				$.each(data.data.list,function(index,log){
+					$(".msg_list").append('<li>'
+                            +'<div class="message_wrapper">'
+                             +' <h4 class="heading">'+log.userName+'</h4>'
+                             +' <blockquote class="message">'+log.remark+'</blockquote>'
+                             +' <br />'
+                              +'<p class="url">'
+                              +'  <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>'
+                              +'  <a><i class="fa fa-calendar"></i> '+getMyDate(log.createTime)+' </a>'
+                              +'</p>'
+                            +'</div>'
+                         +' </li>');
+				});
+				
+			}
+
+		}); 
+    </script>
 	<script src="<%=request.getContextPath()%>/static/ace/production/js/custom.js"></script>
   </body>
 </html>
