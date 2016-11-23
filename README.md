@@ -32,3 +32,11 @@ Github: https://github.com/flyhero/flyapi2.0
 - markdown编辑器: editor.md
 
 # 演示界面
+## 登录页面
+![登录页面](screenshot/login.png)
+## 主页面
+![主页面](screenshot/main.png)
+## 项目列表
+![项目列表](screenshot/project.png)
+## 即时消息
+![即时消息](screenshot/socket.png)
