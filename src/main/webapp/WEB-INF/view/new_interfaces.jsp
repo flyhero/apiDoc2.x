@@ -27,11 +27,10 @@
 	src="http://rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/js/bootstrap-editable.js"></script>
 <script
 	src="<%=request.getContextPath()%>/static/table/bootstrap-table/src/extensions/editable/bootstrap-table-editable.js"></script>
-        <link rel="stylesheet" href="<%=request.getContextPath()%>/static/editor/css/editormd.css" />
-        <script
-	src="<%=request.getContextPath()%>/static/layer/layer.js"></script>
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/static/editor/css/editormd.css" />
+<script src="<%=request.getContextPath()%>/static/layer/layer.js"></script>
 <title>主页</title>
-<!-- Custom styling plus plugins -->
 <link
 	href="<%=request.getContextPath()%>/static/ace/production/css/custom.css"
 	rel="stylesheet">
@@ -41,7 +40,7 @@
 		<div class="main_container">
 			<div class="col-md-3 left_col">
 				<div class="left_col scroll-view">
-				
+
 					<jsp:include page="base/sidebar.jsp"></jsp:include>
 
 				</div>
@@ -180,14 +179,14 @@
 										<div class="form-group">
 											<label class="col-lg-3 control-label">2.6成功返回示例</label>
 											<div class="col-lg-5">
-														<textarea id="trueexam" class="form-control" rows="5"
-			placeholder='{
+												<textarea id="trueexam" class="form-control" rows="5"
+													placeholder='{
 	"msg":"success",
 	"status":200,
 	"data":"",
 }'></textarea>
 											</div>
-										</div>										
+										</div>
 										<div class="form-group">
 											<label class="col-lg-3 control-label">2.7失败返回示例</label>
 											<div class="col-lg-5">
@@ -202,7 +201,7 @@
 										<div class="ln_solid"></div>
 										<div class="form-group">
 											<div class="col-lg-9 col-lg-offset-3">
-               									 <button type="button" class="btn btn-primary"
+												<button type="button" class="btn btn-primary"
 													id="createInterface">提交</button>
 												<button type="button" class="btn btn-info" id="resetBtn">重置</button>
 											</div>
@@ -215,7 +214,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<!-- /page content -->
 
 			<!-- footer content -->
@@ -223,11 +222,9 @@
 			<!-- /footer content -->
 		</div>
 	</div>
-	<!-- Custom Theme Scripts -->
-	<script
-		src="<%=request.getContextPath()%>/static/ace/production/js/custom.js"></script>
- <script src="<%=request.getContextPath()%>/static/editor/js/editormd.min.js"></script>
- <script src="<%=request.getContextPath()%>/static/js/page/new-inter.js"></script>
+	<script src="<%=request.getContextPath()%>/static/ace/production/js/custom.js"></script>
+	<script src="<%=request.getContextPath()%>/static/editor/js/editormd.min.js"></script>
+	<script src="<%=request.getContextPath()%>/static/js/page/new-inter.js"></script>
 
 </body>
 </html>

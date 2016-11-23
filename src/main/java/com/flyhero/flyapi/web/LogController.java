@@ -1,5 +1,6 @@
 package com.flyhero.flyapi.web;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.flyhero.flyapi.entity.OperateLog;
 import com.flyhero.flyapi.pojo.JSONResult;
 import com.flyhero.flyapi.service.LogService;
 import com.flyhero.flyapi.utils.Constant;
@@ -30,5 +32,25 @@ public class LogController extends BaseController{
 	public JSONResult findLogByProjectId(Integer projectId){
 		Map<String, Object> map=logService.findLog(projectId);
 		return new JSONResult(Constant.MSG_OK, Constant.CODE_200, map);
+	}
+	
+	/**
+	 * 获取日志详情根据项目号
+	 * @Title: findLogDetialByProId 
+	 * @author flyhero(http://flyhero.top)  
+	 * @date 2016年11月23日 上午11:14:51 
+	 * @param @param projectId
+	 * @param @return   
+	 * @return JSONResult    
+	 * @throws
+	 */
+	@ResponseBody
+	@RequestMapping("findLogDetial.do")
+	public JSONResult findLogDetialByProId(Integer projectId){
+		List<OperateLog> list=logService.findLogDetialByProId(projectId);
+		if(list.isEmpty()){
+			return new JSONResult(Constant.MSG_OK, Constant.CODE_404, list);	
+		}
+		return new JSONResult(Constant.MSG_OK, Constant.CODE_200, list);
 	}
 }

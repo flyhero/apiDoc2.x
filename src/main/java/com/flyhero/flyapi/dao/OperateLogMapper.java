@@ -7,7 +7,9 @@ import com.flyhero.flyapi.pojo.LogPojo;
 
 public interface OperateLogMapper {
 	
-	List<LogPojo> findLog(Integer projectId);
+	List<LogPojo> findLog(Integer projectId);  
+	
+	List<OperateLog> findLogDetialByProId(Integer projectId);
 	
     int deleteByPrimaryKey(Integer logId);
 

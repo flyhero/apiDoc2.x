@@ -25,6 +25,18 @@
 	GROUP BY DATE_FORMAT(create_time,'%Y-%m-%d')
 	ORDER BY xtime
   </select>
+  <select id="findLogDetialByProId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT 
+    <include refid="Base_Column_List" />
+	FROM
+		fly_operate_log
+	WHERE
+		project_id = #{projectId}
+	AND operate_type IN ('UPDATE', 'INSERT', 'DELETE')
+	AND is_delete = 0
+	ORDER BY
+		create_time DESC
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

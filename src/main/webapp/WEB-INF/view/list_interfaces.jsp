@@ -135,9 +135,6 @@ a:hover {
 
 										<br>
 										<hr>
-
-
-
 										<div class="list">
 											<p class="date">
 												八月 <b>03</b>

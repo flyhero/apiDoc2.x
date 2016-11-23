@@ -21,7 +21,14 @@ public class LogService {
 	public int addLog(OperateLog log){
 		return operateLogMapper.addLog(log);
 	}
-	
+	/**
+	 * 
+	 * @Title: findLog 
+	 * @param @param projectId
+	 * @param @return   
+	 * @return Map<String,Object>    
+	 * @throws
+	 */
 	public Map<String, Object> findLog(Integer projectId){
 		List<LogPojo> list=operateLogMapper.findLog(projectId);
 		List<Integer> cList =new ArrayList<Integer>();
@@ -34,5 +41,19 @@ public class LogService {
 		map.put("count", cList);
 		map.put("xtime", xList);
 		return map;
+	}
+	
+	/**
+	 * 根据项目号获取日志详细信息
+	 * @Title: findLogDetialByProId  
+	 * @author flyhero(http://flyhero.top)
+	 * @date 2016年11月23日 上午11:00:55 
+	 * @param @param projectId
+	 * @param @return    
+	 * @return List<OperateLog>    返回类型 
+	 * @throws
+	 */
+	public List<OperateLog> findLogDetialByProId(Integer projectId){
+		return operateLogMapper.findLogDetialByProId(projectId);
 	}
 }
