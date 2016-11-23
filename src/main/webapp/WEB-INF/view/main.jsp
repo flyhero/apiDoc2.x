@@ -165,12 +165,7 @@
         <!-- /page content -->
 
         <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            flyapi接口管理系统V2.0 &nbsp;Copyright &copy;2016. 作者：王清飞 博客：<a target="_blank" href="http://flyhero.top">flyhero.top</a>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
+        <jsp:include page="base/footer.jsp"></jsp:include>
         <!-- /footer content -->
       </div>
     </div>

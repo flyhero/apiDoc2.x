@@ -2,7 +2,7 @@
 	pageEncoding="utf-8"%>
 
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>flyapi接口管理</span></a>
+              <a href="index.html" class="site_title"><i class="fa fa-paper-plane"></i> <span>flyapi接口管理</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -47,7 +47,7 @@
 
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-database"></i> 字典 <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-database"></i> 数据字典 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="../forward/data_base.html">数据库</a>
                       </li>

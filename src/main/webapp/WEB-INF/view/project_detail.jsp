@@ -17,27 +17,6 @@
       <div class="main_container">
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
-            <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>flyapi接口管理</span></a>
-            </div>
-
-            <div class="clearfix"></div>
-
-            <!-- menu profile quick info -->
-            <div class="profile">
-              <div class="profile_pic">
-                <img src="<%=request.getContextPath()%>${sessionScope.user.avatarUrl}" alt="..." class="img-circle profile_img">
-              </div>
-              <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>flyhero</h2>
-              </div>
-            </div>
-            <!-- /menu profile quick info -->
-
-            <br />
-            <hr>
-
 
 			<jsp:include page="base/sidebar.jsp"></jsp:include>
 
@@ -104,50 +83,13 @@
                         <!-- end of user messages -->
                         <ul class="messages">
                           <li>
-                            <img src="images/img.jpg" class="avatar" alt="Avatar">
-                            <div class="message_date">
-                              <h3 class="date text-info">24</h3>
-                              <p class="month">May</p>
-                            </div>
                             <div class="message_wrapper">
                               <h4 class="heading">Desmond Davison</h4>
-                              <blockquote class="message">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth.</blockquote>
+                              <blockquote class="message">Raw denim you dreamcatcher synth.</blockquote>
                               <br />
                               <p class="url">
                                 <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
-                                <a href="#"><i class="fa fa-paperclip"></i> User Acceptance Test.doc </a>
-                              </p>
-                            </div>
-                          </li>
-                          <li>
-                            <img src="images/img.jpg" class="avatar" alt="Avatar">
-                            <div class="message_date">
-                              <h3 class="date text-error">21</h3>
-                              <p class="month">May</p>
-                            </div>
-                            <div class="message_wrapper">
-                              <h4 class="heading">Brian Michaels</h4>
-                              <blockquote class="message">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth.</blockquote>
-                              <br />
-                              <p class="url">
-                                <span class="fs1" aria-hidden="true" data-icon=""></span>
-                                <a href="#" data-original-title="">Download</a>
-                              </p>
-                            </div>
-                          </li>
-                          <li>
-                            <img src="images/img.jpg" class="avatar" alt="Avatar">
-                            <div class="message_date">
-                              <h3 class="date text-info">24</h3>
-                              <p class="month">May</p>
-                            </div>
-                            <div class="message_wrapper">
-                              <h4 class="heading">Desmond Davison</h4>
-                              <blockquote class="message">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth.</blockquote>
-                              <br />
-                              <p class="url">
-                                <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
-                                <a href="#"><i class="fa fa-paperclip"></i> User Acceptance Test.doc </a>
+                                <a href="#"><i class="fa fa-paperclip"></i> 2016-11-22 </a>
                               </p>
                             </div>
                           </li>
@@ -627,6 +569,31 @@
 				}
 
 			});
+ 			$.ajax({
+				type : 'POST',
+				url : "../log/findLogDetial.do",
+				dataType : "json",
+				data : {
+					"projectId":projectId
+				},
+				success : function(data) {
+					$.each(data.data,function(index,log){
+						$(".messages").append('<li>'
+	                            +'<div class="message_wrapper">'
+	                             +' <h4 class="heading">'+log.userName+'</h4>'
+	                             +' <blockquote class="message">'+log.remark+'</blockquote>'
+	                             +' <br />'
+	                              +'<p class="url">'
+	                              +'  <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>'
+	                              +'  <a><i class="fa fa-calendar"></i> '+getMyDate(log.createTime)+' </a>'
+	                              +'</p>'
+	                            +'</div>'
+	                         +' </li>');
+					});
+					
+				}
+
+			}); 
 			
 			$("#checkUserName").click(function() {
 				var userName = $("#TeamName").val();

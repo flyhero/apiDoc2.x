@@ -34,7 +34,10 @@ public class OperateLog extends Entity{
 
     private Integer isDelete;
 
-    public OperateLog(Integer userId, Integer projectId, String operateType,
+    public OperateLog() {
+		super();
+	}
+	public OperateLog(Integer userId, Integer projectId, String operateType,
 			String modelClass, String modelName, String remark, String content) {
 		super();
 		this.userId = userId;
@@ -56,6 +59,24 @@ public class OperateLog extends Entity{
 		this.modelName = modelName;
 		this.remark = remark;
 		this.content = content;
+	}
+    
+	public OperateLog(Integer logId, Integer userId, Integer projectId,
+			String userName, String operateType, String modelClass,
+			String modelName, String remark, String content, Date createTime,
+			Integer isDelete) {
+		super();
+		this.logId = logId;
+		this.userId = userId;
+		this.projectId = projectId;
+		this.userName = userName;
+		this.operateType = operateType;
+		this.modelClass = modelClass;
+		this.modelName = modelName;
+		this.remark = remark;
+		this.content = content;
+		this.createTime = createTime;
+		this.isDelete = isDelete;
 	}
 	public Integer getLogId() {
         return logId;
