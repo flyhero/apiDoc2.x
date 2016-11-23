@@ -27,7 +27,7 @@
         <div class="right_col" role="main">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>最近动态 <small>Sessions</small></h2>
+                  <h2>最近动态 </h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -53,53 +53,11 @@
                           <img src="<%=request.getContextPath()%>${sessionScope.user.avatarUrl}" alt="img" />
                         </span>
                         <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
+                          <span>qfwang</span>
+                          <span class="time">3分钟前</span>
                         </span>
                         <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image">
-                          <img src="<%=request.getContextPath()%>${sessionScope.user.avatarUrl}" alt="img" />
-                        </span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image">
-                          <img src="<%=request.getContextPath()%>${sessionScope.user.avatarUrl}" alt="img" />
-                        </span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image">
-                          <img src="<%=request.getContextPath()%>${sessionScope.user.avatarUrl}" alt="img" />
-                        </span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that
+                          对遛遛旅游项目中的推荐景点接口进行了更改。
                         </span>
                       </a>
                     </li>
