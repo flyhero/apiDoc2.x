@@ -60,7 +60,7 @@ public class ForwardController extends BaseController{
 	public ModelAndView gotoProjectDetail(Integer projectId,Integer upId){
 		mv.addObject("projectId", projectId);
 		mv.addObject("upId", upId);
-		mv.setViewName("project_detail");
+		mv.setViewName("detail_project");
 		return mv;
 	}
 	@RequestMapping("demo.html")
@@ -80,9 +80,9 @@ public class ForwardController extends BaseController{
 	public String gotoNewDataBase(){
 		return "new_database";
 	}
-	@RequestMapping("detial.html")
+	@RequestMapping("detail.html")
 	public String gotoDetial(){
-		return "detial_interface";
+		return "detail_interface";
 	}
 	@RequestMapping("list_interfaces.html")
 	public String gotoListInterfaces(){
