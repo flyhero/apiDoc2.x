@@ -43,7 +43,7 @@
 				</div>
 				
 					<div class="login-form">
-					 <form id="defaultForm" method="get"  action="user/login.do">
+					 <form id="defaultForm" method="get"  action="<%=request.getContextPath()%>/user/login.do">
 						<div class="form-group">
 <!-- 						<div class="input-group">
 						  <span class="input-group-addon">@</span>
@@ -89,7 +89,10 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    // Generate a simple captcha
+    var user='${sessionScope.user.userName}';
+	if(user != null && user != ''){
+		location.href="forward/main.html";
+	}
     function randomNumber(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
     };

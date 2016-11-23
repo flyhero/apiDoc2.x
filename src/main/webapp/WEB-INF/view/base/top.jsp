@@ -37,7 +37,7 @@
 								class="badge bg-red pull-right">50%</span> <span>Settings</span>
 						</a></li>
 						<li><a href="javascript:;">Help</a></li>
-						<li><a href="login.html"><i
+						<li><a href="../user/logout.do"><i
 								class="fa fa-sign-out pull-right"></i> Log Out</a></li>
 					</ul></li>
 
@@ -48,7 +48,13 @@
 				</a>
 					<ul id="menu1" class="dropdown-menu list-unstyled msg_list"
 						role="menu">
-						
+					<li>
+                      <div class="text-center">
+                        <a>
+                          <strong>无更多消息</strong>
+                        </a>
+                      </div>
+                    </li>
 					</ul></li>
 
 			</ul>
