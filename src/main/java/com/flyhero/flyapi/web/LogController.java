@@ -48,7 +48,26 @@ public class LogController extends BaseController{
 	@RequestMapping("findLogDetial.do")
 	public JSONResult findLogDetialByProId(Integer projectId){
 		List<OperateLog> list=logService.findLogDetialByProId(projectId);
-		if(list.isEmpty()){
+		if(list != null &&list.isEmpty()){
+			return new JSONResult(Constant.MSG_OK, Constant.CODE_404, list);	
+		}
+		return new JSONResult(Constant.MSG_OK, Constant.CODE_200, list);
+	}
+	/**
+	 * 
+	 * @Title: findAllLogByUserId 
+	 * @author flyhero(http://flyhero.top)  
+	 * @date 2016年11月23日 下午5:15:36 
+	 * @param @param userId
+	 * @param @return   
+	 * @return JSONResult    
+	 * @throws
+	 */
+	@ResponseBody
+	@RequestMapping("findAllLog.do")
+	public JSONResult findAllLogByUserId(Integer userId){
+		List<OperateLog> list=logService.findAllLogByUserId(userId);
+		if(list != null &&list.isEmpty()){
 			return new JSONResult(Constant.MSG_OK, Constant.CODE_404, list);	
 		}
 		return new JSONResult(Constant.MSG_OK, Constant.CODE_200, list);

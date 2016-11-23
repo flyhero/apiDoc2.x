@@ -37,6 +37,25 @@
 	ORDER BY
 		create_time DESC
   </select>
+  <select id="findAllLogByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT
+			t.*
+		FROM
+			fly_operate_log t
+		WHERE
+			t.operate_type IN ('DELETE', 'UPDATE', 'INSERT')
+		AND EXISTS (
+			SELECT
+				t1.project_id
+			FROM
+				fly_user_project t1
+			WHERE
+				t1.user_id = #{userId}
+			AND t1.project_id = t.project_id
+			AND t1.is_delete = 0
+		)
+		ORDER BY t.create_time DESC	
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

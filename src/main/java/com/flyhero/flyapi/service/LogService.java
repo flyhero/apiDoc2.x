@@ -56,4 +56,7 @@ public class LogService {
 	public List<OperateLog> findLogDetialByProId(Integer projectId){
 		return operateLogMapper.findLogDetialByProId(projectId);
 	}
+	public List<OperateLog> findAllLogByUserId(Integer userId){
+		return operateLogMapper.findAllLogByUserId(userId);
+	}
 }

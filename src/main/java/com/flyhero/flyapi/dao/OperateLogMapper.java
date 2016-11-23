@@ -11,6 +11,8 @@ public interface OperateLogMapper {
 	
 	List<OperateLog> findLogDetialByProId(Integer projectId);
 	
+	List<OperateLog> findAllLogByUserId(Integer userId);
+	
     int deleteByPrimaryKey(Integer logId);
 
     int insert(OperateLog record);
