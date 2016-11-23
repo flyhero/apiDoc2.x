@@ -5,19 +5,19 @@
 # 项目地址
 Github: https://github.com/flyhero/flyapi2.0
 
-码云：
+码云：http://git.oschina.net/flyhero/flyapi2.0
 
 # 技术选择
 1、后端
 
-- 核心框架：Spring Framework 4.1
-- 视图框架：Spring MVC 4.1
-- 持久层框架：MyBatis 3.2
-- 任务调度：Spring + Quartz 2.2.3
-- 分页插件：Mybatis-PageHelper
+- 核心框架：Spring Framework 4.1.7
+- 视图框架：Spring MVC 4.1.7
+- 持久层框架：MyBatis 3.2.6
+- 任务调度：Spring + Quartz 2.2.2
+- 分页插件：Mybatis-PageHelper 4.0.0
 - 数据库：MySql 5.6
-- 数据库连接池：Alibaba Druid 1.0
-- 日志管理：SLF4J 1.7、Log4j
+- 数据库连接池：Alibaba Druid 1.0.9
+- 日志管理：SLF4J 1.7.7、Log4j
 - 即时消息：Spring WebSocket
 
 2、前端
