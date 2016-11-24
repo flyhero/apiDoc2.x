@@ -26,8 +26,7 @@ public class InterfaceService{
 	}
 	
 	public Interfaces selectByPrimaryKey(Integer interfaceId) {
-		// TODO Auto-generated method stub
-		return null;
+		return interfacesMapper.selectByPrimaryKey(interfaceId);
 	}
 	public int insertSelective(Interfaces record) {
 		return interfacesMapper.insertSelective(record);

@@ -1,10 +1,8 @@
 package com.flyhero.flyapi.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import com.flyhero.flyapi.entity.Interfaces;
-import com.flyhero.flyapi.entity.InterfacesWithBLOBs;
 import com.flyhero.flyapi.pojo.InterPojo;
 
 public interface InterfacesMapper {
@@ -17,7 +15,7 @@ public interface InterfacesMapper {
 
     int insertSelective(Interfaces record);
 
-    InterfacesWithBLOBs selectByPrimaryKey(Integer interfaceId);
+    Interfaces selectByPrimaryKey(Integer interfaceId);
 
     int updateByPrimaryKeySelective(Interfaces record);
 

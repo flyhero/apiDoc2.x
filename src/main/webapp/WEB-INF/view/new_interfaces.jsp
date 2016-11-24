@@ -257,7 +257,6 @@
 		falseexam = $("#falseexam").val();
 	}
 	$(function() {
-		
 		$button.click(function() {
 			$table.bootstrapTable('insertRow', {
 				index : 1,
@@ -277,20 +276,20 @@
 
 		$("#createInterface").click(function() {
 							getValues();
-							var st='#'+interName+'\n [TOCM]\n\n [TOC]\n'+'##功能说明\n'+'###接口名称\n'+interName+'\n###接口描述\n'+interDes+'\n###接口状态\n';
+							var st='#'+interName+'\n[TOCM]\n\n[TOC]\n'+'###功能说明\n'+'####**接口名称**\n'+interName+'\n####**接口描述**\n'+interDes+'\n####**接口状态**\n';
 							if(status==0){
 								st=st+'可用';
 							}else{
 								st=st+'不可用';
 							}
-							st=st+'\n##调用说明\n###调用地址\n'+interUrl+'\n###请求方式 \n'+method+'\n###请求参数\n | 名称   | 是否必须   |  类型  |说明 | \n | ---------- | --------- | --------- | --------- |\n';
+							st=st+'\n###调用说明\n####**调用地址**\n'+interUrl+'\n####**请求方式 **\n'+method+'\n####**请求参数**\n | 名称   | 是否必须   |  类型  |说明 | \n | ---------- | --------- | --------- | --------- |\n';
 							var pa=$.parseJSON(param);
 				            var tab='';
 							 $.each(pa, function (n, p) {
-								 	tab=tab+'  |'+p.name+'|'+p.isTure+'|'+p.interType+'|'+p.des+'|\n';
+								 	tab=tab+'  |'+p.name+'|'+p.isTrue+'|'+p.interType+'|'+p.des+'|\n';
 					           });
 							 st=st+tab;
-							 st=st+'\n###请求示例\n'+requestexam+'\n###返回参数说明\n'+responseparam+'\n###成功示例\n'+trueexam+'\n###失败示例'+falseexam;
+							 st=st+'\n####**请求示例**\n```'+JSON.stringify(JSON.parse(requestexam), null, 4)+'```\n####**返回参数说明**\n'+responseparam+'\n####**成功示例**\n```'+JSON.stringify(JSON.parse(trueexam), null, 4)+'```\n####**失败示例**\n```'+JSON.stringify(JSON.parse(falseexam), null, 4)+'```';
 							 cont=st;
 							 
 					           if (interName != '' && interUrl != ''
@@ -362,6 +361,7 @@
 				},
 				success : function(data) {
 					if (data.msg == 'ok') {
+						$("#module-name").empty();
 						$.each(data.data,function(index,mo){
 							$("#module-name").append('<option value="'+mo.moduleId+'">'+mo.moduleName+'</option>');
 						});

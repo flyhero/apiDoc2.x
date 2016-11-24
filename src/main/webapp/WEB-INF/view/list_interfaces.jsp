@@ -243,7 +243,7 @@ a:hover {
 								+'<p>'+inter.interDes+'</p>'
 								+'<p class="meta">时间：'+getMyDate(inter.createTime)
 								+'&nbsp;	模块：<a href="/">'+inter.moduleName+'</a>&nbsp;创建者：<a href="/">'+inter.userName+'</a>&nbsp;&nbsp;'
-								+'		<a href="#"><i class="fa fa-eye"></i> 详情</a> &nbsp;'
+								+'		<a href="../forward/detail_interface.html?interfaceId='+inter.interfaceId+'"><i class="fa fa-eye"></i> 详情</a> &nbsp;'
 								+'		<a href="#"><i class="fa fa-wrench"></i> 调试</a>'
 								+isEdit+'</p></div>');
     				});

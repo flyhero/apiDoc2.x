@@ -181,8 +181,9 @@ public class Interfaces {
 				+ ", isDelete=" + isDelete + ", param=" + param
 				+ ", requestExam=" + requestExam + ", responseParam="
 				+ responseParam + ", trueExam=" + trueExam + ", falseExam="
-				+ falseExam + "]";
+				+ falseExam + ", content=" + content + "]";
 	}
+
     
     
 }

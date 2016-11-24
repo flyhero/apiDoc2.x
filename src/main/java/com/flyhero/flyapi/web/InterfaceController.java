@@ -52,6 +52,7 @@ public class InterfaceController extends BaseController{
 	@ResponseBody
 	public JSONResult addInterface(Interfaces interfaces,Integer projectId){
 		interfaces.setCreator(getCuUser().getUserId());
+		System.out.println(interfaces.toString());
 		int flag=interfaceService.insertSelective(interfaces);
 		if(flag != 0){
 			try {
@@ -90,6 +91,25 @@ public class InterfaceController extends BaseController{
 		System.out.println(interPojo.toString());
 		PageInfo<InterPojo> list=interfaceService.findInterByWhere(interPojo);
 		return new JSONResult(Constant.MSG_OK, Constant.CODE_200,list);
+	}
+	/**
+	 * 根据接口编号获取接口详情
+	 * @Title: findOneInter 
+	 * @author flyhero(http://flyhero.top)  
+	 * @date 2016年11月24日 下午2:32:28 
+	 * @param @param interfaceId
+	 * @param @return   
+	 * @return JSONResult    
+	 * @throws
+	 */
+	@ResponseBody
+	@RequestMapping("findOneInter.do")
+	public JSONResult findOneInter(Integer interfaceId){
+		Interfaces interfaces=interfaceService.selectByPrimaryKey(interfaceId);
+		if(interfaces !=null){
+			return new JSONResult(Constant.MSG_OK, Constant.CODE_200, interfaces);
+		}
+		return new JSONResult(Constant.MSG_OK, Constant.CODE_404, interfaces);
 	}
 	@RequestMapping("testHttp.do")
 	@ResponseBody
