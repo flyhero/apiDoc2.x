@@ -169,6 +169,21 @@ a:hover {
 	</div>
     <script type="text/javascript">
     	var projectId=${projectId};
+    	var isEdit='';
+		$.ajax({
+			type : 'POST',
+			url : "../project/findUserIsEdit.do",
+			dataType : "json",
+			data : {
+				"projectId":projectId
+			},
+			success : function(data) {
+				if(data.data>0){
+					isEdit='&nbsp;&nbsp;<a href="#"><i class="fa fa-edit"></i>修改</a> &nbsp;';
+				}
+			}
+
+		});
     	
 		$.ajax({
 			type : 'POST',
@@ -228,10 +243,9 @@ a:hover {
 								+'<p>'+inter.interDes+'</p>'
 								+'<p class="meta">时间：'+getMyDate(inter.createTime)
 								+'&nbsp;	模块：<a href="/">'+inter.moduleName+'</a>&nbsp;创建者：<a href="/">'+inter.userName+'</a>&nbsp;&nbsp;'
-								+'		<a href="#"><i class="fa fa-eye"></i> 详情</a> &nbsp;<a href="#"><i class="fa fa-edit"></i> 修改</a> &nbsp;<a href="#"><i'
-								+'		class="fa fa-wrench"></i> 调试</a>'
-								+'</p>'
-								+'	</div>');
+								+'		<a href="#"><i class="fa fa-eye"></i> 详情</a> &nbsp;'
+								+'		<a href="#"><i class="fa fa-wrench"></i> 调试</a>'
+								+isEdit+'</p></div>');
     				});
     				
     			}

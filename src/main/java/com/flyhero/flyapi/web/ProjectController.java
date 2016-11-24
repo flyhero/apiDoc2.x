@@ -305,5 +305,23 @@ public class ProjectController extends BaseController{
 		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
 		
 	}
+	/**
+	 * 获取用户对某个项目的权限
+	 * @Title: findUserIsEdit 
+	 * @author flyhero(http://flyhero.top)  
+	 * @date 2016年11月24日 下午1:38:30 
+	 * @param @param up
+	 * @param @return   
+	 * @return JSONResult    
+	 * @throws
+	 */
+	@ResponseBody
+	@RequestMapping("findUserIsEdit.do")
+	public JSONResult findUserIsEdit(UserProject up){
+		up.setUserId(getCuUser().getUserId());
+		int count=userProjectService.findUserIsEdit(up);
+		return new JSONResult(Constant.MSG_OK, Constant.CODE_200,count);
+		
+	}
 	
 }

@@ -18,6 +18,8 @@ public interface UserProjectMapper {
 	
 	List<TeamMemberPojo> findTeamMembers(UserProject up);
 	
+	int findUserIsEdit(UserProject up);
+	
 	int deleteUserProject(UserProject up);
 	
     int deleteByPrimaryKey(Integer upId);

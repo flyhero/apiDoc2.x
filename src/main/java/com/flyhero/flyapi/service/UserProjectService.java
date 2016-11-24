@@ -45,6 +45,9 @@ public class UserProjectService {
 	public List<TeamMemberPojo> findTeamMembers(UserProject up){
 		return userProjectMapper.findTeamMembers(up);
 	}
+	public int findUserIsEdit(UserProject up){
+		return userProjectMapper.findUserIsEdit(up);
+	}
 	public List selectMyProject(Integer userId) {
 		// TODO Auto-generated method stub
 		return null;
