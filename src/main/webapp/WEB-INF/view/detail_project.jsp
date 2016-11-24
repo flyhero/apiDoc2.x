@@ -93,7 +93,13 @@
                               </p>
                             </div>
                           </li>
+
                         </ul>
+                        	   <center>
+								<ul class="pagination">
+												
+								</ul>
+							  </center>
                         <!-- end of user messages -->
 
 

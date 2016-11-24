@@ -53,13 +53,13 @@
 		LEFT JOIN fly_user t4 ON t3.creator = t4.user_id
 		WHERE
 			t1.is_delete = 0 
-			<if test="moduleId != null">
+			<if test="moduleId != null and moduleId != 0">
 				AND t2.module_id = #{moduleId}
 			</if>
-			<if test="userName = null">
+			<if test="userName != null and userName != ''">
 				AND t4.user_name LIKE '%${userName}%'
 			</if>
-			<if test="interName != null">
+			<if test="interName != null and interName != ''">
 				AND t3.inter_name LIKE '%${interName}%'
 			</if>
 			AND t1.project_id = #{projectId}

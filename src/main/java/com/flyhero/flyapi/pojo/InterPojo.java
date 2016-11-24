@@ -3,14 +3,16 @@ package com.flyhero.flyapi.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
-public class InterPojo implements Serializable {
-	
+import com.flyhero.flyapi.entity.base.Entity;
+
+public class InterPojo extends Entity{
+
 	/**
 	 * serialVersionUID:TODO（用一句话描述这个变量表示什么）
 	 * @since 1.0.0
 	 */
 	
-	private static final long serialVersionUID = -3489745390656077750L;
+	private static final long serialVersionUID = -4471693493132653065L;
 
 	private Integer projectId;
 	

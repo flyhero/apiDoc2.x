@@ -115,19 +115,16 @@ a:hover {
 										<form class="form-inline" role="form">
 											<div class="form-group">
 												<label for="pass" class="control-label">接口名</label> <input
-													type="text" class="form-control" placeholder="请输入字段名"/ >
+													type="text" class="form-control" id="interName" placeholder="接口名"/ >
 											</div>
 											<div class="form-group">
 												<label for="pass" class="control-label">创建者</label> <input
-													type="text" class="form-control" placeholder="Password">
+													type="text" class="form-control"  id="uName" placeholder="创建者">
 											</div>
 											<div class="form-group">
-												<label for="name">选择列表</label> <select class="form-control">
-													<option>1</option>
-													<option>2</option>
-													<option>3</option>
-													<option>4</option>
-													<option>5</option>
+												<label for="name">模块</label> 
+												<select id="module-id" class="form-control">
+													<option value="0">请选择</option>
 												</select>
 											</div>
 											<button class="btn btn-info btn-search">查找</button>
@@ -135,32 +132,27 @@ a:hover {
 
 										<br>
 										<hr>
-										<div class="list">
-											<p class="date">
-												八月 <b>03</b>
-											</p>
-											<h2>
-												<a href="#">一款简单的网页弹出层JS代码</a>
-											</h2>
-
-											<p>一款在网页中弹出层的实例代码，基于JS+css，本实例包含两个实例，一个是标准弹出层，另一个是弹出一个可拖动的层，并可设置层的标题，容器内容等，这是一个基本的层弹出单元，所有复杂的层弹出代码都可在此基础上进一步扩展。</p>
-											<p class="meta">
-												模块：<a href="/">首页</a>&nbsp;创建者：<a href="/">flyhero</a>&nbsp;&nbsp;<a
-													href="#"><i class="fa fa-eye"></i> 详情</a> &nbsp;<a href="#"><i
-													class="fa fa-wrench"></i> 调试</a>
-											</p>
+										<div id="inter-list">
+											<div class="list">
+												<p class="date">
+													八月 <b>03</b>
+												</p>
+												<h2>
+													<a href="#">一款简单的网页弹出层JS代码</a>
+												</h2>
+	
+												<p>一款在网页中弹出层的实例代码，基于JS+css，本实例包含两个实例，一个是标准弹出层，另一个是弹出一个可拖动的层，并可设置层的标题，容器内容等，这是一个基本的层弹出单元，所有复杂的层弹出代码都可在此基础上进一步扩展。</p>
+												<p class="meta">
+													模块：<a href="/">首页</a>&nbsp;创建者：<a href="/">flyhero</a>&nbsp;&nbsp;<a
+														href="#"><i class="fa fa-eye"></i> 详情</a> &nbsp;<a href="#"><i
+														class="fa fa-wrench"></i> 调试</a>
+												</p>
+											</div>
 										</div>
 									</div>
 
 									<center>
 										<ul class="pagination">
-											<li><a href="#">&laquo;</a></li>
-											<li class="active"><a href="#">1</a></li>
-											<li class="disabled"><a href="#">2</a></li>
-											<li><a href="#">3</a></li>
-											<li><a href="#">4</a></li>
-											<li><a href="#">5</a></li>
-											<li><a href="#">&raquo;</a></li>
 										</ul>
 									</center>
 
@@ -177,8 +169,77 @@ a:hover {
 			<!-- /footer content -->
 		</div>
 	</div>
+    <script type="text/javascript">
+    	var projectId=${projectId};
+    	
+    	var interName=$("#interName").val();
+    	var userName=$("#uName").val();
+    	
+		$.ajax({
+			type : 'POST',
+			url : "../module/findModule.do",
+			dataType : "json",
+			data : {
+				"projectId":projectId
+			},
+			success : function(data) {
+				$.each(data.data,function(index,module){
+					$("#module-id").append('<option value="'+module.moduleId+'">'+module.moduleName+'</option>');
+				});
+				
+			}
 
-	<!-- Custom Theme Scripts -->
+		});
+    	
+    	logPage(1,5);
+    	function logPage(pageNumber,pageSize){
+    		$.ajax({
+    			type : 'POST',
+    			url : "../interface/findInterface.do",
+    			dataType : "json",
+    			data : {
+    				"projectId":projectId,
+    				"interName":interName,
+    				"userName":userName,
+    				"pageNumber":pageNumber,
+    				"pageSize":pageSize
+    			},
+    			success : function(data) {
+    				$(".pagination").empty();
+    				$(".pagination").append('<li class="disabled"><a href="#">&laquo;</a></li>');
+    				$.each(data.data.navigatepageNums,function(index,pn){
+    					if(data.data.pageNum==pn){
+    						$(".pagination").append('<li class="active"><a onclick="logPage('+pn+',5)">'+pn+'</a></li>');
+    					}else{
+    						$(".pagination").append('<li><a onclick="logPage('+pn+',5)">'+pn+'</a></li>');
+    					}
+    					
+    				});
+    				$(".pagination").append('<li class="disabled"><a href="disabled">&raquo;</a></li>');
+    				
+    				$("#inter-list").empty();
+    				$.each(data.data.list,function(index,inter){
+    					$("#inter-list").append('<div class="list">'
+								+'<p class="date">'
+								+'八月 <b>03</b>'
+								+'</p>'
+								+'<h2>'
+								+'	<a href="#">'+inter.interName+'</a>'
+								+'</h2>'
+								+'<p>'+inter.interDes+'</p>'
+								+'<p class="meta">'
+								+'	模块：<a href="/">首页</a>&nbsp;创建者：<a href="/">'+inter.userName+'</a>&nbsp;&nbsp;<a'
+								+'		href="#"><i class="fa fa-eye"></i> 详情</a> &nbsp;<a href="#"><i'
+								+'		class="fa fa-wrench"></i> 调试</a>'
+								+'</p>'
+								+'	</div>');
+    				});
+    				
+    			}
+
+    		}); 
+    	}
+    </script>
 	<script
 		src="<%=request.getContextPath()%>/static/ace/production/js/custom.js"></script>
 

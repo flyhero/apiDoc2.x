@@ -31,6 +31,7 @@ import com.flyhero.flyapi.service.UserProjectService;
 import com.flyhero.flyapi.utils.Constant;
 import com.flyhero.flyapi.utils.HttpClientUtil;
 import com.flyhero.flyapi.websocket.SystemWebSocketHandler;
+import com.github.pagehelper.PageInfo;
 
 @Controller
 @RequestMapping("interface")
@@ -86,7 +87,7 @@ public class InterfaceController extends BaseController{
 	@ResponseBody
 	@RequestMapping("findInterface.do")
 	public JSONResult findInterface(InterPojo interPojo){
-		List<InterPojo> list=interfaceService.findInterByWhere(interPojo);
+		PageInfo<InterPojo> list=interfaceService.findInterByWhere(interPojo);
 		return new JSONResult(Constant.MSG_OK, Constant.CODE_200,list);
 	}
 	@RequestMapping("testHttp.do")

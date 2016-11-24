@@ -197,10 +197,11 @@
             formatter:function(value,row,index){   
             	var name="'"+row.project.proName+"'";
             	var des="'"+row.project.proDes+"'";
-                 var f='<a href="../forward/project_detail.html?projectId='+row.project.projectId+'&upId='+row.upId+'" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> 查看 </a>'; 
-                 var g='<a href="#"  class="btn btn-info btn-xs" onclick="edit('+row.project.projectId+','+name+','+des+','+row.project.targetCount+');"><i class="fa fa-pencil"></i> 编辑 </a>'; 
-                 var h='<a href="#" class="btn btn-danger btn-xs" onclick="deletepro('+row.project.projectId+','+name+');"><i class="fa fa-trash-o"></i> 删除 </a>';
-              return f+g+h;  
+            	var j='<a href="../forward/list_inter.html?projectId='+row.project.projectId+'" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> 接口 </a>';
+                var f='<a href="../forward/project_detail.html?projectId='+row.project.projectId+'&upId='+row.upId+'" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> 详细 </a>'; 
+                var g='<a href="#"  class="btn btn-info btn-xs" onclick="edit('+row.project.projectId+','+name+','+des+','+row.project.targetCount+');"><i class="fa fa-pencil"></i> 编辑 </a>'; 
+                var h='<a href="#" class="btn btn-danger btn-xs" onclick="deletepro('+row.project.projectId+','+name+');"><i class="fa fa-trash-o"></i> 删除 </a>';
+              return j+f+g+h;  
           	} 
         } ],
         method: "get",  //使用get请求到服务器获取数据  
