@@ -112,7 +112,6 @@ a:hover {
 
 
 
-										<form class="form-inline" role="form">
 											<div class="form-group">
 												<label for="pass" class="control-label">接口名</label> <input
 													type="text" class="form-control" id="interName" placeholder="接口名"/ >
@@ -127,8 +126,7 @@ a:hover {
 													<option value="0">请选择</option>
 												</select>
 											</div>
-											<button class="btn btn-info btn-search">查找</button>
-										</form>
+											<button class="btn btn-info btn-search" type="button" onclick="logPage(1,5)">查找</button>
 
 										<br>
 										<hr>
@@ -172,9 +170,6 @@ a:hover {
     <script type="text/javascript">
     	var projectId=${projectId};
     	
-    	var interName=$("#interName").val();
-    	var userName=$("#uName").val();
-    	
 		$.ajax({
 			type : 'POST',
 			url : "../module/findModule.do",
@@ -193,6 +188,9 @@ a:hover {
     	
     	logPage(1,5);
     	function logPage(pageNumber,pageSize){
+        	var interName=$("#interName").val();
+        	var userName=$("#uName").val();
+        	var moId=$("#module-id").val();
     		$.ajax({
     			type : 'POST',
     			url : "../interface/findInterface.do",
@@ -201,6 +199,7 @@ a:hover {
     				"projectId":projectId,
     				"interName":interName,
     				"userName":userName,
+    				"moduleId":moId,
     				"pageNumber":pageNumber,
     				"pageSize":pageSize
     			},
@@ -221,15 +220,15 @@ a:hover {
     				$.each(data.data.list,function(index,inter){
     					$("#inter-list").append('<div class="list">'
 								+'<p class="date">'
-								+'八月 <b>03</b>'
+								+getMonth(inter.createTime)+'月<b>'+getDay(inter.createTime)+'</b>'
 								+'</p>'
 								+'<h2>'
 								+'	<a href="#">'+inter.interName+'</a>'
 								+'</h2>'
 								+'<p>'+inter.interDes+'</p>'
-								+'<p class="meta">'
-								+'	模块：<a href="/">首页</a>&nbsp;创建者：<a href="/">'+inter.userName+'</a>&nbsp;&nbsp;<a'
-								+'		href="#"><i class="fa fa-eye"></i> 详情</a> &nbsp;<a href="#"><i'
+								+'<p class="meta">时间：'+getMyDate(inter.createTime)
+								+'&nbsp;	模块：<a href="/">'+inter.moduleName+'</a>&nbsp;创建者：<a href="/">'+inter.userName+'</a>&nbsp;&nbsp;'
+								+'		<a href="#"><i class="fa fa-eye"></i> 详情</a> &nbsp;<a href="#"><i class="fa fa-edit"></i> 修改</a> &nbsp;<a href="#"><i'
 								+'		class="fa fa-wrench"></i> 调试</a>'
 								+'</p>'
 								+'	</div>');

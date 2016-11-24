@@ -85,7 +85,9 @@ public class ForwardController extends BaseController{
 		return "detail_interface";
 	}
 	@RequestMapping("list_interfaces.html")
-	public String gotoListInterfaces(){
-		return "list_interfaces";
+	public ModelAndView gotoListInterfaces(Integer projectId){
+		mv.addObject("projectId", projectId);
+		mv.setViewName("list_interfaces");
+		return mv;
 	}
 }

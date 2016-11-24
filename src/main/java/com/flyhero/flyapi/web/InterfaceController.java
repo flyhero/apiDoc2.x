@@ -87,6 +87,7 @@ public class InterfaceController extends BaseController{
 	@ResponseBody
 	@RequestMapping("findInterface.do")
 	public JSONResult findInterface(InterPojo interPojo){
+		System.out.println(interPojo.toString());
 		PageInfo<InterPojo> list=interfaceService.findInterByWhere(interPojo);
 		return new JSONResult(Constant.MSG_OK, Constant.CODE_200,list);
 	}

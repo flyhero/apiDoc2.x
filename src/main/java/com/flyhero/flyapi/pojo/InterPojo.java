@@ -224,5 +224,20 @@ public class InterPojo extends Entity{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	@Override
+	public String toString() {
+		return "InterPojo [projectId=" + projectId + ", moduleName="
+				+ moduleName + ", interfaceId=" + interfaceId + ", interName="
+				+ interName + ", interDes=" + interDes + ", status=" + status
+				+ ", interUrl=" + interUrl + ", method=" + method
+				+ ", createTime=" + createTime + ", updateTime=" + updateTime
+				+ ", moduleId=" + moduleId + ", creator=" + creator
+				+ ", isDelete=" + isDelete + ", param=" + param
+				+ ", requestExam=" + requestExam + ", responseParam="
+				+ responseParam + ", trueExam=" + trueExam + ", falseExam="
+				+ falseExam + ", userName=" + userName + ", avatarUrl="
+				+ avatarUrl + ", email=" + email + "]";
+	}
 	
 }

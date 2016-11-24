@@ -63,6 +63,7 @@
 				AND t3.inter_name LIKE '%${interName}%'
 			</if>
 			AND t1.project_id = #{projectId}
+		ORDER BY t3.create_time DESC
 		<!-- CONCAT(CONCAT('%','接口2'),'%') -->
   </select>
   

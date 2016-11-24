@@ -9,6 +9,16 @@
         oTime = oYear +'-'+ getzf(oMonth) +'-'+ getzf(oDay) +' '+ getzf(oHour) +':'+ getzf(oMin) +':'+getzf(oSen);//最后拼接时间  
         return oTime;  
     };  
+    function getMonth(str){
+        var oDate = new Date(str);
+        var oMonth = oDate.getMonth()+1;
+        return getzf(oMonth);
+    }
+    function getDay(str){
+        var oDate = new Date(str);
+        var oDay = oDate.getDate();
+        return getzf(oDay);
+    }
     //补0操作  
     function getzf(num){  
         if(parseInt(num) < 10){  
