@@ -52,7 +52,7 @@
    
            <div id="layout">
             <div id="test-editormd-view">
-               <textarea style="display:none;" name="test-editormd-markdown-doc">###Hello world!</textarea>               
+               <textarea style="display:none;" name="test-editormd-markdown-doc"></textarea>               
             </div>
         </div>
         

@@ -9,10 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <jsp:include page="static.jsp"></jsp:include>
 <title>接口列表</title>
-<!-- Custom styling plus plugins -->
-<link
-	href="<%=request.getContextPath()%>/static/ace/production/css/custom.css"
-	rel="stylesheet">
+<link href="<%=request.getContextPath()%>/static/ace/production/css/custom.css" rel="stylesheet">
 <style>
 a {
 	color: #000;
