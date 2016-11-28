@@ -47,7 +47,7 @@
                   </div>
                   <div class="x_content">
 
-                   <form id="defaultForm"  class="form-horizontal" method="get" action="../db/database.do">
+                   <form id="defaultForm"  class="form-horizontal" method="post" action="../db/addDataBase.do">
                         <fieldset id="fieldset">
                             <div class="form-group">
                                 <label class="col-lg-3 control-label">数据库名称</label>
@@ -58,7 +58,7 @@
                             <div class="form-group">
                                 <label class="col-lg-3 control-label">数据库Url</label>
                                 <div class="col-lg-5">
-                                    <input type="text" class="form-control" name="dbUrl" id="dbUrl" />
+                                    <input type="text" class="form-control" name="dbUrl" id="dbUrl" placeholder="jdbc:mysql://localhost:3306/flyapi_v2.0" />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -93,19 +93,19 @@
 							        <div class="col-lg-9">
 							            <div class="btn-group" data-toggle="buttons">
 							                <label class="btn btn-default">
-							                    <input type="radio" name="cycle" value="1" /> 每天
+							                    <input type="radio" name="updateWay" value="1" /> 每天
 							                </label>
 							                <label class="btn btn-default">
-							                    <input type="radio" name="cycle" value="2" /> 每周
+							                    <input type="radio" name="updateWay" value="2" /> 每周
 							                </label>
 							                <label class="btn btn-default">
-							                    <input type="radio" name="cycle" value="3" /> 每月
+							                    <input type="radio" name="updateWay" value="3" /> 每月
 							                </label>
 							                <label class="btn btn-default">
-							                    <input type="radio" name="cycle" value="4" /> 不更新
+							                    <input type="radio" name="updateWay" value="4" /> 不更新
 							                </label>
 							                <label class="btn btn-default">
-							                    <input type="radio" name="cycle" value="5" disabled="disabled"/> ___
+							                    <input type="radio" name="updateWay" value="5" disabled="disabled"/> ___
 							                </label>
 							            </div>
 							        </div>
@@ -164,7 +164,7 @@
     </div>
 <!-- validator -->
 <script>
-function add(){
+/* function add(){
     var proVersion= $("#proVersion").val();
     var proName=$("#proName").val();
     var proDes=$("#proDes").val();
@@ -190,7 +190,7 @@ function add(){
 		}
 
 	});
-}
+} */
 $(document).ready(function() {
     $('#validateBtn').click(function() {
         $('#defaultForm').bootstrapValidator('validate');
@@ -247,7 +247,7 @@ $(document).ready(function() {
                     }
                 }
             },
-            cycle: {
+            updateWay: {
                 validators: {
                     notEmpty: {
                         message: '不能为空'
@@ -273,7 +273,7 @@ $(document).ready(function() {
     });
 
 
-    $('input[name=cycle]').change(function(){
+    $('input[name=updateWay]').change(function(){
     	 switch($(this).val()){
     	  case "1":
     	   $("#whichWeek").hide();

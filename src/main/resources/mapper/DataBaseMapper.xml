@@ -3,6 +3,7 @@
 <mapper namespace="com.flyhero.flyapi.dao.DataBaseMapper">
   <resultMap id="BaseResultMap" type="com.flyhero.flyapi.entity.DataBase">
     <id column="db_id" jdbcType="INTEGER" property="dbId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="db_url" jdbcType="VARCHAR" property="dbUrl" />
     <result column="db_name" jdbcType="VARCHAR" property="dbName" />
     <result column="db_root" jdbcType="VARCHAR" property="dbRoot" />
@@ -17,7 +18,7 @@
     <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
   </resultMap>
   <sql id="Base_Column_List">
-    db_id, db_url, db_name, db_root, db_password, db_driver, update_way, update_day, 
+    db_id, user_id, db_url, db_name, db_root, db_password, db_driver, update_way, update_day, 
     update_week, update_hour, create_time, update_time, is_delete
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -31,22 +32,25 @@
     where db_id = #{dbId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.flyhero.flyapi.entity.DataBase">
-    insert into fly_data_base (db_id, db_url, db_name, 
-      db_root, db_password, db_driver, 
-      update_way, update_day, update_week, 
-      update_hour, create_time, update_time, 
-      is_delete)
-    values (#{dbId,jdbcType=INTEGER}, #{dbUrl,jdbcType=VARCHAR}, #{dbName,jdbcType=VARCHAR}, 
-      #{dbRoot,jdbcType=VARCHAR}, #{dbPassword,jdbcType=VARCHAR}, #{dbDriver,jdbcType=VARCHAR}, 
-      #{updateWay,jdbcType=INTEGER}, #{updateDay,jdbcType=INTEGER}, #{updateWeek,jdbcType=VARCHAR}, 
-      #{updateHour,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{isDelete,jdbcType=INTEGER})
+    insert into fly_data_base (db_id, user_id, db_url, 
+      db_name, db_root, db_password, 
+      db_driver, update_way, update_day, 
+      update_week, update_hour, create_time, 
+      update_time, is_delete)
+    values (#{dbId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{dbUrl,jdbcType=VARCHAR}, 
+      #{dbName,jdbcType=VARCHAR}, #{dbRoot,jdbcType=VARCHAR}, #{dbPassword,jdbcType=VARCHAR}, 
+      #{dbDriver,jdbcType=VARCHAR}, #{updateWay,jdbcType=INTEGER}, #{updateDay,jdbcType=INTEGER}, 
+      #{updateWeek,jdbcType=VARCHAR}, #{updateHour,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.flyhero.flyapi.entity.DataBase">
     insert into fly_data_base
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="dbId != null">
         db_id,
+      </if>
+      <if test="userId != null">
+        user_id,
       </if>
       <if test="dbUrl != null">
         db_url,
@@ -89,6 +93,9 @@
       <if test="dbId != null">
         #{dbId,jdbcType=INTEGER},
       </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
       <if test="dbUrl != null">
         #{dbUrl,jdbcType=VARCHAR},
       </if>
@@ -130,6 +137,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.flyhero.flyapi.entity.DataBase">
     update fly_data_base
     <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
       <if test="dbUrl != null">
         db_url = #{dbUrl,jdbcType=VARCHAR},
       </if>
@@ -171,7 +181,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.flyhero.flyapi.entity.DataBase">
     update fly_data_base
-    set db_url = #{dbUrl,jdbcType=VARCHAR},
+    set user_id = #{userId,jdbcType=INTEGER},
+      db_url = #{dbUrl,jdbcType=VARCHAR},
       db_name = #{dbName,jdbcType=VARCHAR},
       db_root = #{dbRoot,jdbcType=VARCHAR},
       db_password = #{dbPassword,jdbcType=VARCHAR},
@@ -185,5 +196,4 @@
       is_delete = #{isDelete,jdbcType=INTEGER}
     where db_id = #{dbId,jdbcType=INTEGER}
   </update>
-
 </mapper>

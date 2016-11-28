@@ -2,8 +2,19 @@ package com.flyhero.flyapi.entity;
 
 import java.util.Date;
 
-public class DataBase {
-    private Integer dbId;
+import com.flyhero.flyapi.entity.base.Entity;
+
+public class DataBase extends Entity{
+    /**
+	 * serialVersionUID:TODO（用一句话描述这个变量表示什么）
+	 * @since 1.0.0
+	 */
+	
+	private static final long serialVersionUID = 7507523494778900058L;
+
+	private Integer dbId;
+
+    private Integer userId;
 
     private String dbUrl;
 
@@ -35,6 +46,14 @@ public class DataBase {
 
     public void setDbId(Integer dbId) {
         this.dbId = dbId;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getDbUrl() {
