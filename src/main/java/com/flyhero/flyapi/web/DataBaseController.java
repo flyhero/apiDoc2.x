@@ -1,5 +1,7 @@
 package com.flyhero.flyapi.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +38,7 @@ public class DataBaseController extends BaseController{
 	@RequestMapping("addDataBase.do")
 	public String addDataBase(DataBase database){
 		int flag=dataBaseService.addDataBase(database);
-		return "list_database";
+		return "redirect:list_database";
 	}
 	/**
 	 * 获取数据字典
@@ -51,8 +53,8 @@ public class DataBaseController extends BaseController{
 	@ResponseBody
 	@RequestMapping("findDataBase.do")
 	public JSONResult findDataBase(Integer userId){
-		DataBase dataBase=dataBaseService.findDataBase(userId);
-		if(dataBase != null){
+		List<DataBase> dataBase=dataBaseService.findDataBase(userId);
+		if(dataBase != null && !dataBase.isEmpty()){
 			return new JSONResult(Constant.MSG_OK, Constant.CODE_200, dataBase);
 		}
 		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200, dataBase);

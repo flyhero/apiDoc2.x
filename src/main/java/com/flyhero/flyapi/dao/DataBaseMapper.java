@@ -1,5 +1,7 @@
 package com.flyhero.flyapi.dao;
 
+import java.util.List;
+
 import com.flyhero.flyapi.entity.DataBase;
 
 public interface DataBaseMapper {
@@ -11,7 +13,7 @@ public interface DataBaseMapper {
 
     DataBase selectByPrimaryKey(Integer dbId);
     
-    DataBase findDataBase(Integer userId);
+    List<DataBase> findDataBase(Integer userId);
 
     int updateByPrimaryKeySelective(DataBase record);
 

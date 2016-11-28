@@ -1,10 +1,13 @@
 package com.flyhero.flyapi.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.flyhero.flyapi.dao.DataBaseMapper;
 import com.flyhero.flyapi.entity.DataBase;
+import com.flyhero.flyapi.utils.DESUtil;
 
 @Service
 public class DataBaseService {
@@ -13,10 +16,16 @@ public class DataBaseService {
 	private DataBaseMapper dataBaseMapper;
 	
 	public int addDataBase(DataBase dataBase){
+		try {
+			dataBase.setDbPassword(DESUtil.decrypt(dataBase.getDbPassword(), DESUtil.key));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
 		return dataBaseMapper.insertSelective(dataBase);
 	}
 
-	public  DataBase findDataBase(Integer userId){
+	public  List<DataBase> findDataBase(Integer userId){
 		return dataBaseMapper.findDataBase(userId);
 	}
 }

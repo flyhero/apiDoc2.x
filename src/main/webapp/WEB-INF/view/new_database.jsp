@@ -53,13 +53,13 @@
                             <div class="form-group">
                                 <label class="col-lg-3 control-label">数据库名称</label>
                                 <div class="col-lg-5">
-                                    <input type="text" class="form-control" name="dbName" id="dbName" />
+                                    <input type="text" class="form-control" name="dbName" id="dbName" placeholder="flyapi_v2.0" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-3 control-label">数据库Url</label>
                                 <div class="col-lg-5">
-                                    <input type="text" class="form-control" name="dbUrl" id="dbUrl" placeholder="jdbc:mysql://localhost:3306/flyapi_v2.0" />
+                                    <input type="text" class="form-control" name="dbUrl" id="dbUrl" placeholder="jdbc:mysql://localhost:3306" />
                                 </div>
                             </div>
                             <div class="form-group">
