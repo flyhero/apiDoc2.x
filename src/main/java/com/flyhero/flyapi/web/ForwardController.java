@@ -56,10 +56,15 @@ public class ForwardController extends BaseController{
 	public String gotoCreatedProject(){
 		return "list_createdproject";
 	}
+	@RequestMapping("listJoinProject.html")
+	public String gotoJoinProject(){
+		return "list_joinproject";
+	}
 	@RequestMapping("project_detail.html")
-	public ModelAndView gotoProjectDetail(Integer projectId,Integer upId){
+	public ModelAndView gotoProjectDetail(Integer projectId,Integer upId,int isEdit){
 		mv.addObject("projectId", projectId);
 		mv.addObject("upId", upId);
+		mv.addObject("isEdit", isEdit);
 		mv.setViewName("detail_project");
 		return mv;
 	}

@@ -76,8 +76,6 @@
 					</table>  
 
 
-
-
                   </div>
                 </div>
               </div>
@@ -85,32 +83,6 @@
           </div>
         </div>
         
-        	<div class="modal fade" id="myModal2" tabindex="0" role="dialog"
-		aria-labelledby="myModalLabel2" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">×</button>
-					<h4 class="modal-title" id="myModalLabel2">修改项目</h4>
-				</div>
-				<div class="modal-body">
-					<input type="hidden" id="projectid" />
-					<label for="projectName">名称</label> <input type="text"
-						class="form-control" id="projectName"> 
-					<label for="description">描述</label>
-					<textarea id="description" class="form-control" rows="3"></textarea>
-					<label for="targetCount">预计接口</label> <input type="number"
-						class="form-control" id="targetCount">
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" id="changeProject" data-dismiss="modal"
-						class="btn btn-primary">提交</button>
-				</div>
-			</div>
-		</div>
-		</div>
         
         <!-- /page content -->
         <!-- footer content -->
@@ -119,32 +91,6 @@
       </div>
     </div>
     <script type="text/javascript">
-	function edit(projectId,name,des,targetCount) {  
-	    $("#projectid").val(projectId);
-	    $("#projectName").val(name);
-	    $("#description").val(des);
-	    $("#targetCount").val(targetCount);
-	    $('#myModal2').modal('show');  
-	}  
-	function deletepro(projectId,name) {  
-		$.ajax({
-			type : 'POST',
-			url : "../project/deleteProject.do",
-			dataType : "json",
-			data : {
-				"projectId" : projectId,
-				"proName" : name
-			},
-			success : function(data) {
-				if (data.msg == 'ok') {
-					layer.alert("删除成功！");
-					location.reload();
-				}
-
-			}
-
-		});
-	}  
   function initTable() {  
 	  var id = ${sessionScope.user.userId};
     //先销毁表格  
@@ -198,14 +144,12 @@
             	var name="'"+row.project.proName+"'";
             	var des="'"+row.project.proDes+"'";
             	var j='<a href="../forward/list_interfaces.html?projectId='+row.project.projectId+'" class="btn btn-primary btn-xs"><i class="fa fa-sliders"></i> 接口 </a>';
-                var f='<a href="../forward/project_detail.html?projectId='+row.project.projectId+'&upId='+row.upId+'&isEdit=1" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> 详情 </a>'; 
-                var g='<a href="#"  class="btn btn-info btn-xs" onclick="edit('+row.project.projectId+','+name+','+des+','+row.project.targetCount+');"><i class="fa fa-pencil"></i> 编辑 </a>'; 
-                var h='<a href="#" class="btn btn-danger btn-xs" onclick="deletepro('+row.project.projectId+','+name+');"><i class="fa fa-trash-o"></i> 删除 </a>';
-              return j+f+g+h;  
+                var f='<a href="../forward/project_detail.html?projectId='+row.project.projectId+'&upId='+row.upId+'&isEdit=0" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> 详情 </a>'; 
+              return j+f;  
           	} 
         } ],
         method: "get",  //使用get请求到服务器获取数据  
-        url: "../project/findUserCreate.do", //获取数据的Servlet地址  
+        url: "../project/findUserJoin.do", //获取数据的Servlet地址  
         striped: true,  //表格显示条纹  
         pagination: true, //启动分页  
         pageSize: 10,  //每页显示的记录数  
@@ -238,37 +182,6 @@
   $(function () {          
       //调用函数，初始化表格  
       initTable();  
-		$("#changeProject").click(
-				function() {
-					var projectName = $("#projectName").val();
-					var targetCount = $("#targetCount").val();
-					var description = $("#description").val();
-					var projectId =$("#projectid").val();
-					if (projectName != '' && targetCount != ''
-							&& description != '') {
-						$.ajax({
-							type : 'POST',
-							url : "../project/updateProject.do",
-							dataType : "json",
-							data : {
-								"proName" : projectName,
-								"targetCount" : targetCount,
-								"proDes" : description,
-								"projectId" : projectId
-							},
-							success : function(data) {
-								if (data.msg == 'ok') {
-									location.reload();
-								}
-
-							}
-
-						});
-					} else {
-						layer.alert("信息不能为空！");
-					}
-
-				});
       //当点击查询按钮的时候执行  
       $("#search").bind("click", initTable);  
   });  

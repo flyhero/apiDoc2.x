@@ -14,6 +14,8 @@ public interface DataBaseMapper {
     DataBase selectByPrimaryKey(Integer dbId);
     
     List<DataBase> findDataBase(Integer userId);
+    
+    List<DataBase> findAllDB();
 
     int updateByPrimaryKeySelective(DataBase record);
 

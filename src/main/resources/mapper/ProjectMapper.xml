@@ -33,7 +33,7 @@
 		t3.done_count doneCount
 	FROM
 		fly_user_project t1
-	LEFT JOIN fly_user t2 ON t1.is_creator = t2.user_id
+	LEFT JOIN fly_user t2 ON t1.user_id = t2.user_id
 	LEFT JOIN fly_project t3 ON t1.project_id = t3.project_id
 	WHERE
 		t1.up_id = #{upId}

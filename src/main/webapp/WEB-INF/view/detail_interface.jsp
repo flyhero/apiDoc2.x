@@ -8,7 +8,6 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <jsp:include page="static.jsp"></jsp:include>
-        <link rel="stylesheet" href="<%=request.getContextPath()%>/static/editor/css/style.css" />
         <link rel="stylesheet" href="<%=request.getContextPath()%>/static/editor/css/editormd.css" />
         <link rel="stylesheet" href="<%=request.getContextPath()%>/static/editor/css/editormd.preview.css" />
 <title>新建项目</title>
@@ -51,6 +50,12 @@
                   <div class="x_content">
    
            <div id="layout">
+           
+            <header>
+            </header>
+            <div class="btns">
+                <button id="goto-line-btn" onclick="window.print();"><i class="fa fa-download"></i>下载PDF</button>
+            </div>
             <div id="test-editormd-view">
                <textarea style="display:none;" name="test-editormd-markdown-doc"></textarea>               
             </div>

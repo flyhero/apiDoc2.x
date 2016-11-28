@@ -11,13 +11,14 @@ import com.flyhero.flyapi.utils.DESUtil;
 
 @Service
 public class DataBaseService {
-	
+
 	@Autowired
 	private DataBaseMapper dataBaseMapper;
-	
-	public int addDataBase(DataBase dataBase){
+
+	public int addDataBase(DataBase dataBase) {
 		try {
-			dataBase.setDbPassword(DESUtil.decrypt(dataBase.getDbPassword(), DESUtil.key));
+			dataBase.setDbPassword(DESUtil.decrypt(dataBase.getDbPassword(),
+					DESUtil.key));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return 0;
@@ -25,7 +26,23 @@ public class DataBaseService {
 		return dataBaseMapper.insertSelective(dataBase);
 	}
 
-	public  List<DataBase> findDataBase(Integer userId){
+	public List<DataBase> findDataBase(Integer userId) {
 		return dataBaseMapper.findDataBase(userId);
+	}
+
+	public List<DataBase> findAllDB() {
+		List<DataBase> list = dataBaseMapper.findAllDB();
+
+		try {
+			for (DataBase db : list) {
+				db.setDbPassword(DESUtil.decrypt(db.getDbPassword(),
+						DESUtil.key));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
+		return dataBaseMapper.findAllDB();
 	}
 }

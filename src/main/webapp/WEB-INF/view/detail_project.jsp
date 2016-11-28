@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,17 +83,6 @@
 
                         <!-- end of user messages -->
                         <ul class="messages">
-                          <li>
-                            <div class="message_wrapper">
-                              <h4 class="heading">Desmond Davison</h4>
-                              <blockquote class="message">Raw denim you dreamcatcher synth.</blockquote>
-                              <br />
-                              <p class="url">
-                                <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
-                                <a href="#"><i class="fa fa-paperclip"></i> 2016-11-22 </a>
-                              </p>
-                            </div>
-                          </li>
 
                         </ul>
                         	   <center>
@@ -134,23 +124,27 @@
                           <br />
                           <h5>项目成员</h5>
                           <ul class="list-unstyled project_files" id="team-member">
-                            <li><i class="fa fa-user"></i> Functional-requirements.docx</li>
                           </ul>
                           <br />
 
                           <div class=" mtop20">
-                           <a href="#" class="btn btn-sm btn-primary"  data-toggle="modal" data-target="#addTeam">添加成员</a>
+                          <c:if test="${isEdit eq 1} " >
+						    　　<a href="#" class="btn btn-sm btn-primary"  data-toggle="modal" data-target="#addTeam">添加成员</a>
+						  </c:if>
+                           
                             <a href="#" class="btn btn-sm btn-danger">删除成员</a>
                           </div>
                           <br /><hr>
                           <h5>项目模块</h5>
                           <ul class="list-unstyled project_files" id="project-module">
-                            <li><i class="fa fa-cube"></i> 模块1</li>
                           </ul>
                           <br />
 
                           <div class=" mtop20">
-                           <a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addModule">添加模块</a>
+                          <c:if test="${isEdit eq 1} " >
+						    　　 <a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addModule">添加模块</a>
+						  </c:if>
+                          
                             <a href="#" class="btn btn-sm btn-danger">删除模块</a>
                           </div>
                         </div>
@@ -260,14 +254,14 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">×</button>
-					<h4 class="modal-title" id="myModalLabel3">新建模块</h4>
+					<h4 class="modal-title" id="myModalLabel3">修改模块</h4>
 				</div>
 				<div class="modal-body">
 					<input type="hidden" id="editId"/>
 					<label for="editName">名称</label> 
-					<input type="text" class="form-control" id="moduleName"> 
+					<input type="text" class="form-control" id="editName"> 
 					<label for="editDes">描述</label>
-					<textarea id="moduleDes" class="form-control" rows="3"></textarea>
+					<textarea id="editDes" class="form-control" rows="3"></textarea>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -601,30 +595,7 @@
 
 			}); 
 			
-			$("#checkUserName").click(function() {
-				var userName = $("#TeamName").val();
-				if (userName != '') {
-					$.ajax({
-						type : 'POST',
-						url : "../user/checkUserName.do",
-						dataType : "json",
-						data : {
-							"userName" : userName
-						},
-						success : function(data) {
-							if (data.valid == false) {
-								layer.alert("用户存在^_^");
-							} else {
-								layer.alert("用户不存在！-_-");
-							}
-						}
 
-					});
-				} else {
-					layer.alert("用户名不能为空！");
-				}
-
-			});
 			$("#updatePermission").click(function() {
 				var userName = $("#userName").val();
 				var projectId = $("#projectID").val();
@@ -654,6 +625,31 @@
 					layer.alert("信息不能为空！");
 				}
 			});
+			
+			$("#checkUserName").click(function() {
+				var userName = $("#addName").val();
+				if (userName != '') {
+					$.ajax({
+						type : 'POST',
+						url : "../user/checkUserName.do",
+						dataType : "json",
+						data : {
+							"userName" : userName
+						},
+						success : function(data) {
+							if (data.valid == false) {
+								layer.alert("用户存在^_^");
+							} else {
+								layer.alert("用户不存在！-_-");
+							}
+						}
+
+					});
+				} else {
+					layer.alert("用户名不能为空！");
+				}
+
+			});			
 			$("#addTeamUser").click(function() {
 				var addName = $("#addName").val();
 				var addisEdit = $("#addisEdit").val();

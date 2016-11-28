@@ -78,13 +78,15 @@ public class ProjectController extends BaseController{
 	 */
 	@RequestMapping("findUserJoin.do")
 	@ResponseBody
-	public JSONResult findUserJoin(UserProject up){
+	public JSONObject findUserJoin(UserProject up){
 		PageInfo<UserProject> list=userProjectService.findUserJoin(up);
 		OperateLog log=new OperateLog(getCuUser().getUserId(),getCuUser().getUserName(), 0, Constant.TYPE_SELECT, Constant.CLASS_PROJECT, 
 				Constant.NAME_PROJECT, "查询："+getCuUser().getUserName()+"参与的项目", JSONObject.toJSONString(up));
 		LogService.addLog(log);
 		if(list != null){
-			return new JSONResult(Constant.MSG_OK, Constant.CODE_200, list);
+			json.put("total",list.getTotal());
+			json.put("rows", list.getList());
+			return json;
 		}
 		return null;
 	}
