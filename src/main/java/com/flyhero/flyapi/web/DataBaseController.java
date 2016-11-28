@@ -33,11 +33,30 @@ public class DataBaseController extends BaseController{
 	 * @return JSONResult    
 	 * @throws
 	 */
-	@ResponseBody
 	@RequestMapping("addDataBase.do")
 	public String addDataBase(DataBase database){
 		int flag=dataBaseService.addDataBase(database);
 		return "list_database";
+	}
+	/**
+	 * 获取数据字典
+	 * @Title: findDataBase 
+	 * @author flyhero(http://flyhero.top)  
+	 * @date 2016年11月28日 上午11:40:37 
+	 * @param @param userId
+	 * @param @return   
+	 * @return JSONResult    
+	 * @throws
+	 */
+	@ResponseBody
+	@RequestMapping("findDataBase.do")
+	public JSONResult findDataBase(Integer userId){
+		DataBase dataBase=dataBaseService.findDataBase(userId);
+		if(dataBase != null){
+			return new JSONResult(Constant.MSG_OK, Constant.CODE_200, dataBase);
+		}
+		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200, dataBase);
+		
 	}
 
 }

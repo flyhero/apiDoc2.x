@@ -16,4 +16,7 @@ public class DataBaseService {
 		return dataBaseMapper.insertSelective(dataBase);
 	}
 
+	public  DataBase findDataBase(Integer userId){
+		return dataBaseMapper.findDataBase(userId);
+	}
 }

@@ -10,6 +10,8 @@ public interface DataBaseMapper {
     int insertSelective(DataBase record);
 
     DataBase selectByPrimaryKey(Integer dbId);
+    
+    DataBase findDataBase(Integer userId);
 
     int updateByPrimaryKeySelective(DataBase record);
 

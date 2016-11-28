@@ -49,6 +49,7 @@
 
                    <form id="defaultForm"  class="form-horizontal" method="post" action="../db/addDataBase.do">
                         <fieldset id="fieldset">
+                         <input type="hidden" class="form-control" name="userId" value="${sessionScope.user.userId}"/>
                             <div class="form-group">
                                 <label class="col-lg-3 control-label">数据库名称</label>
                                 <div class="col-lg-5">

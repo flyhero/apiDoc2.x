@@ -21,6 +21,13 @@
     db_id, user_id, db_url, db_name, db_root, db_password, db_driver, update_way, update_day, 
     update_week, update_hour, create_time, update_time, is_delete
   </sql>
+  <select id=findDataBase" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    db_id, user_id, db_url, db_name, db_root, db_driver, update_way, update_day, 
+    update_week, update_hour, create_time, update_time, is_delete
+    from fly_data_base
+    where user_id = #{userId,jdbcType=INTEGER} and is_delete=0
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -79,9 +86,7 @@
       <if test="updateHour != null">
         update_hour,
       </if>
-      <if test="createTime != null">
         create_time,
-      </if>
       <if test="updateTime != null">
         update_time,
       </if>
@@ -123,9 +128,7 @@
       <if test="updateHour != null">
         #{updateHour,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
+        NOW(),
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
