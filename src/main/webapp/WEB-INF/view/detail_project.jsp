@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -128,11 +129,14 @@
                           <br />
 
                           <div class=" mtop20">
-                          <c:if test="${isEdit eq 1} " >
-						    　　<a href="#" class="btn btn-sm btn-primary"  data-toggle="modal" data-target="#addTeam">添加成员</a>
-						  </c:if>
-                           
-                            <a href="#" class="btn btn-sm btn-danger">删除成员</a>
+                          <c:choose>
+							   <c:when test="${isEdit== '1' || isEdit== 1 }">  
+							   		<a href="#" class="btn btn-sm btn-primary"  data-toggle="modal" data-target="#addTeam">添加成员</a>
+							   </c:when>
+							   <c:otherwise> 
+							   </c:otherwise>
+						  </c:choose>
+                          <a href="#" class="btn btn-sm btn-danger">删除成员</a>
                           </div>
                           <br /><hr>
                           <h5>项目模块</h5>
@@ -141,9 +145,13 @@
                           <br />
 
                           <div class=" mtop20">
-                          <c:if test="${isEdit eq 1} " >
-						    　　 <a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addModule">添加模块</a>
-						  </c:if>
+                          <c:choose>
+							   <c:when test="${isEdit== '1' || isEdit== 1 }">  
+							   		<a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addModule">添加模块</a>
+							   </c:when>
+							   <c:otherwise> 
+							   </c:otherwise>
+						  </c:choose>
                           
                             <a href="#" class="btn btn-sm btn-danger">删除模块</a>
                           </div>
@@ -498,20 +506,25 @@
       };
 
       var echartBarLine = echarts.init(document.getElementById('mainb'), theme);
+		
+      var userEdit=${isEdit};
 
-
-		function edit(upId,isEdit,name,projectId) {  
-		    $("#userName").val(name);
-		    $("#isEdit  option[value='"+isEdit+"'] ").attr("selected",true)
-		    $("#upID").val(upId);
-		    $("#projectID").val(projectId);
-		    $('#editTeam').modal('show');  
+		function edit(upId,isEdit,name,projectId) { 
+			if(userEdit==1){
+			    $("#userName").val(name);
+			    $("#isEdit  option[value='"+isEdit+"'] ").attr("selected",true)
+			    $("#upID").val(upId);
+			    $("#projectID").val(projectId);
+			    $('#editTeam').modal('show');  
+			}
 		}  
 		function editModule(id,name,des) {  
-		    $("#editId").val(id);
-		    $("#editName").val(name);
-		    $("#editDes").val(des);
-		    $('#editModule').modal('show');  
+			if(userEdit==1){
+			    $("#editId").val(id);
+			    $("#editName").val(name);
+			    $("#editDes").val(des);
+			    $('#editModule').modal('show');  
+			}
 		}  
       $(document).ready(function () {     
     	    var projectId=${projectId};
