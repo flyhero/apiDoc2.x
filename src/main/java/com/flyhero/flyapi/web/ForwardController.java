@@ -97,4 +97,11 @@ public class ForwardController extends BaseController{
 		mv.setViewName("list_interfaces");
 		return mv;
 	}
+	
+	@RequestMapping("detail_tableinfo.html")
+	public ModelAndView gotoTableinfo(Integer dbId){
+		mv.addObject("dbId", dbId);
+		mv.setViewName("detail_tableinfo");
+		return mv;
+	}
 }
