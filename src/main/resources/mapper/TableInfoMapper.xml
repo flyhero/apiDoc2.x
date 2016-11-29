@@ -26,6 +26,24 @@
     from fly_table_info
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="findDBByDbId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from fly_table_info
+    where db_id = #{dbId}
+  </select>
+  <select id="findTableNameByDbId" parameterType="java.lang.Integer" resultType="java.lang.String">
+    SELECT TABLE_NAME
+	FROM fly_table_info
+	WHERE db_id=#{dbId}
+	GROUP BY TABLE_NAME
+  </select>
+  <select id="findInfoByTableName" parameterType="java.lang.String" resultMap="BaseResultMap">
+	SELECT 
+	<include refid="Base_Column_List" />
+	FROM fly_table_info
+	WHERE TABLE_NAME= #{tableName}	
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from fly_table_info
     where id = #{id,jdbcType=INTEGER}
