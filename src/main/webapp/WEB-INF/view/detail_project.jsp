@@ -136,7 +136,7 @@
 							   <c:otherwise> 
 							   </c:otherwise>
 						  </c:choose>
-                          <a href="#" class="btn btn-sm btn-danger">删除成员</a>
+                          
                           </div>
                           <br /><hr>
                           <h5>项目模块</h5>
@@ -153,7 +153,7 @@
 							   </c:otherwise>
 						  </c:choose>
                           
-                            <a href="#" class="btn btn-sm btn-danger">删除模块</a>
+                            
                           </div>
                         </div>
 
@@ -177,7 +177,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">×</button>
-					<h4 class="modal-title" id="myModalLabel">修改权限</h4>
+					<h4 class="modal-title" id="myModalLabel">修改/删除权限</h4>
 				</div>
 				<div class="modal-body">
 					<input type="hidden" id="upID"/>
@@ -192,6 +192,7 @@
 					</select>
 				</div>
 				<div class="modal-footer">
+					<button id="deleteTeam" class="btn btn-sm btn-danger" data-dismiss="modal">删除成员</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 					<button type="button" id="updatePermission" data-dismiss="modal"
 						class="btn btn-primary">提交</button>
@@ -262,7 +263,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">×</button>
-					<h4 class="modal-title" id="myModalLabel3">修改模块</h4>
+					<h4 class="modal-title" id="myModalLabel3">修改/删除模块</h4>
 				</div>
 				<div class="modal-body">
 					<input type="hidden" id="editId"/>
@@ -272,8 +273,9 @@
 					<textarea id="editDes" class="form-control" rows="3"></textarea>
 				</div>
 				<div class="modal-footer">
+					<button data-dismiss="modal" id="deleteMod" class="btn btn-sm btn-danger">删除模块</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" id="updateModule" data-dismiss="modal"
+					<button type="button" id="updateModule" 
 						class="btn btn-primary">提交</button>
 				</div>
 			</div>
@@ -608,7 +610,7 @@
 
 			}); 
 			
-
+ 			
 			$("#updatePermission").click(function() {
 				var userName = $("#userName").val();
 				var projectId = $("#projectID").val();
@@ -638,7 +640,33 @@
 					layer.alert("信息不能为空！");
 				}
 			});
-			
+			$("#deleteTeam").click(function() {
+				var userName = $("#userName").val();
+				var projectId = $("#projectID").val();
+			    var upId=$("#upID").val();
+				if (userName != '' && projectId != '' && upId != '') {
+					$.ajax({
+						type : 'POST',
+						url : "../project/deleteTeamMembers.do",
+						dataType : "json",
+						data : {
+							"name" : userName,
+							"projectId" : projectId,
+							"upId" : upId
+						},
+						success : function(data) {
+							if (data.msg == 'ok') {
+								layer.alert("删除成功！^_^");
+							} else {
+								layer.alert("删除失败！-_-");
+							}
+						}
+
+					});
+				} else {
+					layer.alert("信息不能为空！");
+				}
+			});
 			$("#checkUserName").click(function() {
 				var userName = $("#addName").val();
 				if (userName != '') {
@@ -716,7 +744,29 @@
 					layer.alert("信息不能为空！");
 				}
 			});
-			
+			$("#deleteMod").click(function() {
+				var id = $("#editId").val();
+				if (id != '' ) {
+					$.ajax({
+						type : 'POST',
+						url : "../module/deleteModule.do",
+						dataType : "json",
+						data : {
+							"moduleId" : id
+						},
+						success : function(data) {
+							if (data.msg == 'ok') {
+								layer.alert("删除成功！^_^");
+							} else {
+								layer.alert("删除失败！-_-");
+							}
+						}
+
+					});
+				} else {
+					layer.alert("信息不能为空！");
+				}
+			});			
 			$("#domodule").click(function() {
 				var moduleName = $("#moduleName").val();
 				var moduleDes = $("#moduleDes").val();

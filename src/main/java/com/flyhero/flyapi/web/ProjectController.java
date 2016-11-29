@@ -282,6 +282,29 @@ public class ProjectController extends BaseController{
 		return new JSONResult(Constant.MSG_OK, Constant.CODE_200, list);
 	}
 	/**
+	 * 删除团队成员
+	 * @Title: deleteTeamMembers 
+	 * @author flyhero(http://flyhero.top)  
+	 * @date 2016年11月29日 上午11:43:59 
+	 * @param @param up
+	 * @param @param name
+	 * @param @return   
+	 * @return JSONResult    
+	 * @throws
+	 */
+	@RequestMapping("deleteTeamMembers.do")
+	@ResponseBody
+	public JSONResult deleteTeamMembers(UserProject up,String name){
+		int flag=userProjectService.updateByPrimaryKeySelective(up);
+		if(flag>0){
+			OperateLog log=new OperateLog(getCuUser().getUserId(),getCuUser().getUserName(), up.getProjectId(), Constant.TYPE_DELETE,
+					Constant.CLASS_TEAM, Constant.NAME_TEAM, "删除："+name+"-成员", JSONObject.toJSONString(up));
+			LogService.addLog(log);
+			return new JSONResult(Constant.MSG_OK, Constant.CODE_200);
+		}
+		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
+	}
+	/**
 	 * 更新成员权限
 	 * @Title: updateMemberPermission  
 	 * @author flyhero(http://flyhero.top)

@@ -159,12 +159,6 @@ public class UserController extends BaseController {
 		return "login";
 	}
 
-	@RequestMapping("getMyProject.do")
-	@ResponseBody
-	public List<UserProject> getMyProject(int userId){
-		List<UserProject> list=userProjectService.selectMyProject(userId);
-		return list;
-	}
 	@RequestMapping("goToModule.do")
 	public ModelAndView goToModule(int projectId){
 		Project p=projectService.selectByPrimaryKey(projectId);
@@ -195,11 +189,5 @@ public class UserController extends BaseController {
 		return mv;
 	}
 	
-	@RequestMapping("getInterfaceByModuleId.do")
-	@ResponseBody
-	public List<Interfaces> getInterfaceByModuleId(int moduleId){
-		return InterfaceService.selectByModuleId(moduleId);
-	}
-
 
 }

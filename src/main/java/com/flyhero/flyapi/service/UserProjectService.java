@@ -48,15 +48,7 @@ public class UserProjectService {
 	public int findUserIsEdit(UserProject up){
 		return userProjectMapper.findUserIsEdit(up);
 	}
-	public List selectMyProject(Integer userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	public int deleteByPrimaryKey(Integer r1Id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	public int insert(UserProject record) {
 		// TODO Auto-generated method stub
@@ -79,7 +71,10 @@ public class UserProjectService {
 	}
 
 	public int updateByPrimaryKeySelective(UserProject record) {
-		return userProjectMapper.updateByPrimaryKeySelective(record);
+		UserProject userProject=new UserProject();
+		userProject.setIsDelete(1);
+		userProject.setUpId(record.getUpId());
+		return userProjectMapper.updateByPrimaryKeySelective(userProject);
 	}
 
 	public int updateByPrimaryKey(UserProject record) {

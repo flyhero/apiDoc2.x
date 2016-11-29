@@ -63,7 +63,7 @@
 			LEFT JOIN fly_user t3 ON t1.user_id = t3.user_id
 			WHERE
 				t1.is_creator = 1
-		) t5 ON t4.project_id = t5.project_id
+		) t5 ON t4.project_id = t5.projectId
 		WHERE
 			t4.up_id = #{upId}
   </select>
