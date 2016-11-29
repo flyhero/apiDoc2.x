@@ -75,9 +75,7 @@
       <if test="columnComment != null">
         COLUMN_COMMENT,
       </if>
-      <if test="createTime != null">
         create_time,
-      </if>
       <if test="updateTime != null">
         update_time,
       </if>
@@ -116,9 +114,7 @@
       <if test="columnComment != null">
         #{columnComment,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
+        NOW(),
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>

@@ -7,26 +7,7 @@
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/static/table/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/static/table/bootstrap-table/src/bootstrap-table.css">
-<link
-	href="<%=request.getContextPath()%>/static/ace/vendors/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet">
-<link
-	href="http://rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/css/bootstrap-editable.css"
-	rel="stylesheet">
-
-<script src="<%=request.getContextPath()%>/static/table/jquery.min.js"></script>
-<script
-	src="<%=request.getContextPath()%>/static/table/bootstrap/js/bootstrap.min.js"></script>
-<script
-	src="<%=request.getContextPath()%>/static/table/bootstrap-table/src/bootstrap-table.js"></script>
-<script
-	src="http://rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/js/bootstrap-editable.js"></script>
-<script
-	src="<%=request.getContextPath()%>/static/table/bootstrap-table/src/extensions/editable/bootstrap-table-editable.js"></script>
+<jsp:include page="base/static.jsp"></jsp:include>
 <title>主页</title>
 <!-- Custom styling plus plugins -->
 <link
@@ -79,27 +60,23 @@
 								</div>
 
 								<div class="x_content">
-								
-<div class="col-md-4 col-sm-4 col-xs-12 profile_details">
+<!-- 								
+						<div class="col-md-4 col-sm-4 col-xs-12 profile_details">
                         <div class="well profile_view">
                           <div class="col-sm-12">
-                            <h4 class="brief"><i>Digital Strategist</i></h4>
-                            <div class="left col-xs-7">
-                              <h2>Nicole Pearson</h2>
-                              <p><strong>About: </strong> Web Designer / UX / Graphic Artist / Coffee Lover </p>
+                            <h4 class="brief"><i>数据库名</i></h4>
+                            <div class="left col-xs-12">
+                              <h2>驱动包名</h2>
                               <ul class="list-unstyled">
-                                <li><i class="fa fa-building"></i> Address: </li>
-                                <li><i class="fa fa-phone"></i> Phone #: </li>
+                              	<li><i class="fa fa-user"></i>&nbsp; admin </li>
+                                <li><i class="fa fa-lock"></i>&nbsp; ****** </li>
+                              	<li><i class="fa fa-link"></i> jdbc:mysql://localhost:3306</li>
+                                <li><i class="fa fa-calendar-o"></i>&nbsp; 2016-11-08</li>
                               </ul>
-                            </div>
-                            <div class="right col-xs-5 text-center">
-                              <img src="images/img.jpg" alt="" class="img-circle img-responsive">
                             </div>
                           </div>
                           <div class="col-xs-12 bottom text-center">
                             <div class="col-xs-12 col-sm-6 emphasis">
-                              <button type="button" class="btn btn-success btn-xs"> <i class="fa fa-user">
-                                </i> <i class="fa fa-comments-o"></i> </button>
                               <button type="button" class="btn btn-primary btn-xs">
                                 <i class="fa fa-user"> </i> View Profile
                               </button>
@@ -107,7 +84,7 @@
                           </div>
                         </div>
                       </div>
-									
+ -->									
 								</div>
 							</div>
 						</div>
@@ -127,124 +104,50 @@
 
 
 	<script>
-		var $table = $('#table'), $button = $('#button'), $button1 = $('#button1');
-		var userId=${sessionScope.user.userId};
 		$(function() {
-			$button.click(function() {
-				$table.bootstrapTable('insertRow', {
-					index : 1,
-					row : {
-						name : '描述',
-						isTrue : 'true',
-						interType : 'int',
-						des : '描述'
-					}
-				});
-			});
-			$button1.click(function() {
-				layer.alert('getSelections: '
-						+ JSON.stringify($table
-								.bootstrapTable('getAllSelections')));
-			});
-
-			$("#createInterface")
-					.click(
-							function() {
-								var moduleId=$("#module-name").val();
-								var interName = $("#interName").val();
-								var interDes = $("#interDes").val();
-								var status = $("#status").val();
-								var interUrl = $("#interUrl").val();
-								var method = $("#method").val();
-								var param = JSON.stringify($table
-										.bootstrapTable('getAllSelections'));
-								responseparam
-								var requestexam = $("#requestexam").val();
-								var responseparam = $("#responseparam").val();
-								var trueexam = $("#trueexam").val();
-								var falseexam = $("#falseexam").val();
-								if (interName != '' && interUrl != ''
-										&& param != '') {
-									$
-											.ajax({
-												type : 'POST',
-												url : "../interface/addInterface.do",
-												dataType : "json",
-												data : {
-													"moduleId":moduleId,
-													"interName" : interName,
-													"interDes" : interDes,
-													"status" : status,
-													"interUrl" : interUrl,
-													"method" : method,
-													"param" : param,
-													"requestExam" : requestexam,
-													"responseParam" : responseparam,
-													"trueExam" : trueexam,
-													"falseExam" : falseexam
-												},
-												success : function(data) {
-													if (data.msg == 'ok') {
-														layer.alert("创建成功！");
-													} else {
-														layer.alert("创建失败！");
-													}
-
-												}
-
-											});
-								} else {
-									layer.alert("信息不能为空！");
-								}
-
-							});
-			
-			
-			$
-			.ajax({
+			var userId=${sessionScope.user.userId};				
+			$.ajax({
 				type : 'POST',
-				url : "../project/findUserEdit.do",
+				url : "../db/findDataBase.do",
 				dataType : "json",
 				data : {
 					"userId":userId
 				},
 				success : function(data) {
 					if (data.msg == 'ok') {
-						$.each(data.data,function(index,pro){
-							$("#pro-name").append('<option value="'+pro.project.projectId+'">'+pro.project.proName+'</option>');
+						$.each(data.data,function(index,db){
+							$(".x_content").append('<div class="col-md-4 col-sm-4 col-xs-12 profile_details">'
+			                       +'<div class="well profile_view">'
+			                       +'  <div class="col-sm-12">'
+			                       +'   <h4 class="brief"><i>'+db.dbName+'</i></h4>'
+			                       +'   <div class="left col-xs-12">'
+			                       +'     <h2>'+db.dbDriver+'</h2>'
+			                       +'     <ul class="list-unstyled">'
+			                       +'     	<li><i class="fa fa-user"></i>&nbsp; '+db.dbRoot+' </li>'
+			                       +'       <li><i class="fa fa-lock"></i>&nbsp; ****** </li>'
+			                       +'     	<li><i class="fa fa-link"></i>&nbsp; '+db.dbUrl+'</li>'
+			                       +'       <li><i class="fa fa-calendar-o"></i>&nbsp; '+getMyDate(db.createTime)+'</li>'
+			                       +'     </ul>'
+			                       +'   </div>'
+			                       +' </div>'
+			                       +' <div class="col-xs-12 bottom text-center">'
+			                       +'   <div class="col-xs-12 col-sm-6 emphasis">'
+			                       +'     <button type="button" class="btn btn-primary btn-xs">'
+			                       +'       <i class="fa fa-user"> </i> 查看详情'
+			                       +'     </button>'
+			                       +'   </div>'
+			                       +' </div>'
+			                       +'</div>'
+			                       +'</div>');
 						});
 						
 					} else {
-						layer.alert("获取项目失败！");
+						layer.alert("获取数据失败！");
 					}
 
 				}
 
 			});
-			$("#pro-name").change( function() {
-				var proId=$("#pro-name").val();
-				$
-				.ajax({
-					type : 'POST',
-					url : "../module/findModule.do",
-					dataType : "json",
-					data : {
-						"projectId":proId
-					},
-					success : function(data) {
-						if (data.msg == 'ok') {
-							$.each(data.data,function(index,mo){
-								$("#module-name").append('<option value="'+mo.moduleId+'">'+mo.moduleName+'</option>');
-							});
-							
-						} else {
-							layer.alert("获取模块失败！");
-						}
-
-					}
-
-				});
-				});
 			
 		});
 	</script>
