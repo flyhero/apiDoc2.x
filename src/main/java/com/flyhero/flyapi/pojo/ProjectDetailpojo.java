@@ -13,6 +13,7 @@ public class ProjectDetailpojo implements Serializable{
 	private static final long serialVersionUID = -8689530079817031049L;
 
 	private Integer upId;
+	private Integer isEdit;
 	private Integer isCreator;
 	private Integer projectId;
 	private String userName;
@@ -29,6 +30,12 @@ public class ProjectDetailpojo implements Serializable{
 	}
 	public void setUpId(Integer upId) {
 		this.upId = upId;
+	}
+	public Integer getIsEdit() {
+		return isEdit;
+	}
+	public void setIsEdit(Integer isEdit) {
+		this.isEdit = isEdit;
 	}
 	public Integer getIsCreator() {
 		return isCreator;

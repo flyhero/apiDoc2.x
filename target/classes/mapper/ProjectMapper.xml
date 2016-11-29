@@ -18,7 +18,7 @@
   </sql>
 
   <select id="findProjectDetail" parameterType="java.lang.Integer" resultType="com.flyhero.flyapi.pojo.ProjectDetailpojo">
-	  SELECT
+<!-- 	  SELECT
 		t1.up_id upId,
 		t1.is_creator isCreator,
 		t1.project_id projectId,
@@ -36,7 +36,36 @@
 	LEFT JOIN fly_user t2 ON t1.user_id = t2.user_id
 	LEFT JOIN fly_project t3 ON t1.project_id = t3.project_id
 	WHERE
-		t1.up_id = #{upId}
+		t1.up_id = #{upId} -->
+		
+		SELECT
+			t4.up_id upId,
+			t4.is_edit isEdit,
+			t5.*
+		FROM
+			fly_user_project t4
+		LEFT JOIN (
+			SELECT
+				t1.project_id projectId,
+				t1.is_creator isCreator,
+				t2.pro_name proName,
+				t2.pro_des proDes,
+				t2.pro_version proVersion,
+				t2.create_time createTime,
+				t2.target_count targetCount,
+				t2.done_count doneCount,
+				t3.user_name userName,
+				t3.avatar_url avatarUrl,
+				t3.company
+			FROM
+				fly_user_project t1
+			LEFT JOIN fly_project t2 ON t1.project_id = t2.project_id
+			LEFT JOIN fly_user t3 ON t1.user_id = t3.user_id
+			WHERE
+				t1.is_creator = 1
+		) t5 ON t4.project_id = t5.project_id
+		WHERE
+			t4.up_id = #{upId}
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
