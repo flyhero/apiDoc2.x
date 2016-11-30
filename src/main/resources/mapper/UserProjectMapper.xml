@@ -53,7 +53,7 @@
   <select id="findTeamMembers" parameterType="com.flyhero.flyapi.entity.UserProject" resultType="com.flyhero.flyapi.pojo.TeamMemberPojo">
 	SELECT t2.user_id userId,t2.user_name userName,t2.avatar_url avatarUrl,t1.is_edit isEdit,t1.project_id projectId,t1.up_id upId
 	FROM fly_user_project t1 LEFT JOIN fly_user t2 ON t1.user_id=t2.user_id
-	WHERE t2.user_id != #{userId} and t1.project_id=#{projectId} and t1.is_delete=0
+	WHERE t1.project_id=#{projectId} and t1.is_delete=0
   </select>  
   <select id="findUserIsEdit" parameterType="com.flyhero.flyapi.entity.UserProject" resultType="java.lang.Integer">
   	SELECT

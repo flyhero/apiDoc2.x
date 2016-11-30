@@ -509,8 +509,8 @@
 
       var echartBarLine = echarts.init(document.getElementById('mainb'), theme);
 		
-      var userEdit=${isEdit};
-
+     	var userEdit=${isEdit};
+		var myId=${sessionScope.user.userId};
 		function edit(upId,isEdit,name,projectId) { 
 			if(userEdit==1){
 			    $("#userName").val(name);
@@ -561,7 +561,12 @@
 				success : function(data) {
 					$.each(data.data,function(index,user){
 						var name="'"+user.userName+"'";
-						$("#team-member").append('<li><a href="#" onclick="edit('+user.upId+','+user.isEdit+','+name+','+user.projectId+')"><i class="fa fa-user"></i>&nbsp;'+user.userName+'</a></li>');
+						if(user.userId==myId){
+							$("#team-member").append('<li><a><i class="fa fa-user"></i>&nbsp;'+user.userName+'</a></li>');
+						}else{
+							$("#team-member").append('<li><a href="#" onclick="edit('+user.upId+','+user.isEdit+','+name+','+user.projectId+')"><i class="fa fa-user"></i>&nbsp;'+user.userName+'</a></li>');
+						}
+						
 					});
 					
 				}
