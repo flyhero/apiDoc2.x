@@ -25,6 +25,10 @@ public class InterfaceService{
 		return pageInfo;
 	}
 	
+	public List<Interfaces> findAllInter(Integer projectId){
+		return interfacesMapper.findAllInter(projectId);
+	}
+	
 	public Interfaces selectByPrimaryKey(Integer interfaceId) {
 		return interfacesMapper.selectByPrimaryKey(interfaceId);
 	}

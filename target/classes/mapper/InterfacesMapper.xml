@@ -111,7 +111,16 @@
 		
 		
   </select>
-  
+  <select id="findAllInter" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT
+		t1.*
+	FROM
+		fly_interfaces t1
+	LEFT JOIN fly_module t2 ON t1.module_id = t2.module_id
+	LEFT JOIN fly_project t3 ON t2.project_id = t3.project_id
+	WHERE
+		t3.project_id = #{projectId}
+  </select>  
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

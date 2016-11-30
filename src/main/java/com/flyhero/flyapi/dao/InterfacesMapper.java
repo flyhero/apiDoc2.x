@@ -9,6 +9,8 @@ public interface InterfacesMapper {
 	
 	List<InterPojo> findInterByWhere(InterPojo interPojo);
 	
+	List<Interfaces> findAllInter(Integer projectId);
+	
     int deleteByPrimaryKey(Integer interfaceId);
 
     int insert(Interfaces record);

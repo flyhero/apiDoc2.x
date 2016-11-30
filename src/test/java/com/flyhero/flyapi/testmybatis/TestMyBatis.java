@@ -1,12 +1,18 @@
 package com.flyhero.flyapi.testmybatis;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.flyhero.flyapi.entity.Interfaces;
 import com.flyhero.flyapi.entity.Module;
 import com.flyhero.flyapi.entity.User;
 import com.flyhero.flyapi.entity.UserProject;
+import com.flyhero.flyapi.utils.DocUtil;
 import com.flyhero.flyapi.utils.Md5Util;
 
 import org.apache.log4j.Logger;
@@ -17,6 +23,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;  
 
 import com.flyhero.flyapi.pojo.InterPojo;
+import com.flyhero.flyapi.pojo.InterfacesPojo;
+import com.flyhero.flyapi.pojo.ParamPojo;
 import com.flyhero.flyapi.service.InterfaceService;
 import com.flyhero.flyapi.service.UserProjectService;
 import com.flyhero.flyapi.service.UserService;
@@ -49,12 +57,35 @@ public class TestMyBatis {
    }
    @Test
    public void testInter(){
-	   InterPojo interPojo=new InterPojo();
-	   interPojo.setProjectId(11);
-	   interPojo.setModuleId(1);
-	   interPojo.setInterName("接口");
-	   interPojo.setUserName("ad");
-	   System.out.println(JSON.toJSONString(interfaceService.findInterByWhere(interPojo)));
+	   List<Interfaces> list=interfaceService.findAllInter(11);
+	   List<ParamPojo> pList=new ArrayList<ParamPojo>();
+	  
+	   List<InterfacesPojo> pInterfacesPojos=new ArrayList<InterfacesPojo>();
+	   for (Interfaces inter:list) {
+		   InterfacesPojo pInterfacesPojo=new InterfacesPojo();
+		   pInterfacesPojo.setInterName(inter.getInterName());
+		   pInterfacesPojo.setInterDes(inter.getInterDes());
+		   pInterfacesPojo.setInterUrl(inter.getInterUrl());
+		   pInterfacesPojo.setStatus(inter.getStatus());
+		   pInterfacesPojo.setMethod(inter.getMethod());
+		   pInterfacesPojo.setRequestExam(inter.getRequestExam());
+		   pInterfacesPojo.setResponseParam(inter.getResponseParam());
+		   pInterfacesPojo.setTrueExam(inter.getTrueExam());
+		   pInterfacesPojo.setFalseExam(inter.getFalseExam());
+		   
+		   pList=JSONObject.parseArray(inter.getParam(), ParamPojo.class);
+		   System.out.println(pList);
+		   pInterfacesPojo.setParam(pList);
+		   pInterfacesPojos.add(pInterfacesPojo);
+	   }
+	   
+	   Map<String, Object> map=new HashMap<String, Object>();
+	   map.put("interList", pInterfacesPojos);
+	   try {
+		   DocUtil.createDoc(map);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
    }
    
 /*	@Autowired

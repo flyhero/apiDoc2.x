@@ -14,6 +14,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.fastjson.JSONObject;
+import com.flyhero.flyapi.entity.Interfaces;
+import com.flyhero.flyapi.pojo.InterfacesPojo;
+import com.flyhero.flyapi.pojo.ParamPojo;
+
 import sun.misc.BASE64Encoder;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -23,9 +28,12 @@ import freemarker.template.TemplateExceptionHandler;
 public class DocUtil {
     public static Configuration configure=null;
     
-    public DocUtil(){
+    static{
         configure=new Configuration();
         configure.setDefaultEncoding("utf-8");
+    }
+    public DocUtil(){
+
     }
     /**
      * 根据Doc模板生成word文件
@@ -57,13 +65,15 @@ public class DocUtil {
             e.printStackTrace();
         }
     }
-	public void createDoc(Map<String, Object> dataMap)
+	public static void createDoc(Map<String, Object> dataMap)
 			throws IOException {
 		String fileName="G:/temp"+(int)(Math.random()*10000)+".doc";
-		String rootPath=getClass().getResource("/").getFile().toString();  
+//		String rootPath=DocUtil.class.getResource("/").getFile().toString();  
+		String rootPath=Thread.currentThread().getContextClassLoader().getResource("").getPath();
+		System.out.println(rootPath);
 		// dataMap 要填入模本的数据文件
 		configure.setDirectoryForTemplateLoading(new File(rootPath));
-		Template t = configure.getTemplate("DoOffice_Jacob_touxiang.ftl");
+		Template t = configure.getTemplate("temp_inter.ftl");
 		// 输出文档路径及名称
 		File outFile = new File(fileName);
 		Writer out = null;
@@ -108,7 +118,7 @@ public class DocUtil {
         return encoder.encode(data);
     }
 	public static void main(String[] args) throws IOException {
-		Map<String, Object> dataMap = new HashMap<String, Object>();
+/*		Map<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("name", "Blue");
 		dataMap.put("gender", "男");
 		dataMap.put("birth", "1992-2-2");
@@ -129,7 +139,43 @@ public class DocUtil {
 		Strs.add("333333333333333");
 		dataMap.put("tests", Strs);
 		DocUtil mdoc = new DocUtil();
-		mdoc.createDoc(dataMap);
+		mdoc.createDoc(dataMap);*/
+		
+		System.out.println( Thread.currentThread().getContextClassLoader().getResource("").getPath());
+		   
+/*		   List<ParamPojo> pList=new ArrayList<ParamPojo>();
+
+		   List<InterfacesPojo> pInterfacesPojos=new ArrayList<InterfacesPojo>();
+		   for (int i=0;i<3;i++) {
+			   
+			   InterfacesPojo pInterfacesPojo=new InterfacesPojo();
+			   pInterfacesPojo.setInterName("标题"+i);
+			   pInterfacesPojo.setInterUrl("78994654");
+			   pInterfacesPojo.setInterDes("描述");
+			   pInterfacesPojo.setMethod("post");
+			   pInterfacesPojo.setStatus(0);
+			   pInterfacesPojo.setRequestExam("asdasd");
+			   pInterfacesPojo.setResponseParam("asfmosafjk");
+			   pInterfacesPojo.setTrueExam("askoiodfdf");
+			   pInterfacesPojo.setFalseExam("fkojdsog");
+			   for (int j = 0; j < 3; j++) {
+				   ParamPojo paramPojo=new ParamPojo();
+				   paramPojo.setName("haha"+j);
+				   paramPojo.setIsTrue("true");
+				   paramPojo.setInterType("int");
+				   paramPojo.setDes("说明");
+				   pList.add(paramPojo);
+			   }
+			   pInterfacesPojo.setParam(pList);
+			   pInterfacesPojos.add(pInterfacesPojo);
+		   }
+		   
+		   Map<String, Object> map=new HashMap<String, Object>();
+		   map.put("interList", pInterfacesPojos);
+		
+			DocUtil mdoc = new DocUtil();
+			mdoc.createDoc(map);*/
+		
 	}
 
     
