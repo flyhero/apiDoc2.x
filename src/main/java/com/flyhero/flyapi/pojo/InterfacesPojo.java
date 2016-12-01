@@ -10,7 +10,7 @@ public class InterfacesPojo {
 
     private String interDes;
 
-    private Integer status;
+    private String status;
 
     private String interUrl;
 
@@ -61,11 +61,11 @@ public class InterfacesPojo {
         this.interDes = interDes == null ? null : interDes.trim();
     }
 
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

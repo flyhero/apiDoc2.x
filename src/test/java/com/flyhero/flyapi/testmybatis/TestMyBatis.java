@@ -57,35 +57,6 @@ public class TestMyBatis {
    }
    @Test
    public void testInter(){
-	   List<Interfaces> list=interfaceService.findAllInter(11);
-	   List<ParamPojo> pList=new ArrayList<ParamPojo>();
-	  
-	   List<InterfacesPojo> pInterfacesPojos=new ArrayList<InterfacesPojo>();
-	   for (Interfaces inter:list) {
-		   InterfacesPojo pInterfacesPojo=new InterfacesPojo();
-		   pInterfacesPojo.setInterName(inter.getInterName());
-		   pInterfacesPojo.setInterDes(inter.getInterDes());
-		   pInterfacesPojo.setInterUrl(inter.getInterUrl());
-		   pInterfacesPojo.setStatus(inter.getStatus());
-		   pInterfacesPojo.setMethod(inter.getMethod());
-		   pInterfacesPojo.setRequestExam(inter.getRequestExam());
-		   pInterfacesPojo.setResponseParam(inter.getResponseParam());
-		   pInterfacesPojo.setTrueExam(inter.getTrueExam());
-		   pInterfacesPojo.setFalseExam(inter.getFalseExam());
-		   
-		   pList=JSONObject.parseArray(inter.getParam(), ParamPojo.class);
-		   System.out.println(pList);
-		   pInterfacesPojo.setParam(pList);
-		   pInterfacesPojos.add(pInterfacesPojo);
-	   }
-	   
-	   Map<String, Object> map=new HashMap<String, Object>();
-	   map.put("interList", pInterfacesPojos);
-	   try {
-		   DocUtil.createDoc(map);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
    }
    
 /*	@Autowired

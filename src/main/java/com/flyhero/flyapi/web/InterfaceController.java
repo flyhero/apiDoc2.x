@@ -1,6 +1,11 @@
 package com.flyhero.flyapi.web;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -8,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletOutputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,7 +46,7 @@ import com.github.pagehelper.PageInfo;
 
 @Controller
 @RequestMapping("interface")
-public class InterfaceController extends BaseController{
+public class InterfaceController extends BaseController {
 
 	@Autowired
 	private InterfaceService interfaceService;
@@ -52,25 +58,35 @@ public class InterfaceController extends BaseController{
 	private UserProjectService userProjectService;
 	@Resource
 	private SystemWebSocketHandler handler;
-	
+
 	@RequestMapping("addInterface.do")
 	@ResponseBody
-	public JSONResult addInterface(Interfaces interfaces,Integer projectId){
+	public JSONResult addInterface(Interfaces interfaces, Integer projectId) {
 		interfaces.setCreator(getCuUser().getUserId());
 		System.out.println(interfaces.toString());
-		int flag=interfaceService.insertSelective(interfaces);
-		if(flag != 0){
+		int flag = interfaceService.insertSelective(interfaces);
+		if (flag != 0) {
 			try {
 				interfaces.setContent("");
-				OperateLog log=new OperateLog(getCuUser().getUserId(),getCuUser().getUserName(), projectId, Constant.TYPE_INSERT, Constant.CLASS_INTERFACE, 
-						Constant.NAME_INTERFACE, "新建："+interfaces.getInterName()+"接口", JSONObject.toJSONString(interfaces));
+				OperateLog log = new OperateLog(getCuUser().getUserId(),
+						getCuUser().getUserName(), projectId,
+						Constant.TYPE_INSERT, Constant.CLASS_INTERFACE,
+						Constant.NAME_INTERFACE, "新建："
+								+ interfaces.getInterName() + "接口",
+						JSONObject.toJSONString(interfaces));
 				LogService.addLog(log);
-				UserProject up=new UserProject();
+				UserProject up = new UserProject();
 				up.setUserId(getCuUser().getUserId());
 				up.setProjectId(projectId);
-				List<TeamMemberPojo>  list=userProjectService.findTeamMembers(up);
-				Message msg = new Message(-1L, "系统广播", 0L, getCuUser().getUserName()+"新建："+interfaces.getInterName()+"接口", new Date());
-				handler.sendMessageToTeam(list, new TextMessage(JSON.toJSONString(msg)));
+				List<TeamMemberPojo> list = userProjectService
+						.findTeamMembers(up);
+				Message msg = new Message(-1L, "系统广播", 0L, getCuUser()
+						.getUserName()
+						+ "新建："
+						+ interfaces.getInterName()
+						+ "接口", new Date());
+				handler.sendMessageToTeam(list,
+						new TextMessage(JSON.toJSONString(msg)));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -78,108 +94,134 @@ public class InterfaceController extends BaseController{
 			return new JSONResult(Constant.MSG_OK, Constant.CODE_200);
 		}
 		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
-		
+
 	}
+
 	/**
 	 * 根据条件获取接口
-	 * @Title: findInterface  
+	 * 
+	 * @Title: findInterface
 	 * @author flyhero(http://flyhero.top)
-	 * @date 2016年11月18日 下午4:46:20 
+	 * @date 2016年11月18日 下午4:46:20
 	 * @param @param interPojo
-	 * @param @return    
-	 * @return JSONResult    返回类型 
+	 * @param @return
+	 * @return JSONResult 返回类型
 	 * @throws
 	 */
 	@ResponseBody
 	@RequestMapping("findInterface.do")
-	public JSONResult findInterface(InterPojo interPojo){
+	public JSONResult findInterface(InterPojo interPojo) {
 		System.out.println(interPojo.toString());
-		PageInfo<InterPojo> list=interfaceService.findInterByWhere(interPojo);
-		return new JSONResult(Constant.MSG_OK, Constant.CODE_200,list);
+		PageInfo<InterPojo> list = interfaceService.findInterByWhere(interPojo);
+		return new JSONResult(Constant.MSG_OK, Constant.CODE_200, list);
 	}
+
 	/**
 	 * 
-	 * @Title: findAllInter 
-	 * @author flyhero(http://flyhero.top)  
-	 * @date 2016年11月30日 下午4:15:32 
+	 * @Title: findAllInter
+	 * @author flyhero(http://flyhero.top)
+	 * @date 2016年11月30日 下午4:15:32
 	 * @param @param projectId
-	 * @param @return   
-	 * @return JSONResult    
+	 * @param @return
+	 * @return JSONResult
 	 * @throws
 	 */
 	@ResponseBody
 	@RequestMapping("findAllInter.do")
-	public JSONResult findAllInter(Integer projectId){
-		List<Interfaces> list=interfaceService.findAllInter(projectId);
-		if(list!=null && !list.isEmpty()){
-			return new JSONResult(Constant.MSG_OK, Constant.CODE_200, list);
-		}
-		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200, list);
+	public JSONResult findAllInter(Integer projectId) {
+		/*
+		 * List<Interfaces> list=interfaceService.findAllInter(projectId);
+		 * if(list!=null && !list.isEmpty()){ return new
+		 * JSONResult(Constant.MSG_OK, Constant.CODE_200, list); }
+		 */
+		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
 	}
-	@RequestMapping("testInter.do")
-	  public void testInter(){
-		   List<Interfaces> list=interfaceService.findAllInter(11);
-		   List<ParamPojo> pList=new ArrayList<ParamPojo>();
-		   InterfacesPojo pInterfacesPojo=new InterfacesPojo();
-		   List<InterfacesPojo> pInterfacesPojos=new ArrayList<InterfacesPojo>();
-		   for (Interfaces inter:list) {
-			   
-			   pInterfacesPojo.setInterName(inter.getInterName());
-			   pInterfacesPojo.setInterDes(inter.getInterDes());
-			   pInterfacesPojo.setInterUrl(inter.getInterUrl());
-			   pInterfacesPojo.setStatus(inter.getStatus());
-			   pInterfacesPojo.setMethod(inter.getMethod());
-			   pInterfacesPojo.setRequestExam(inter.getRequestExam());
-			   pInterfacesPojo.setResponseParam(inter.getResponseParam());
-			   pInterfacesPojo.setTrueExam(inter.getTrueExam());
-			   pInterfacesPojo.setFalseExam(inter.getFalseExam());
-			   
-			   pList=JSONObject.parseArray(inter.getParam(), ParamPojo.class);
-			   pInterfacesPojo.setParam(pList);
-			   pInterfacesPojos.add(pInterfacesPojo);
-		   }
-		   
-		   Map<String, Object> map=new HashMap<String, Object>();
-		   map.put("interList", pInterfacesPojos);
-		   try {
-			   DocUtil.createDoc(map);
-			} catch (IOException e) {
-				e.printStackTrace();
+
+	@ResponseBody
+	@RequestMapping("downloadInter.do")
+	public void downloadInter(Integer projectId) throws IOException {
+
+		UserProject up=new UserProject();
+		up.setProjectId(projectId);
+		List<TeamMemberPojo> list=userProjectService.findTeamMembers(up);
+		for(TeamMemberPojo pojo:list){
+			if(pojo.getUserId()==getCuUser().getUserId()){
+				
 			}
-	   }
+		}
+		request.setCharacterEncoding("UTF-8");
+		File file = null;
+		InputStream fin = null;
+		ServletOutputStream out = null;
+		try {
+			file = interfaceService.findAllInter(projectId);
+			fin = new FileInputStream(file);
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("application/msword");
+			response.setHeader("content-disposition", "attachment;filename="
+					+ URLEncoder.encode("inter-"+(int)(Math.random()*10000)+".doc", "UTF-8"));
+			// response.addHeader("Content-Disposition",
+			// "attachment;filename=Exhibition.doc");//用这种方式下载下来的word 文档显示不了中文
+			out = response.getOutputStream();
+			byte[] buffer = new byte[512]; // 缓冲区
+			int bytesToRead = -1;
+			// 通过循环将读入的Word文件的内容输出到浏览器中
+			while ((bytesToRead = fin.read(buffer)) != -1) {
+				out.write(buffer, 0, bytesToRead);
+			}
+		}catch (IOException e ) {
+			e.printStackTrace();
+		} finally {
+			if (fin != null)
+				fin.close();
+			if (out != null)
+				out.close();
+			if (file != null)
+				file.delete(); // 删除临时文件
+		}
+
+	}
+
 	/**
 	 * 根据接口编号获取接口详情
-	 * @Title: findOneInter 
-	 * @author flyhero(http://flyhero.top)  
-	 * @date 2016年11月24日 下午2:32:28 
+	 * 
+	 * @Title: findOneInter
+	 * @author flyhero(http://flyhero.top)
+	 * @date 2016年11月24日 下午2:32:28
 	 * @param @param interfaceId
-	 * @param @return   
-	 * @return JSONResult    
+	 * @param @return
+	 * @return JSONResult
 	 * @throws
 	 */
 	@ResponseBody
 	@RequestMapping("findOneInter.do")
-	public JSONResult findOneInter(Integer interfaceId){
-		Interfaces interfaces=interfaceService.selectByPrimaryKey(interfaceId);
-		if(interfaces !=null){
-			return new JSONResult(Constant.MSG_OK, Constant.CODE_200, interfaces);
+	public JSONResult findOneInter(Integer interfaceId) {
+		Interfaces interfaces = interfaceService
+				.selectByPrimaryKey(interfaceId);
+		if (interfaces != null) {
+			return new JSONResult(Constant.MSG_OK, Constant.CODE_200,
+					interfaces);
 		}
 		return new JSONResult(Constant.MSG_OK, Constant.CODE_404, interfaces);
 	}
+
 	@RequestMapping("testHttp.do")
 	@ResponseBody
-	public JSONObject testHttp(String method,String url,String param,int jsonWay){
-		System.out.println("参数为"+param+"way:"+jsonWay);
-		JSONObject  jsonget=HttpClientUtil.getUrl(method, url, param,jsonWay);
-		HttpResponse hr=JSON.parseObject(jsonget.toString(), HttpResponse.class);
+	public JSONObject testHttp(String method, String url, String param,
+			int jsonWay) {
+		System.out.println("参数为" + param + "way:" + jsonWay);
+		JSONObject jsonget = HttpClientUtil.getUrl(method, url, param, jsonWay);
+		HttpResponse hr = JSON.parseObject(jsonget.toString(),
+				HttpResponse.class);
 		System.out.println(hr.toString());
-	       for (Map.Entry<String, Object> entry : jsonget.entrySet()) {
-	            System.out.println(entry.getKey() + ":" + entry.getValue());
-	        }
-	    json.put("result", hr.getContent());
+		for (Map.Entry<String, Object> entry : jsonget.entrySet()) {
+			System.out.println(entry.getKey() + ":" + entry.getValue());
+		}
+		json.put("result", hr.getContent());
 		json.put("msg", Constant.MSG_OK);
 		return json;
 	}
+
 	// 发布系统广播（群发）
 	@ResponseBody
 	@RequestMapping("send")
@@ -192,5 +234,5 @@ public class InterfaceController extends BaseController{
 		msg.setText("这是我的第一个消息");
 		handler.sendMessageToUser(2L, new TextMessage(JSON.toJSONString(msg)));
 	}
-	
+
 }

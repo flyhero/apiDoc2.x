@@ -27,13 +27,21 @@ import freemarker.template.TemplateExceptionHandler;
 
 public class DocUtil {
     public static Configuration configure=null;
-    
+    public static String rootPath;
     static{
+    	
         configure=new Configuration();
         configure.setDefaultEncoding("utf-8");
-    }
-    public DocUtil(){
-
+        try {
+	//		String rootPath=DocUtil.class.getResource("/").getFile().toString();  
+			rootPath=Thread.currentThread().getContextClassLoader().getResource("").getPath();
+			System.out.println(rootPath);
+			// dataMap 要填入模本的数据文件
+			configure.setDirectoryForTemplateLoading(new File(rootPath));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     /**
      * 根据Doc模板生成word文件
@@ -41,7 +49,7 @@ public class DocUtil {
      * @param downloadType 文件名称
      * @param savePath 保存路径
      */
-    public static void createDoc(Map<String,Object> dataMap,String downloadType,String savePath){
+    public void createDoc(Map<String,Object> dataMap,String downloadType,String savePath){
         try {
             //加载需要装填的模板
             Template template=null;
@@ -68,11 +76,6 @@ public class DocUtil {
 	public static void createDoc(Map<String, Object> dataMap)
 			throws IOException {
 		String fileName="G:/temp"+(int)(Math.random()*10000)+".doc";
-//		String rootPath=DocUtil.class.getResource("/").getFile().toString();  
-		String rootPath=Thread.currentThread().getContextClassLoader().getResource("").getPath();
-		System.out.println(rootPath);
-		// dataMap 要填入模本的数据文件
-		configure.setDirectoryForTemplateLoading(new File(rootPath));
 		Template t = configure.getTemplate("temp_inter.ftl");
 		// 输出文档路径及名称
 		File outFile = new File(fileName);
@@ -99,7 +102,38 @@ public class DocUtil {
 			e.printStackTrace();
 		}
 
-		// System.out.println("---------------------------");
+	}
+	
+	public static File createWord(Map<String, Object> dataMap)
+			throws IOException {
+		String fileName=rootPath+File.separator+(int)(Math.random()*10000)+".doc";
+
+		Template t = configure.getTemplate("temp_inter.ftl");
+		// 输出文档路径及名称
+		File outFile = new File(fileName);
+		Writer out = null;
+		FileOutputStream fos = null;
+		try {
+			fos = new FileOutputStream(outFile);
+			OutputStreamWriter oWriter = new OutputStreamWriter(fos, "UTF-8");
+			// 这个地方对流的编码不可或缺，使用main（）单独调用时，应该可以，但是如果是web请求导出时导出后word文档就会打不开，并且包XML文件错误。主要是编码格式不正确，无法解析。
+			// out = new BufferedWriter(new OutputStreamWriter(new
+			// FileOutputStream(outFile)));
+			out = new BufferedWriter(oWriter);
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+
+		try {
+			t.process(dataMap, out);
+			out.close();
+			fos.close();
+		} catch (TemplateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return outFile;
 	}
     public String getImageStr(String imgFile){
         InputStream in=null;
