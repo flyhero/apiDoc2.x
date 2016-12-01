@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -15,6 +16,8 @@ import com.flyhero.flyapi.entity.User;
 public class LoginInterceptor implements HandlerInterceptor {
 
     private List<String> excludedUrls;
+    
+    private Logger logger=Logger.getLogger(LoginInterceptor.class);
 
     /**
      * 在DispatcherServlet完全处理完请求后被调用
@@ -38,8 +41,9 @@ public class LoginInterceptor implements HandlerInterceptor {
      */
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
                              Object handler) throws Exception {
-    	System.out.println("=================="+request.getRequestURI());
+    	
         String requestUri = request.getRequestURI();
+        logger.info("=============================访问："+requestUri);
         for (String url : excludedUrls) {
             if (requestUri.contains(url)) {
                 return true;

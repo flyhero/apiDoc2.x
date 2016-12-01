@@ -63,7 +63,6 @@ public class InterfaceController extends BaseController {
 	@ResponseBody
 	public JSONResult addInterface(Interfaces interfaces, Integer projectId) {
 		interfaces.setCreator(getCuUser().getUserId());
-		System.out.println(interfaces.toString());
 		int flag = interfaceService.insertSelective(interfaces);
 		if (flag != 0) {
 			try {
@@ -111,7 +110,6 @@ public class InterfaceController extends BaseController {
 	@ResponseBody
 	@RequestMapping("findInterface.do")
 	public JSONResult findInterface(InterPojo interPojo) {
-		System.out.println(interPojo.toString());
 		PageInfo<InterPojo> list = interfaceService.findInterByWhere(interPojo);
 		return new JSONResult(Constant.MSG_OK, Constant.CODE_200, list);
 	}
@@ -200,14 +198,12 @@ public class InterfaceController extends BaseController {
 	@ResponseBody
 	public JSONObject testHttp(String method, String url, String param,
 			int jsonWay) {
-		System.out.println("参数为" + param + "way:" + jsonWay);
 		JSONObject jsonget = HttpClientUtil.getUrl(method, url, param, jsonWay);
 		HttpResponse hr = JSON.parseObject(jsonget.toString(),
 				HttpResponse.class);
-		System.out.println(hr.toString());
-		for (Map.Entry<String, Object> entry : jsonget.entrySet()) {
+/*		for (Map.Entry<String, Object> entry : jsonget.entrySet()) {
 			System.out.println(entry.getKey() + ":" + entry.getValue());
-		}
+		}*/
 		json.put("result", hr.getContent());
 		json.put("msg", Constant.MSG_OK);
 		return json;

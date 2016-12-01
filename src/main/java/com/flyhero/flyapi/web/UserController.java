@@ -100,7 +100,7 @@ public class UserController extends BaseController {
 	@RequestMapping("checkUserName.do")
 	@ResponseBody
 	public JSONObject checkUserName(User user) {
-		System.out.println("正在验证用户是否存在！"+user.getUserName());
+		logger.info("正在验证用户:"+user.getUserName()+" 是否存在");
 		User u=userService.findByUserName(user);
 		if(u != null){
 			json.put("valid", false);
@@ -124,7 +124,6 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value = "login.do")
 	public ModelAndView login(User user) throws Exception {
-		System.out.println("当前用户："+getCuUser());
 		if(getCuUser()!=null){
 			mv.setViewName("main");
 			return mv;
@@ -166,7 +165,6 @@ public class UserController extends BaseController {
 		User u=(User) session.getAttribute("user");
 		up.setUserId(u.getUserId());
 		up.setProjectId(projectId);
-		System.out.println(up.toString());
 		UserProject up1=userProjectService.selectByIdAndPro(up);
 		mv.addObject("project", p);
 		mv.addObject("up", up1);

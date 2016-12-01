@@ -73,7 +73,6 @@ public class LogController extends BaseController{
 		if(list != null ){
 			map.put("rows", list.getList());
 			map.put("total", list.getTotal());
-			System.out.println(list.getPages());
 			return new JSONResult(Constant.MSG_OK, Constant.CODE_200, list);	
 		}
 		return new JSONResult(Constant.MSG_OK, Constant.CODE_404, list);

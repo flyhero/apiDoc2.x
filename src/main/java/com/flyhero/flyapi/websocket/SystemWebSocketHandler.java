@@ -42,7 +42,6 @@ public class SystemWebSocketHandler implements WebSocketHandler {
 	public void afterConnectionEstablished(WebSocketSession session)
 			throws Exception {
 		Long uid = (Long) session.getAttributes().get("uid");
-		System.out.println("uid:"+uid);//((User)session.getAttributes().get("user")).getUserId()
 		if (userSocketSessionMap.get(uid) == null) {
 			userSocketSessionMap.put(uid, session);
 		}
@@ -75,7 +74,7 @@ public class SystemWebSocketHandler implements WebSocketHandler {
 			Entry<Long, WebSocketSession> entry = it.next();
 			if (entry.getValue().getId().equals(session.getId())) {
 				userSocketSessionMap.remove(entry.getKey());
-				System.out.println("Socket会话已经移除:用户ID" + entry.getKey());
+//				System.out.println("Socket会话已经移除:用户ID" + entry.getKey());
 				break;
 			}
 		}
@@ -94,7 +93,7 @@ public class SystemWebSocketHandler implements WebSocketHandler {
 			Entry<Long, WebSocketSession> entry = it.next();
 			if (entry.getValue().getId().equals(session.getId())) {
 				userSocketSessionMap.remove(entry.getKey());
-				System.out.println("Socket会话已经移除:用户ID" + entry.getKey());
+//				System.out.println("Socket会话已经移除:用户ID" + entry.getKey());
 				break;
 			}
 		}
