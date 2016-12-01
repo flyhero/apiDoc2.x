@@ -177,15 +177,16 @@
             title: '操作',
             field: 'id',
             align: 'center',
-            width: 250,
+            width: 220,
             formatter:function(value,row,index){   
             	var name="'"+row.project.proName+"'";
             	var des="'"+row.project.proDes+"'";
-            	var j='<a href="../forward/list_interfaces.html?projectId='+row.project.projectId+'" class="btn btn-primary btn-xs"><i class="fa fa-sliders"></i> 接口 </a>';
+            	var j='<a href="../forward/list_interfaces.html?projectId='+row.project.projectId+'" class="btn btn-info btn-xs"><i class="fa fa-sliders"></i> 接口 </a>';
                 var f='<a href="../forward/project_detail.html?projectId='+row.project.projectId+'&upId='+row.upId+'&isEdit=1" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> 详情 </a>'; 
-                var g='<a href="#"  class="btn btn-info btn-xs" onclick="edit('+row.project.projectId+','+name+','+des+','+row.project.targetCount+');"><i class="fa fa-pencil"></i> 编辑 </a>'; 
+                var down='<a href="../interface/downloadInter.do?projectId='+row.project.projectId+'" class="btn btn-success btn-xs"><i class="fa fa-download"></i> 下载 </a>';
+                var g='<a href="#"  class="btn btn-warning btn-xs" onclick="edit('+row.project.projectId+','+name+','+des+','+row.project.targetCount+');"><i class="fa fa-pencil"></i> 编辑 </a>'; 
                 var h='<a href="#" class="btn btn-danger btn-xs" onclick="deletepro('+row.project.projectId+','+name+');"><i class="fa fa-trash-o"></i> 删除 </a>';
-              return j+f+g+h;  
+              return j+f+down+g+h;  
           	} 
         } ],
         method: "get",  //使用get请求到服务器获取数据  

@@ -36,10 +36,9 @@ public class InterfaceService{
 	public File findAllInter(Integer projectId) throws IOException{
 		List<Interfaces> list=interfacesMapper.findAllInter(projectId);
 		   List<ParamPojo> pList=new ArrayList<ParamPojo>();
-		   InterfacesPojo pInterfacesPojo=new InterfacesPojo();
 		   List<InterfacesPojo> pInterfacesPojos=new ArrayList<InterfacesPojo>();
 		   for (Interfaces inter:list) {
-			   
+			   InterfacesPojo pInterfacesPojo=new InterfacesPojo();
 			   pInterfacesPojo.setInterName(inter.getInterName());
 			   pInterfacesPojo.setInterDes(inter.getInterDes());
 			   pInterfacesPojo.setInterUrl(inter.getInterUrl());

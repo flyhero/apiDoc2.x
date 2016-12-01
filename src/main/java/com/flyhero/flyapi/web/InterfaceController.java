@@ -117,67 +117,58 @@ public class InterfaceController extends BaseController {
 	}
 
 	/**
-	 * 
-	 * @Title: findAllInter
-	 * @author flyhero(http://flyhero.top)
-	 * @date 2016年11月30日 下午4:15:32
+	 * 下载项目文档
+	 * @Title: downloadInter 
+	 * @author flyhero(http://flyhero.top)  
+	 * @date 2016年12月1日 下午2:09:01 
 	 * @param @param projectId
-	 * @param @return
-	 * @return JSONResult
+	 * @param @throws IOException   
+	 * @return void    
 	 * @throws
 	 */
 	@ResponseBody
-	@RequestMapping("findAllInter.do")
-	public JSONResult findAllInter(Integer projectId) {
-		/*
-		 * List<Interfaces> list=interfaceService.findAllInter(projectId);
-		 * if(list!=null && !list.isEmpty()){ return new
-		 * JSONResult(Constant.MSG_OK, Constant.CODE_200, list); }
-		 */
-		return new JSONResult(Constant.MSG_ERROR, Constant.CODE_200);
-	}
-
-	@ResponseBody
 	@RequestMapping("downloadInter.do")
 	public void downloadInter(Integer projectId) throws IOException {
-
+		boolean flag=false;
 		UserProject up=new UserProject();
 		up.setProjectId(projectId);
 		List<TeamMemberPojo> list=userProjectService.findTeamMembers(up);
+		int id=getCuUser().getUserId();
 		for(TeamMemberPojo pojo:list){
-			if(pojo.getUserId()==getCuUser().getUserId()){
-				
+			if(pojo.getUserId()==id){
+				flag=true;
+				break;
 			}
 		}
-		request.setCharacterEncoding("UTF-8");
-		File file = null;
-		InputStream fin = null;
-		ServletOutputStream out = null;
-		try {
-			file = interfaceService.findAllInter(projectId);
-			fin = new FileInputStream(file);
-			response.setCharacterEncoding("utf-8");
-			response.setContentType("application/msword");
-			response.setHeader("content-disposition", "attachment;filename="
-					+ URLEncoder.encode("inter-"+(int)(Math.random()*10000)+".doc", "UTF-8"));
-			// response.addHeader("Content-Disposition",
-			// "attachment;filename=Exhibition.doc");//用这种方式下载下来的word 文档显示不了中文
-			out = response.getOutputStream();
-			byte[] buffer = new byte[512]; // 缓冲区
-			int bytesToRead = -1;
-			// 通过循环将读入的Word文件的内容输出到浏览器中
-			while ((bytesToRead = fin.read(buffer)) != -1) {
-				out.write(buffer, 0, bytesToRead);
+		if(flag){
+			request.setCharacterEncoding("UTF-8");
+			File file = null;
+			InputStream fin = null;
+			ServletOutputStream out = null;
+			try {
+				file = interfaceService.findAllInter(projectId);
+				fin = new FileInputStream(file);
+				response.setCharacterEncoding("utf-8");
+				response.setContentType("application/msword");
+				response.setHeader("content-disposition", "attachment;filename="
+						+ URLEncoder.encode("inter-"+(int)(Math.random()*10000)+".doc", "UTF-8"));
+				out = response.getOutputStream();
+				byte[] buffer = new byte[512]; // 缓冲区
+				int bytesToRead = -1;
+				// 通过循环将读入的Word文件的内容输出到浏览器中
+				while ((bytesToRead = fin.read(buffer)) != -1) {
+					out.write(buffer, 0, bytesToRead);
+				}
+			}catch (IOException e ) {
+				e.printStackTrace();
+			} finally {
+				if (fin != null)
+					fin.close();
+				if (out != null)
+					out.close();
+				if (file != null)
+					file.delete(); // 删除临时文件
 			}
-		}catch (IOException e ) {
-			e.printStackTrace();
-		} finally {
-			if (fin != null)
-				fin.close();
-			if (out != null)
-				out.close();
-			if (file != null)
-				file.delete(); // 删除临时文件
 		}
 
 	}
