@@ -235,7 +235,7 @@ a:hover {
 								+getMonth(inter.createTime)+'月<b>'+getDay(inter.createTime)+'</b>'
 								+'</p>'
 								+'<h2>'
-								+'	<a href="#">'+inter.interName+'</a>'
+								+'	<a href="../forward/detail_interface.html?interfaceId='+inter.interfaceId+'">'+inter.interName+'</a>'
 								+'</h2>'
 								+'<p>'+inter.interDes+'</p>'
 								+'<p class="meta">时间：'+getMyDate(inter.createTime)
