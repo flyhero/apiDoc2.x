@@ -34,7 +34,8 @@
 		<property name="removeAbandoned" value="true" />
 		<property name="removeAbandonedTimeout" value="1800" />
 		<property name="logAbandoned" value="true" />
-		<property name="filters" value="mergeStat" />
+		<!-- 开启sql监控和防火墙 -->
+		<property name="filters" value="mergeStat,wall" />
 	</bean>
 
 	<!-- 3.配置SqlSessionFactory对象 -->

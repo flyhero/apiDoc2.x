@@ -88,17 +88,17 @@
 	 </mvc:interceptors>
   
   
-  	<!-- 	配置druid监控spring jdbc -->
+  	<!-- 	配置druid监控spring jdbc 监控调用的方法-->
 	<bean id="druid-stat-interceptor" class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">
 	</bean>
 	<bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut" scope="prototype">
 		<property name="patterns">
 			<list>
-				<value>com.flyhero.flyapi</value>
+				<value>com.flyhero.flyapi.web.*</value>
 			</list>
 		</property>
 	</bean>
-	<aop:config>
+	<aop:config  proxy-target-class="true">
 		<aop:advisor advice-ref="druid-stat-interceptor" pointcut-ref="druid-stat-pointcut" />
 	</aop:config>
   
