@@ -1,0 +1,11 @@
+com\flyhero\flyapi\dao\UserProjectMapper.class
+com\flyhero\flyapi\dao\InterfacesMapper.class
+com\flyhero\flyapi\dao\CommentsMapper.class
+com\flyhero\flyapi\dao\ProjectMapper.class
+com\flyhero\flyapi\dao\OperateLogMapper.class
+com\flyhero\flyapi\dao\WebInfoMapper.class
+com\flyhero\flyapi\dao\DataBaseMapper.class
+com\flyhero\flyapi\dao\App.class
+com\flyhero\flyapi\dao\ModuleMapper.class
+com\flyhero\flyapi\dao\TableInfoMapper.class
+com\flyhero\flyapi\dao\UserMapper.class

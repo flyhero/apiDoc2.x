@@ -1,0 +1,10 @@
+com\flyhero\flyapi\service\InterfaceService.class
+com\flyhero\flyapi\service\WebInfoService.class
+com\flyhero\flyapi\service\DataBaseService.class
+com\flyhero\flyapi\service\LogService.class
+com\flyhero\flyapi\service\ModuleService.class
+com\flyhero\flyapi\service\App.class
+com\flyhero\flyapi\service\ProjectService.class
+com\flyhero\flyapi\service\TableInfoService.class
+com\flyhero\flyapi\service\UserProjectService.class
+com\flyhero\flyapi\service\UserService.class

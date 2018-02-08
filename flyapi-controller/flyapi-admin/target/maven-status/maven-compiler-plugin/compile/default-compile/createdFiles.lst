@@ -1,0 +1,9 @@
+com\flyhero\flyapi\admin\LogController.class
+com\flyhero\flyapi\admin\ModuleController.class
+com\flyhero\flyapi\admin\DataBaseController.class
+com\flyhero\flyapi\admin\ForwardController.class
+com\flyhero\flyapi\admin\UserController.class
+com\flyhero\flyapi\admin\WebInfoController.class
+com\flyhero\flyapi\admin\ProjectController.class
+com\flyhero\flyapi\admin\BaseController.class
+com\flyhero\flyapi\admin\InterfaceController.class
